@@ -1,3 +1,5 @@
+<?php include("../../path.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,58 +18,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Acme&family=Kanit&display=swap" rel="stylesheet">
 
     <!-- Custom Styling -->
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
 
     <!-- Admin Styling -->
-    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../assets/css/admin.css">
 
     <title>Admin Section - Add User</title>
 </head>
 <body>
-<header>
-    <div class="logo">
-        <h1 class="logo-text"><span>Shitty</span> Blog</h1>
-    </div>
-    <i class="fa-solid fa-bars menu-toggle"></i>
-    <ul class="nav">
-        <li><a href="#">Home</a> </li>
-        <li>
-            <a href="# user">
-                <i class="fa-solid fa-user" style="font-size: 0.9em;"></i>
-                Suka User
-                <i class="fa-solid fa-chevron-down arrow-toggle" style="font-size: 0.8em;"></i>
-            </a>
-            <ul class="us">
-                <li><a href="#" class="logout">Logout</a> </li>
-            </ul>
-        </li>
-    </ul>
-</header>
+
+<?php include(ROOT_PATH. "../../app/includes/adminHeader.php"); ?>
 
 <!-- Admin Page Wrapper -->
 <div class="admin-wrapper clearfix">
 
-    <!-- Left Sidebar -->
-    <div class="left-sidebar">
-        <ul>
-            <li><a href="../posts/index.html">Manage Posts</a></li>
-            <li><a href="index.html">Manage Users</a></li>
-            <li><a href="../topics/index.html">Manage Topics</a></li>
-        </ul>
-    </div>
-    <!-- //Left Sidebar -->
+    <?php include(ROOT_PATH. "../../app/includes/adminSidebar.php"); ?>
+
     <!-- Admin Content -->
     <div class="admin-content">
         <div class="button-group">
-            <a href="create.html" class="btn btn-big">Add User</a>
-            <a href="index.html" class="btn btn-big">Manage Users</a>
+            <a href="create.php" class="btn btn-big">Add User</a>
+            <a href="index.php" class="btn btn-big">Manage Users</a>
         </div>
 
         <div class="content">
 
             <h2 class="page-title">Add User</h2>
 
-            <form action="create.html" method="post">
+            <form action="create.php" method="post">
                 <div>
                     <label>Username</label>
                     <input type="text" name="username" class="text-input">
@@ -86,7 +64,7 @@
                 </div>
                 <div>
                     <label>Role</label>
-                    <select name="topic">
+                    <select name="role" class="text-input">
                         <option value="Admin">Admin</option>
                         <option value="Manager">Manager</option>
                         <option value="User">User</option>
@@ -111,7 +89,7 @@
 
 
 <!-- Custom Script -->
-<script src="../../js/scripts.js"></script>
+<script src="../../assets/js/scripts.js"></script>
 
 </body>
 </html>
