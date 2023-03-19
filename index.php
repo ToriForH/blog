@@ -1,4 +1,7 @@
-<?php include("path.php"); ?>
+<?php
+include("path.php");
+include(ROOT_PATH. "app/database/db.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,9 +26,8 @@
 </head>
 <body>
 
-<!-- Header cause root_path not work -->
 <?php include (ROOT_PATH. "/app/includes/header.php"); ?>
-
+<?php include (ROOT_PATH. "/app/includes/messages.php"); ?>
 
 <!-- Page Wrapper -->
 <div class="page-wrapper">
