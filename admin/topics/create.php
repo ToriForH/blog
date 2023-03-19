@@ -1,3 +1,5 @@
+<?php include("../../path.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,33 +18,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Acme&family=Kanit&display=swap" rel="stylesheet">
 
     <!-- Custom Styling -->
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
 
     <!-- Admin Styling -->
-    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../assets/css/admin.css">
 
     <title>Admin Section - Add Topic</title>
 </head>
 <body>
-<header>
-    <div class="logo">
-        <h1 class="logo-text"><span>Shitty</span> Blog</h1>
-    </div>
-    <i class="fa-solid fa-bars menu-toggle"></i>
-    <ul class="nav">
-        <li><a href="#">Home</a> </li>
-        <li>
-            <a href="# user">
-                <i class="fa-solid fa-user" style="font-size: 0.9em;"></i>
-                Suka User
-                <i class="fa-solid fa-chevron-down arrow-toggle" style="font-size: 0.8em;"></i>
-            </a>
-            <ul class="us">
-                <li><a href="#" class="logout">Logout</a> </li>
-            </ul>
-        </li>
-    </ul>
-</header>
+
+<?php include(ROOT_PATH. "/app/includes/adminHeader.php"); ?>
 
 <!-- Admin Page Wrapper -->
 <div class="admin-wrapper clearfix">
@@ -95,7 +80,7 @@
 
 
 <!-- Custom Script -->
-<script src="../../js/scripts.js"></script>
+<script src="../../assets/js/scripts.js"></script>
 
 </body>
 </html>
