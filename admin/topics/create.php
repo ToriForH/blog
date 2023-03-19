@@ -27,20 +27,13 @@
 </head>
 <body>
 
-<?php include(ROOT_PATH. "/app/includes/adminHeader.php"); ?>
+<?php include(ROOT_PATH. "../../app/includes/adminHeader.php"); ?>
 
 <!-- Admin Page Wrapper -->
 <div class="admin-wrapper clearfix">
 
-    <!-- Left Sidebar -->
-    <div class="left-sidebar">
-        <ul>
-            <li><a href="../posts/index.html">Manage Posts</a></li>
-            <li><a href="../user/index.html">Manage Users</a></li>
-            <li><a href="index.html">Manage Topics</a></li>
-        </ul>
-    </div>
-    <!-- //Left Sidebar -->
+    <?php include(ROOT_PATH. "../../app/includes/adminSidebar.php"); ?>
+
     <!-- Admin Content -->
     <div class="admin-content">
         <div class="button-group">
