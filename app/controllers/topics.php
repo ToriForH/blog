@@ -9,6 +9,7 @@ $errors = array();
 $id = '';
 $name = '';
 $description = '';
+$published = '';
 
 $topics = selectAll($table);
 
@@ -17,6 +18,7 @@ if (isset($_POST['add-topic'])) {
 
     if (count($errors) == 0) {
         unset($_POST['add-topic']);
+        $_POST['published'] = isset($_POST['published']) ? 1 : 0;
         $topic_id = create('topics', $_POST);
         $_SESSION['message'] = 'Topic created successfully';
         $_SESSION['type'] = 'success';
@@ -25,6 +27,7 @@ if (isset($_POST['add-topic'])) {
     } else {
         $name = $_POST['name'];
         $description = $_POST['description'];
+        $published = isset($_POST['published']) ? 1 : 0;
     }
 }
 

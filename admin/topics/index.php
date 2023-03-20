@@ -52,15 +52,22 @@
                 <thead>
                 <th>№</th>
                 <th>Name</th>
-                <th colspan="2">Action</th>
+                <th>Author</th>
+                <th colspan="3">Action</th>
                 </thead>
                 <tbody>
                 <?php foreach ($topics as $key => $topic): ?>
                     <tr>
                         <td><?php echo $key + 1; ?></td>
                         <td><?php echo $topic['name']; ?></td>
+                        <td><?php echo $topic['user_id']; ?></td>
                         <td><a href="edit.php?id=<?php echo $topic['id']; ?>" class="edit">edit</a></td>
                         <td><a href="index.php?del_id=<?php echo $topic['id']; ?>" class="delete">delete</a></td>
+                        <?php if ($topic['published']): ?>
+                            <td>is published</td>
+                        <?php else: ?>
+                            <td><a href="#" class="publish">publish</a></td>
+                        <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

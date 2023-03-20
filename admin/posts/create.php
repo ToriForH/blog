@@ -46,14 +46,16 @@
 
             <h2 class="page-title">Add Post</h2>
 
-            <form action="create.php" method="post">
+            <?php include(ROOT_PATH . "../../app/helpers/formErrors.php"); ?>
+
+            <form action="create.php" method="post" enctype="multipart/form-data">
                 <div>
                     <label>Title</label>
-                    <input type="text" name="title" class="text-input">
+                    <input type="text" name="title" value="<?php echo $title?>" class="text-input main">
                 </div>
                 <div>
                     <label>Body</label>
-                    <textarea name="body" id="body"></textarea>
+                    <textarea name="body" id="body"><?php echo $body ?></textarea>
                 </div>
                 <div>
                     <label>Image</label>
@@ -61,14 +63,34 @@
                 </div>
                 <div>
                     <label>Topic</label>
-                    <select name="topic">
-                        <option value="Poetry">Poetry</option>
-                        <option value="Life Lessons">Life Lessons</option>
+                    <select name="topic_id" class="text-input">
+                        <option value=""></option>
+                        <?php foreach ($topics as $key => $topic): ?>
+                        <?php if (!empty($topic_id) && $topic_id == $topic['id']): ?>
+                        <option selected value="<?php echo $topic['id'] ?>"><?php echo $topic['name'] ?></option>
+                        <?php else: ?>
+                        <option value="<?php echo $topic['id'] ?>"><?php echo $topic['name'] ?></option>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div>
-                    <button type="submit" name ="add-post" class="btn btn-big">Add Post</button>
+                    <?php if (empty($published)): ?>
+                    <label>
+                        <input type="checkbox" name="published">
+                        Publish
+                    </label>
+                    <?php else: ?>
+                    <label>
+                        <input type="checkbox" name="published" checked>
+                        Publish
+                    </label>
+                    <?php endif; ?>
                 </div>
+                <div>
+                    <button type="submit" name ="add-post" class="btn btn-big">Add Post Draft</button>
+                </div>
+
             </form>
         </div>
     </div>

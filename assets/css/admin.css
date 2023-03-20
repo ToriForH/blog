@@ -16,6 +16,15 @@ header {
   background: #8A098A;
 }
 
+.text-input {
+  font-family: 'Acme', sans-serif;
+  color: black;
+}
+
+.text-input.main {
+  font-size: 1.3em;
+}
+
 .admin-wrapper {
   display: flex;
   height: 100%;
@@ -84,14 +93,16 @@ td {
   text-decoration: none;
 }
 
-.publish {
+.publish,
+.unpublish {
   color: #1779F1;
   text-decoration: none;
 }
 
 .edit:hover,
 .delete:hover,
-.publish:hover {
+.publish:hover,
+.unpublish:hover {
   text-decoration: underline;
 }
 

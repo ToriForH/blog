@@ -50,11 +50,24 @@
             <form action="create.php" method="post">
                 <div>
                     <label>Name</label>
-                    <input type="text" name="name" value="<?php echo $name; ?>" class="text-input">
+                    <input type="text" name="name" value="<?php echo $name; ?>" class="text-input main">
                 </div>
                 <div>
                     <label>Description</label>
                     <textarea name="description" id="body"><?php echo $description; ?></textarea>
+                </div>
+                <div>
+                    <?php if (empty($published)): ?>
+                        <label>
+                            <input type="checkbox" name="published">
+                            Publish
+                        </label>
+                    <?php else: ?>
+                        <label>
+                            <input type="checkbox" name="published" checked>
+                            Publish
+                        </label>
+                    <?php endif; ?>
                 </div>
                 <div>
                     <button type="submit" name="add-topic" class="btn btn-big">Add Topic</button>

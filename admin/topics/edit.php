@@ -51,7 +51,7 @@
                 <input type="hidden" name="id" value="<?php echo $id; ?>" class="text-input">
                 <div>
                     <label>Name</label>
-                    <input type="text" name="name" value="<?php echo $name; ?>" class="text-input">
+                    <input type="text" name="name" value="<?php echo $name; ?>" class="text-input main">
                 </div>
                 <div>
                     <label>Description</label>

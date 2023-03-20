@@ -48,7 +48,7 @@
             <form action="create.html" method="post">
                 <div>
                     <label>Title</label>
-                    <input type="text" name="title" class="text-input">
+                    <input type="text" name="title" class="text-input main">
                 </div>
                 <div>
                     <label>Body</label>
