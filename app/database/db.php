@@ -21,7 +21,7 @@
   }
 
 
-  function selectAll($table, $condition)
+  function selectAll($table, $condition = [])
   {
       global $conn;
       $sql = "SELECT * FROM $table";

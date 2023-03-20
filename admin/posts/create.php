@@ -1,4 +1,5 @@
 <?php include("../../path.php"); ?>
+<?php include(ROOT_PATH. "../../app/controllers/posts.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +46,7 @@
 
             <h2 class="page-title">Add Post</h2>
 
-            <form action="create.html" method="post">
+            <form action="create.php" method="post">
                 <div>
                     <label>Title</label>
                     <input type="text" name="title" class="text-input">
@@ -66,7 +67,7 @@
                     </select>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-big">Add Post</button>
+                    <button type="submit" name ="add-post" class="btn btn-big">Add Post</button>
                 </div>
             </form>
         </div>

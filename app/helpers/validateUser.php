@@ -9,7 +9,7 @@ function validateUser($user)
         }
 
         $existingUsername = selectOne('users', ['username' => $user['username']]);
-        if (isset($existingUsername)) {
+        if ($existingUsername) {
             array_push($errors, 'This username already exists');
         }
 
@@ -18,7 +18,7 @@ function validateUser($user)
         }
 
         $existingUser = selectOne('users', ['email' => $user['email']]);
-        if (isset($existingUser)) {
+        if ($existingUser) {
             array_push($errors, 'User with this email already exists');
         }
 
