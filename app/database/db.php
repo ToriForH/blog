@@ -108,7 +108,6 @@
         return $stmt->affected_rows;
     }
 
-
     function delete($table, $id)
     {
         global $conn;

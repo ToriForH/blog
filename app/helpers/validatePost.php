@@ -9,7 +9,7 @@ function validatePost($post)
     }
 
     $existingPost = selectOne('posts', ['title' => $post['title']]);
-    if ($existingPost) {
+    if ($existingPost && $existingPost['title'] != $post['title']) {
         array_push($errors, 'Post with this title already exists');
     }
 
