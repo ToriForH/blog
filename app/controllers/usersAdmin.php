@@ -1,6 +1,7 @@
 <?php
 
 include(ROOT_PATH. "../../app/database/db.php");
+include(ROOT_PATH. "../../app/helpers/middleware.php");
 include(ROOT_PATH. "../../app/helpers/validateUser.php");
 
 $table = 'users';
@@ -19,6 +20,7 @@ $admin = '';
 $manager = '';
 
 if (isset($_POST['create-user'])) {
+    //adminsOnly();
     $errors = validateUser($_POST);
 
     if (empty($_POST['role'])) {
@@ -59,6 +61,7 @@ if(isset($_GET['id'])) {
 }
 
 if (isset($_GET['delete_id'])) {
+    //adminsOnly();
     $count = delete($table, $_GET['delete_id']);
     $_SESSION['message'] = "User deleted successfully";
     $_SESSION['type'] = "success";
@@ -67,6 +70,7 @@ if (isset($_GET['delete_id'])) {
 }
 
 if (isset($_POST['update-user'])) {
+    //adminsOnly();
     $errors = validateUser($_POST);
 
     if (empty($_POST['role'])) {

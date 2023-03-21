@@ -2,15 +2,25 @@
 include("path.php");
 include(ROOT_PATH. "app/database/db.php");
 include(ROOT_PATH. "app/controllers/topics.php");
+include(ROOT_PATH. "app/controllers/posts.php");
 
 $posts = array();
 $postsTitle = 'Recent Posts';
+$topics = selectAll('topics', ['published' => 1]);
 
-if (isset($_POST['search-term']) && $_POST['search-term'] != '') {
-    $postsTitle = "Searching for '" . $_POST['search-term'] . "'";
-    $posts = searchPost($_POST['search-term']);
+if (isset($_POST['search-term'])) {
+    if ($_POST['search-term'] == '') {
+        unset($_POST['search-term']);
+        header('location: ' . BASE_URL . '/index.php');
+    } else {
+        $postsTitle = "Searching for '" . $_POST['search-term'] . "'";
+        $posts = searchPost($_POST['search-term']);
+    }
+} else if (isset($_GET['t_id'])) {
+    $posts = selectPublished('posts', ['published' => 1, 'topic_id' => $_GET['t_id']]);
+    $postsTitle = "Searching for posts under'" . $_GET['name'] . "'";
 } else {
-    $posts = selectAll('posts', ['published' => 1]);
+    $posts = selectPublished('posts', ['published' => 1]);
 }
 
 ?>
@@ -54,14 +64,14 @@ if (isset($_POST['search-term']) && $_POST['search-term'] != '') {
         <div class="post clearfix">
             <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="" class="post-image">
             <div class="post-preview">
-                <h2><a href="single.html"><?php echo $post['title']; ?></a> </h2>
+                <h2><a href="single.php?id=<?php echo $post['id']; ?>"><?php echo $post['title']; ?></a> </h2>
                 <i class="fa-solid fa-user"> <?php echo getValue('users', $post['user_id'], 'username'); ?></i>
                 &nbsp;
                 <i class="fa-regular fa-calendar-days"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?></i>
                 <p class="preview-text">
                     <?php echo html_entity_decode(substr($post['body'], 0, 140) . '. . .'); ?>
                 </p>
-                <a href="single.html" class="btn read-more">Read More</a>
+                <a href="single.php?id=<?php echo $post['id']; ?>" class="btn read-more">Read More</a>
             </div>
         </div>
         <?php endforeach; ?>
@@ -79,9 +89,7 @@ if (isset($_POST['search-term']) && $_POST['search-term'] != '') {
             <h2 class="section-title">Topics</h2>
             <ul>
                 <?php foreach ($topics as $key => $topic): ?>
-                <?php if ($topic['published'] == 1): ?>
-                    <li><a href="#"><?php echo $topic['name']; ?></a></li>
-                <?php endif; ?>
+                    <li><a href="<?php echo BASE_URL . '/index.php?t_id=' . $topic['id'] . '&name=' . $topic['name']; ?>"><?php echo $topic['name']; ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>

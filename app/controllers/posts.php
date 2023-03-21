@@ -1,6 +1,7 @@
 <?php
 
 include(ROOT_PATH. "../../app/database/db.php");
+include(ROOT_PATH. "../../app/helpers/middleware.php");
 include(ROOT_PATH. "../../app/helpers/validatePost.php");
 
 $table = 'posts';
@@ -34,6 +35,7 @@ if (isset($_GET['delete_id'])) {
 }
 
 if (isset($_GET['published']) && isset($_GET['p_id'])) {
+    //modersOnly();
     $published = $_GET['published'];
     $p_id = $_GET['p_id'];
     $count = update($table, $p_id, ['published' => $published]);

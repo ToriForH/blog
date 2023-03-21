@@ -1,5 +1,7 @@
 <?php
 include("path.php");
+include(ROOT_PATH. "app/helpers/middleware.php");
+//usersOnly();
 session_start();
 
 unset($_SESSION['id']);

@@ -1,7 +1,9 @@
 <?php
 
 include(ROOT_PATH. "app/database/db.php");
+include(ROOT_PATH. "app/helpers/middleware.php");
 include(ROOT_PATH. "app/helpers/validateUser.php");
+//guestsOnly();
 
 $table = 'users';
 
@@ -13,6 +15,7 @@ $passwordConf ='';
 
 function loginUser($user)
 {
+    //guestsOnly();
     $_SESSION['id'] = $user['id'];
     $_SESSION['username'] = $user['username'];
     $_SESSION['admin'] = $user['admin'];
@@ -30,6 +33,7 @@ function loginUser($user)
 
 
 if (isset($_POST['register-btn'])) {
+    //guestsOnly();
     $errors = validateUser($_POST);
 
     if(count($errors) == 0) {
@@ -52,6 +56,7 @@ if (isset($_POST['register-btn'])) {
 
 
 if (isset($_POST['login-btn'])) {
+    //guestsOnly();
     $errors = validateLogin($_POST);
 
     if (count($errors) == 0) {

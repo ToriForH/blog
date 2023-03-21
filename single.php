@@ -1,4 +1,16 @@
-<?php include("path.php");  ?>
+<?php
+include("path.php");
+include(ROOT_PATH. "app/database/db.php");
+include(ROOT_PATH. "app/controllers/topics.php");
+include(ROOT_PATH. "app/controllers/posts.php");
+
+if (isset($_GET['id'])) {
+    $post = selectOne('posts', ['id' => $_GET['id']]);
+}
+$topics = selectAll('topics', ['published' => 1]);
+$posts = selectPublished('posts', ['published' => 1]);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +31,7 @@
     <!-- Custom Styling -->
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <title>Single Post</title>
+    <title><?php echo $post['title']; ?> | SiteName </title>
 </head>
 <body>
 
@@ -33,13 +45,10 @@
 
     <!-- Main Content Wrapper -->
     <div class="main-content single">
-        <h1 class="post-title">Title of the post will be written here</h1>
-        <img src="assets/images/image-2.png" alt="">
+        <h1 class="post-title"><?php echo $post['title']; ?></h1>
+        <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="">
         <div class="post-content">
-            <p>Some words to be post content info. Like I write something about shit, but it is nit shit. In case I too tired to write shit content I can write only some mad words to fill up this page with some letters that pretend to be an informative article. If you still read this please stop you won't find here something except boring.</p>
-            <p>Again Some words to be post content info. Like I write something about shit, but it is nit shit. In case I too tired to write shit content I can write only some mad words to fill up this page with some letters that pretend to be an informative article. If you still read this please stop you won't find here something except boring.</p>
-            <p>2 AgainSome words to be post content info. Like I write something about shit, but it is nit shit. In case I too tired to write shit content I can write only some mad words to fill up this page with some letters that pretend to be an informative article. If you still read this please stop you won't find here something except boring.</p>
-            <p>Again 3 Some words to be post content info. Like I write something about shit, but it is nit shit. In case I too tired to write shit content I can write only some mad words to fill up this page with some letters that pretend to be an informative article. If you still read this please stop you won't find here something except boring.</p>
+            <?php echo html_entity_decode($post['body']); ?>
         </div>
     </div>
     <!-- //Main Content -->
@@ -50,32 +59,23 @@
         <div class="section recent">
             <h2 class="section-title">Recent</h2>
 
+            <?php $count = 0; foreach ($posts as $p): ?>
+            <?php if ($count < 5 && $p['id'] != $post['id']): ?>
             <div class="post clearfix">
-                <img src="assets/images/image-2.png" alt="">
-                <a href="" class="title"><h4>Some recent post title</h4></a>
+                <img src="<?php echo BASE_URL . '/assets/images/' . $p['image']; ?>" alt="">
+                <a href="single.php?id=<?php echo $p['id']; ?>" class="title"><h4><?php echo $p['title']; ?></h4></a>
             </div>
-            <div class="post clearfix">
-                <img src="assets/images/image-1.png" alt="">
-                <a href="" class="title"><h4>Some recent post title</h4></a>
-            </div>
-            <div class="post clearfix">
-                <img src="assets/images/image-3.png" alt="">
-                <a href="" class="title"><h4>Some recent post title</h4></a>
-            </div>
-            <div class="post clearfix">
-                <img src="assets/images/image-1.png" alt="">
-                <a href="" class="title"><h4>Some recent post title</h4></a>
-            </div>
+            <?php $count++; endif; ?>
+            <?php endforeach; ?>
+
         </div>
 
         <div class="section topics">
             <h2 class="section-title">Topics</h2>
             <ul>
-                <li><a href="#">Shit</a></li>
-                <li><a href="#">Dirty Shit</a></li>
-                <li><a href="#">Holy Shit</a></li>
-                <li><a href="#">My Shit</a></li>
-                <li><a href="#">Cats' Shit</a></li>
+                <?php foreach ($topics as $key => $topic): ?>
+                    <li><a href="<?php echo BASE_URL . '/index.php?t_id=' . $topic['id'] . '&name=' . $topic['name']; ?>"><?php echo $topic['name']; ?></a></li>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>

@@ -127,8 +127,34 @@
     {
         global $conn;
         $match = '%' . $term . '%';
-        $sql = "SELECT * FROM posts WHERE published=? AND title LIKE ? OR body LIKE ?";
+        $sql = "SELECT * FROM posts WHERE published=? AND title LIKE ? OR body LIKE ? ORDER BY created_at DESC";
         $stmt = executeQuery($sql, ['published' => 1, 'title' => $match, 'body' => $match]);
         $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         return $records;
     }
+
+function selectPublished($table, $condition = [])
+{
+    global $conn;
+    $sql = "SELECT * FROM $table";
+    if (empty($condition)) {
+        $sql = $sql . " ORDER BY created_at DESC";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    } else {
+        $i = 0;
+        foreach ($condition as $key => $value) {
+            if ($i == 0) {
+                $sql = $sql . " WHERE $key=?";
+            } else {
+                $sql = $sql . " AND $key=?";
+            }
+            $i++;
+        }
+        $sql = $sql . " ORDER BY created_at DESC";
+        $stmt = executeQuery($sql, $condition);
+
+    }
+    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $records;
+}

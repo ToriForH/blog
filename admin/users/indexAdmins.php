@@ -1,5 +1,8 @@
-<?php include("../../path.php"); ?>
-<?php include(ROOT_PATH. "../../app/controllers/usersAdmin.php"); ?>
+<?php
+include("../../path.php");
+include(ROOT_PATH. "../../app/controllers/usersAdmin.php");
+//adminsOnly();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
