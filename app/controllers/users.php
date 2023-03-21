@@ -3,12 +3,13 @@
 include(ROOT_PATH. "app/database/db.php");
 include(ROOT_PATH. "app/helpers/validateUser.php");
 
+$table = 'users';
+
 $errors = array();
 $username ='';
 $email ='';
 $password ='';
 $passwordConf ='';
-$table = 'users';
 
 function loginUser($user)
 {

@@ -1,4 +1,5 @@
 <?php include("../../path.php"); ?>
+<?php include(ROOT_PATH. "../../app/controllers/usersAdmin.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,33 +46,41 @@
 
             <h2 class="page-title">Edit User</h2>
 
-            <form action="create.php" method="post">
+            <?php include(ROOT_PATH . "../../app/helpers/formErrors.php"); ?>
+
+            <form action="edit.php" method="post">
+                <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <div>
                     <label>Username</label>
-                    <input type="text" name="username" class="text-input">
+                    <input type="text" name="username" value="<?php echo $username; ?>" class="text-input">
                 </div>
                 <div>
                     <label>Email</label>
-                    <input type="email" name="email" class="text-input">
+                    <input type="email" name="email" value="<?php echo $email; ?>" class="text-input">
                 </div>
                 <div>
                     <label>Password</label>
-                    <input type="password" name="password" class="text-input">
+                    <input type="password" name="password" value="<?php echo $password; ?>" class="text-input">
                 </div>
                 <div>
                     <label>Password Confirmation</label>
-                    <input type="password" name="passwordConf" class="text-input">
+                    <input type="password" name="passwordConf" value="<?php echo $passwordConf; ?>" class="text-input">
                 </div>
                 <div>
                     <label>Role</label>
                     <select name="role" class="text-input">
-                        <option value="Admin">Admin</option>
-                        <option value="Manager">Manager</option>
+                        <?php if (!empty($role)): ?>
+                            <option selected value="<?php echo $role ?>"><?php echo $role ?></option>
+                        <?php else: ?>
+                            <option value=""></option>
+                        <?php endif; ?>
                         <option value="User">User</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Admin">Admin</option>
                     </select>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-big">Update User</button>
+                    <button type="submit" name="update-user" class="btn btn-big">Update User</button>
                 </div>
             </form>
         </div>

@@ -9,7 +9,7 @@ function validateUser($user)
         }
 
         $existingUsername = selectOne('users', ['username' => $user['username']]);
-        if ($existingUsername) {
+        if ($existingUsername  && $existingUsername['id'] != $user['id']) {
             array_push($errors, 'This username already exists');
         }
 
@@ -18,11 +18,11 @@ function validateUser($user)
         }
 
         $existingUser = selectOne('users', ['email' => $user['email']]);
-        if ($existingUser) {
+        if ($existingUser && $existingUser['id'] != $user['id']) {
             array_push($errors, 'User with this email already exists');
         }
 
-        if(empty($user['password'])) {
+        if(empty($user['password']) && !($existingUser || $existingUsername)) {
             array_push($errors, 'Password is required');
         }
 

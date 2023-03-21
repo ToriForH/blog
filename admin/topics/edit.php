@@ -48,7 +48,7 @@
             <?php include(ROOT_PATH . "../../app/helpers/formErrors.php"); ?>
 
             <form action="edit.php" method="post">
-                <input type="hidden" name="id" value="<?php echo $id; ?>" class="text-input">
+                <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <div>
                     <label>Name</label>
                     <input type="text" name="name" value="<?php echo $name; ?>" class="text-input main">
