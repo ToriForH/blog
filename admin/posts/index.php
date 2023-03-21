@@ -61,8 +61,8 @@
                     <tr>
                         <td><?php echo $key + 1; ?></td>
                         <td><?php echo $post['title'] ?></td>
-                        <td><?php echo $post['user_id']; ?></td>
-                        <td><?php echo $post['topic_id']; ?></td>
+                        <td><?php $user = selectOne('users', ['id' => $post['user_id']]); echo $user['username']; ?></td>
+                        <td><?php $topic = selectOne('topics', ['id' => $post['topic_id']]); echo $topic['name']; ?></td>
                         <td><a href="edit.php?id=<?php echo $post['id']; ?>" class="edit">edit</a></td>
                         <td><a href="edit.php?delete_id=<?php echo $post['id']; ?>" class="delete">delete</a></td>
                         <?php if ($post['published']): ?>

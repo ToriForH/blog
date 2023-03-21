@@ -45,6 +45,7 @@
         <div class="content">
 
             <h2 class="page-title">Edit Post</h2>
+            <?php include(ROOT_PATH . "../../app/helpers/formErrors.php"); ?>
 
             <form action="edit.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?php echo $id ?>">
@@ -57,7 +58,8 @@
                     <textarea name="body" id="body"><?php echo $body ?></textarea>
                 </div>
                 <div>
-                    <label>Image</label>
+                    <label>Image  </label>
+                    <a>(Don't add any new image if you want to save an old one)</a>
                     <input type="file" name="image" class="text-input">
                 </div>
                 <div>

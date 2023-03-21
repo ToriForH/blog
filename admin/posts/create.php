@@ -88,7 +88,7 @@
                     <?php endif; ?>
                 </div>
                 <div>
-                    <button type="submit" name ="add-post" class="btn btn-big">Add Post Draft</button>
+                    <button type="submit" name ="add-post" class="btn btn-big">Add Post</button>
                 </div>
 
             </form>

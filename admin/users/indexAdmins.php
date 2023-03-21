@@ -1,5 +1,5 @@
 <?php include("../../path.php"); ?>
-<?php include(ROOT_PATH. "../../app/controllers/topics.php"); ?>
+<?php include(ROOT_PATH. "../../app/controllers/usersAdmin.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +24,7 @@
     <!-- Admin Styling -->
     <link rel="stylesheet" href="../../assets/css/admin.css">
 
-    <title>Admin Section - Manage Topics</title>
+    <title>Admin Section - Manage Users</title>
 </head>
 <body>
 
@@ -38,38 +38,36 @@
     <!-- Admin Content -->
     <div class="admin-content">
         <div class="button-group">
-            <a href="create.php" class="btn btn-big">Add Topic</a>
-            <a href="index.php" class="btn btn-big">Manage Topics</a>
+            <a href="create.php" class="btn btn-big">Add User</a>
+            <a href="index.php" class="btn btn-big">Manage All Users</a>
+            <a href="indexAdmins.php" class="btn btn-big">Manage Moders and Admins</a>
         </div>
 
         <div class="content">
 
-            <h2 class="page-title">Manage Topics</h2>
-
+            <h2 class="page-title">Manage Users</h2>
             <?php include (ROOT_PATH. "../../app/includes/messages.php"); ?>
 
             <table>
                 <thead>
                 <th>№</th>
-                <th>Name</th>
-                <th>Author</th>
-                <th colspan="3">Action</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th colspan="2">Action</th>
                 </thead>
                 <tbody>
-                <?php foreach ($topics as $key => $topic): ?>
-                    <tr>
-                        <td><?php echo $key + 1; ?></td>
-                        <td><?php echo $topic['name']; ?></td>
-                        <td><?php $user = selectOne('users', ['id' => $topic['user_id']]); echo $user['username']; ?></td>
-                        <td><a href="edit.php?id=<?php echo $topic['id']; ?>" class="edit">edit</a></td>
-                        <td><a href="index.php?del_id=<?php echo $topic['id']; ?>" class="delete">delete</a></td>
-                        <?php if ($topic['published']): ?>
-                            <td>is published</td>
-                        <?php else: ?>
-                            <td><a href="edit.php?published=1&p_id=<?php echo $topic['id']; ?>" class="publish">publish</a></td>
-                        <?php endif; ?>
-                    </tr>
+                <?php foreach ($manager_users as $key => $user): ?>
+                <tr>
+                    <td><?php echo $key + 1; ?></td>
+                    <td><?php echo $user['username']; ?></td>
+                    <td><?php echo $user['email']; ?></td>
+                    <td><?php echo $user['role']; ?></td>
+                    <td><a href="edit.php?id=<?php echo $user['id']; ?>" class="edit">edit</a></td>
+                    <td><a href="index.php?delete_id=<?php echo $user['id']; ?>" class="delete">delete</a></td>
+                </tr>
                 <?php endforeach; ?>
+
                 </tbody>
             </table>
         </div>

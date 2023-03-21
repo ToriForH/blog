@@ -6,9 +6,7 @@ include(ROOT_PATH. "../../app/helpers/validateUser.php");
 $table = 'users';
 
 $users = selectAll($table);
-//$manager_users = selectAll($table, ['manager' => 1]); ['role' => "Manager"]
-//$admin_users = selectAll($table, ['admin' => 1]);
-//$condition = '';
+$manager_users = selectAll($table, ['manager' => 1]);
 
 $errors = array();
 $id = '';

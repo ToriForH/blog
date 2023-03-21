@@ -1,6 +1,6 @@
 <?php
 include("path.php");
-include(ROOT_PATH. "app/database/db.php"); // may be need be removed because included in topics.php
+include(ROOT_PATH. "app/database/db.php");
 include(ROOT_PATH. "app/controllers/topics.php");
 ?>
 <!DOCTYPE html>

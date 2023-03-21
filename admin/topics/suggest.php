@@ -24,7 +24,7 @@
     <!-- Admin Styling -->
     <link rel="stylesheet" href="../../assets/css/admin.css">
 
-    <title>Admin Section - Edit Topic</title>
+    <title>Admin Section - Suggest Topic</title>
 </head>
 <body>
 
@@ -38,22 +38,16 @@
     <!-- Admin Content -->
     <div class="admin-content">
         <div class="button-group">
-            <?php if ($_SESSION['role'] == 'User'): ?>
-                <a href="suggest.php" class="btn btn-big">Suggest New Topic</a>
-                <a href="topicIndex.php" class="btn btn-big">Manage My Topics</a>
-            <?php else: ?>
-            <a href="create.php" class="btn btn-big">Add Topic</a>
-            <a href="index.php" class="btn btn-big">Manage Topics</a>
-            <?php endif; ?>
+            <a href="suggest.php" class="btn btn-big">Suggest New Topic</a>
+            <a href="topicIndex.php" class="btn btn-big">Manage My Topics</a>
         </div>
 
         <div class="content">
 
-            <h2 class="page-title">Edit Topic</h2>
+            <h2 class="page-title">Suggest Topic</h2>
             <?php include(ROOT_PATH . "../../app/helpers/formErrors.php"); ?>
 
-            <form action="edit.php" method="post">
-                <input type="hidden" name="id" value="<?php echo $id; ?>">
+            <form action="suggest.php" method="post">
                 <div>
                     <label>Name</label>
                     <input type="text" name="name" value="<?php echo $name; ?>" class="text-input main">
@@ -63,7 +57,7 @@
                     <textarea name="description" id="body"><?php echo $description; ?></textarea>
                 </div>
                 <div>
-                    <button type="submit" name="update-topic" class="btn btn-big">Update Topic</button>
+                    <button type="submit" name="suggest-topic" class="btn btn-big">Suggest Topic</button>
                 </div>
             </form>
         </div>

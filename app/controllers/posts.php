@@ -6,6 +6,7 @@ include(ROOT_PATH. "../../app/helpers/validatePost.php");
 $table = 'posts';
 
 $topics = selectAll('topics');
+$users = selectAll('users');
 $posts = selectAll($table);
 
 $errors = array();
@@ -63,7 +64,7 @@ if (isset($_POST['add-post'])) {
 
     if (count($errors) == 0) {
         unset($_POST['add-post']);
-        $_POST['user_id'] = 1;
+        $_POST['user_id'] = $_SESSION['id'];
         $_POST['published'] = isset($_POST['published']) ? 1 : 0;
         $_POST['body'] = htmlentities($_POST['body']);
         $post_id = create($table, $_POST);
@@ -93,13 +94,12 @@ if (isset($_POST['update-post'])) {
             array_push($errors, "Failed to upload image");
         }
     } else {
-        array_push($errors, "You must upload an image"); //may be i'll remove else since its not save image value;
+        unset($_POST['image']);
     }
 
     if (count($errors) == 0) {
         $id = $_POST['id'];
         unset($_POST['update-post'], $_POST['id']);
-        $_POST['user_id'] = 1;
         $_POST['published'] = isset($_POST['published']) ? 1 : 0;
         $_POST['body'] = htmlentities($_POST['body']);
 

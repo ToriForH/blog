@@ -5,6 +5,8 @@ include(ROOT_PATH. "../../app/helpers/validateTopic.php");
 
 $table = 'topics';
 
+$users = selectAll('users');
+
 $errors = array();
 $id = '';
 $name = '';
@@ -13,16 +15,36 @@ $published = '';
 
 $topics = selectAll($table);
 
-if (isset($_POST['add-topic'])) {
+if (isset($_GET['published']) && isset($_GET['p_id'])) {
+    $published = $_GET['published'];
+    $p_id = $_GET['p_id'];
+    $count = update($table, $p_id, ['published' => $published]);
+    $_SESSION['message'] = "Topic published successfully";
+    $_SESSION['type'] = "success";
+    header('location: ' . BASE_URL . '/admin/topics/index.php');
+    exit();
+}
+
+if (isset($_POST['add-topic']) || isset($_POST['suggest-topic'])) {
     $errors = validateTopic($_POST);
 
     if (count($errors) == 0) {
-        unset($_POST['add-topic']);
-        $_POST['published'] = isset($_POST['published']) ? 1 : 0;
+        unset($_POST['add-topic'], $_POST['suggest-topic']);
+        $_POST['user_id'] = $_SESSION['id'];
+        if ($_SESSION['role'] = 'User') {
+            $_POST['published'] = '0';
+        } else {
+            $_POST['published'] = isset($_POST['published']) ? 1 : 0;
+        }
         $topic_id = create('topics', $_POST);
-        $_SESSION['message'] = 'Topic created successfully';
         $_SESSION['type'] = 'success';
-        header('location: ' . BASE_URL . '/admin/topics/index.php');
+        if ($_SESSION['role'] = 'User') {
+            $_SESSION['message'] = 'Topic suggested successfully. Please, wait for confirm from admin';
+            header('location: ' . BASE_URL . '/admin/topics/topicIndex.php');
+        } else {
+            $_SESSION['message'] = 'Topic created successfully';
+            header('location: ' . BASE_URL . '/admin/topics/index.php');
+        }
         exit();
     } else {
         $name = $_POST['name'];
@@ -53,11 +75,20 @@ if (isset($_POST['update-topic'])) {
     if (count($errors) == 0) {
         $id = $_POST['id'];
         unset($_POST['update-topic'], $_POST['id']);
+        if ($_SESSION['role'] == 'User') {
+            $_POST['published'] = '0';
+        }
         $topic_id = update($table, $id, $_POST);
-        $_SESSION['message'] = 'Topic updated successfully';
         $_SESSION['type'] = 'success';
-        header('location: ' . BASE_URL . '/admin/topics/index.php');
-        exit();
+        if ($_SESSION['role'] == 'User') {
+            $_SESSION['message'] = 'Update is accepted. Please, wait for confirmation from admin';
+            header('location: ' . BASE_URL . '/admin/topics/topicIndex.php');
+            exit();
+        } else {
+            $_SESSION['message'] = 'Topic updated successfully';
+            header('location: ' . BASE_URL . '/admin/topics/index.php');
+            exit();
+        }
     } else {
         $id = $_POST['id'];
         $name = $_POST['name'];
