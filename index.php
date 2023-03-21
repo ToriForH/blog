@@ -2,6 +2,17 @@
 include("path.php");
 include(ROOT_PATH. "app/database/db.php");
 include(ROOT_PATH. "app/controllers/topics.php");
+
+$posts = array();
+$postsTitle = 'Recent Posts';
+
+if (isset($_POST['search-term']) && $_POST['search-term'] != '') {
+    $postsTitle = "Searching for '" . $_POST['search-term'] . "'";
+    $posts = searchPost($_POST['search-term']);
+} else {
+    $posts = selectAll('posts', ['published' => 1]);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,69 +48,30 @@ include(ROOT_PATH. "app/controllers/topics.php");
 <div class="content clearfix">
     <!-- Main Content -->
     <div class="main-content">
-        <h1 class="recent-post-title">Recent Posts</h1>
+        <h1 class="recent-post-title"><?php echo $postsTitle; ?></h1>
 
+        <?php foreach ($posts as $post): ?>
         <div class="post clearfix">
-            <img src="assets/images/image-3.png" alt="" class="post-image">
+            <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="" class="post-image">
             <div class="post-preview">
-                <h2><a href="single.html">Some text to be post-preview</a></h2>
-                <i class="fa-solid fa-user"> Suka user2</i>
+                <h2><a href="single.html"><?php echo $post['title']; ?></a> </h2>
+                <i class="fa-solid fa-user"> <?php echo getValue('users', $post['user_id'], 'username'); ?></i>
                 &nbsp;
-                <i class="fa-regular fa-calendar-days"> Unexisting date</i>
+                <i class="fa-regular fa-calendar-days"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?></i>
                 <p class="preview-text">
-                    Some text to be preview-text.
-                    One more line And more line it will be a limit to characters in this section And some more here. What about 140
+                    <?php echo html_entity_decode(substr($post['body'], 0, 140) . '. . .'); ?>
                 </p>
                 <a href="single.html" class="btn read-more">Read More</a>
             </div>
         </div>
-        <div class="post clearfix">
-            <img src="assets/images/image-1.png" alt="" class="post-image">
-            <div class="post-preview">
-                <h2><a href="single.html">Some text to be post-preview</a> </h2>
-                <i class="fa-solid fa-user"> Suka user2</i>
-                &nbsp;
-                <i class="fa-regular fa-calendar-days"> Unexisting date</i>
-                <p class="preview-text">
-                    Some text to be preview-text.
-                    One more line.
-                </p>
-                <a href="single.html" class="btn read-more">Read More</a>
-            </div>
-        </div><div class="post clearfix">
-        <img src="assets/images/image-2.png" alt="" class="post-image">
-        <div class="post-preview">
-            <h2><a href="single.html">Some text to be post-preview</a> </h2>
-            <i class="fa-solid fa-user"> Suka user2</i>
-            &nbsp;
-            <i class="fa-regular fa-calendar-days"> Unexisting date</i>
-            <p class="preview-text">
-                Some text to be preview-text.
-                One more line.
-            </p>
-            <a href="single.html" class="btn read-more">Read More</a>
-        </div>
-    </div>
-        <div class="post clearfix">
-        <img src="assets/images/image-2.png" alt="" class="post-image">
-            <div class="post-preview">
-                <h2><a href="single.html">Some text to be post-preview</a> </h2>
-                <i class="fa-solid fa-user"> Suka user2</i>
-                &nbsp;
-                <i class="fa-regular fa-calendar-days"> Unexisting date</i>
-                <p class="preview-text">
-                    Some text to be preview-text.
-                    One more line And more line it will be a limit to characters in this section And some more here. What about 140
-                </p>
-                <a href="single.html" class="btn read-more">Read More</a>
-            </div>
-        </div>
+        <?php endforeach; ?>
+
     </div>
     <!-- //Main Content -->
     <div class="sidebar">
         <div class="section search">
             <h2 class="section-title">Search</h2>
-            <form action="index.html" method="post">
+            <form action="index.php" method="post">
                 <input type="text" name="search-term" class="text-input" placeholder="Search...">
             </form>
         </div>
@@ -107,7 +79,9 @@ include(ROOT_PATH. "app/controllers/topics.php");
             <h2 class="section-title">Topics</h2>
             <ul>
                 <?php foreach ($topics as $key => $topic): ?>
+                <?php if ($topic['published'] == 1): ?>
                     <li><a href="#"><?php echo $topic['name']; ?></a></li>
+                <?php endif; ?>
                 <?php endforeach; ?>
             </ul>
         </div>

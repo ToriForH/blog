@@ -65,7 +65,7 @@
                         <?php if ($topic['published']): ?>
                             <td>published</td>
                         <?php else: ?>
-                            <td>not published</td>
+                            <td>suggested</td>
                         <?php endif; ?>
                     </tr>
                 <?php endif; ?>

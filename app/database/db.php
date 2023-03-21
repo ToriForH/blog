@@ -116,3 +116,19 @@
         return $stmt->affected_rows;
     }
 
+    function getValue($table, $record_id, $value)
+    {
+        global $conn;
+        $record = selectOne($table, ['id' => $record_id]);
+        return $record[$value];
+    }
+
+    function searchPost($term)
+    {
+        global $conn;
+        $match = '%' . $term . '%';
+        $sql = "SELECT * FROM posts WHERE published=? AND title LIKE ? OR body LIKE ?";
+        $stmt = executeQuery($sql, ['published' => 1, 'title' => $match, 'body' => $match]);
+        $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $records;
+    }

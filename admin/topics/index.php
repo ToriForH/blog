@@ -60,7 +60,7 @@
                     <tr>
                         <td><?php echo $key + 1; ?></td>
                         <td><?php echo $topic['name']; ?></td>
-                        <td><?php $user = selectOne('users', ['id' => $topic['user_id']]); echo $user['username']; ?></td>
+                        <td><?php echo getValue('users', $topic['user_id'], 'username'); ?></td>
                         <td><a href="edit.php?id=<?php echo $topic['id']; ?>" class="edit">edit</a></td>
                         <td><a href="index.php?del_id=<?php echo $topic['id']; ?>" class="delete">delete</a></td>
                         <?php if ($topic['published']): ?>
