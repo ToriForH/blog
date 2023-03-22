@@ -1,6 +1,9 @@
-<?php include("../path.php"); ?>
-<?php include(ROOT_PATH. "../app/controllers/users.php"); ?>
-<?php include(ROOT_PATH. "../app/database/db.php"); ?>
+<?php include("../path.php");
+include(ROOT_PATH. "../app/controllers/users.php");
+include(ROOT_PATH. "../app/database/db.php");
+include(ROOT_PATH. "../app/helpers/middleware.php");
+usersOnly();
+?>
 
 <!DOCTYPE html>
 <html lang="en">

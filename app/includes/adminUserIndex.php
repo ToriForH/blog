@@ -1,6 +1,3 @@
-<?php include("../../path.php"); ?>
-<?php include(ROOT_PATH. "../../app/controllers/topics.php"); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,52 +21,55 @@
     <!-- Admin Styling -->
     <link rel="stylesheet" href="../../assets/css/admin.css">
 
-    <title>Admin Section - Manage Topics</title>
+    <title>Admin Section - <?php echo $title; ?></title>
 </head>
 <body>
 
-<?php include(ROOT_PATH. "../../app/includes/adminHeader.php"); ?>
+<?php include(ROOT_PATH . "../../app/includes/adminHeader.php"); ?>
 
 <!-- Admin Page Wrapper -->
 <div class="admin-wrapper clearfix">
 
-    <?php include(ROOT_PATH. "../../app/includes/adminSidebar.php"); ?>
+    <?php include(ROOT_PATH . "../../app/includes/adminSidebar.php"); ?>
 
     <!-- Admin Content -->
     <div class="admin-content">
         <div class="button-group">
-            <a href="suggest.php" class="btn btn-big">Suggest New Topic</a>
-            <a href="topicIndex.php" class="btn btn-big">Manage My Topics</a>
+            <a href="create.php" class="btn btn-big">Add User</a>
+            <a href="index.php" class="btn btn-big">Manage All Users</a>
+            <a href="index_admin.php" class="btn btn-big">Manage Moders and Admins</a>
+            <a href="index_regular.php" class="btn btn-big">Manage Only Regular Users</a>
         </div>
 
         <div class="content">
 
-            <h2 class="page-title">Manage Topics</h2>
-
-            <?php include (ROOT_PATH. "../../app/includes/messages.php"); ?>
+            <h2 class="page-title"><?php echo $title; ?></h2>
+            <?php include(ROOT_PATH . "../../app/includes/messages.php"); ?>
 
             <table>
                 <thead>
                 <th>№</th>
-                <th>Name</th>
-                <th colspan="3">Action</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th colspan="2">Action</th>
                 </thead>
                 <tbody>
-                <?php $number = 1; foreach ($topics as $key => $topic): ?>
-                <?php if ($topic['user_id'] == $_SESSION['id']): ?>
+                <?php foreach (users($condition) as $key => $user): ?>
                     <tr>
-                        <td><?php echo $number++; ?></td>
-                        <td><?php echo $topic['name']; ?></td>
-                        <td><a href="edit.php?id=<?php echo $topic['id']; ?>" class="edit">edit</a></td>
-                        <td><a href="index.php?del_id=<?php echo $topic['id']; ?>" class="delete">delete</a></td>
-                        <?php if ($topic['published']): ?>
-                            <td>published</td>
+                        <td><?php echo $key + 1; ?></td>
+                        <td><?php echo $user['username']; ?></td>
+                        <td><?php echo $user['email']; ?></td>
+                        <td><?php echo $user['role']; ?></td>
+                        <td><a href="edit.php?id=<?php echo $user['id']; ?>" class="edit">edit</a></td>
+                        <?php if($user['id'] == 1): ?>
+                            <td>Superadmin</td>
                         <?php else: ?>
-                            <td>suggested</td>
+                            <td><a href="index.php?delete_id=<?php echo $user['id']; ?>" class="delete">delete</a></td>
                         <?php endif; ?>
                     </tr>
-                <?php endif; ?>
                 <?php endforeach; ?>
+
                 </tbody>
             </table>
         </div>

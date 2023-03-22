@@ -1,6 +1,3 @@
-<?php include("../../path.php"); ?>
-<?php include(ROOT_PATH. "../../app/controllers/topics.php"); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +21,7 @@
     <!-- Admin Styling -->
     <link rel="stylesheet" href="../../assets/css/admin.css">
 
-    <title>Admin Section - Suggest Topic</title>
+    <title>Admin Section - Add Topic</title>
 </head>
 <body>
 
@@ -38,16 +35,20 @@
     <!-- Admin Content -->
     <div class="admin-content">
         <div class="button-group">
-            <a href="suggest.php" class="btn btn-big">Suggest New Topic</a>
-            <a href="topicIndex.php" class="btn btn-big">Manage My Topics</a>
+            <a href="create.php" class="btn btn-big">Add Topic</a>
+            <a href="index.php" class="btn btn-big">Published Topic</a>
+            <?php if($_SESSION['moder']): ?>
+                <a href="index_all.php" class="btn btn-big">Manage All Topics</a>
+            <?php endif; ?>
+            <a href="index_my.php" class="btn btn-big">Manage My Topics</a>
         </div>
 
         <div class="content">
 
-            <h2 class="page-title">Suggest Topic</h2>
+            <h2 class="page-title">Add Topic</h2>
             <?php include(ROOT_PATH . "../../app/helpers/formErrors.php"); ?>
 
-            <form action="suggest.php" method="post">
+            <form action="create.php" method="post">
                 <div>
                     <label>Name</label>
                     <input type="text" name="name" value="<?php echo $name; ?>" class="text-input main">
@@ -56,8 +57,11 @@
                     <label>Description</label>
                     <textarea name="description" id="body"><?php echo $description; ?></textarea>
                 </div>
-                <div>
-                    <button type="submit" name="suggest-topic" class="btn btn-big">Suggest Topic</button>
+                <div class="button-group">
+                    <button type="submit" name="<?php echo $submitName; ?>" class="btn btn-big"><?php echo $submitTitle; ?></button>
+                    <?php if($_SESSION['moder']): ?>
+                        <button type="submit" name="add-topic" class="btn btn-big">Publish Topic</button>
+                    <?php endif; ?>
                 </div>
             </form>
         </div>

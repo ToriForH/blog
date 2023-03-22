@@ -1,7 +1,6 @@
 <?php include("path.php"); ?>
 <?php include(ROOT_PATH. "app/controllers/users.php");
-include(ROOT_PATH. "app/helpers/middleware.php");
-//guestsOnly();
+guestsOnly();
 ?>
 <!DOCTYPE html>
 <html lang="en">

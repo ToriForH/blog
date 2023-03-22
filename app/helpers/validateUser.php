@@ -17,12 +17,13 @@ function validateUser($user)
             array_push($errors, 'Email is required');
         }
 
-        $existingUser = selectOne('users', ['email' => $user['email']]);
-        if ($existingUser && $existingUser['id'] != $user['id']) {
+        $existingUserEmail = selectOne('users', ['email' => $user['email']]);
+        if ($existingUserEmail && $existingUserEmail['id'] != $user['id']) {
             array_push($errors, 'User with this email already exists');
         }
 
-        if(empty($user['password']) && !($existingUser || $existingUsername)) {
+        $existingUser = selectOne('users', ['id' => $user['id']]);
+        if(empty($user['password']) && !$existingUser) {
             array_push($errors, 'Password is required');
         }
 

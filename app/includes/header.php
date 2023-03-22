@@ -16,11 +16,7 @@
                 <i class="fa-solid fa-chevron-down arrow-toggle" style="font-size: 0.8em;"></i>
             </a>
             <ul class="us">
-                <?php if($_SESSION['manager']): ?>
-                    <li><a href="<?php echo BASE_URL . '/admin/dashboard.php' ?>">Dashboard</a> </li>
-                <?php else: ?>
-                    <li><a href="<?php echo BASE_URL . '/admin/dashboard.php' ?>">My posts</a> </li>
-                <?php endif; ?>
+                <li><a href="<?php echo BASE_URL . '/admin/dashboard.php' ?>">Dashboard</a> </li>
                 <li><a href="<?php echo BASE_URL . '/logout.php' ?>" class="logout">Logout</a> </li>
             </ul>
         </li>

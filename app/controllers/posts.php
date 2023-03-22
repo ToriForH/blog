@@ -30,7 +30,7 @@ if (isset($_GET['delete_id'])) {
     $count = delete($table, $_GET['delete_id']);
     $_SESSION['message'] = "Post deleted successfully";
     $_SESSION['type'] = "success";
-    header('location: ' . BASE_URL . '/admin/posts/index.php');
+    header('location: ' . BASE_URL . '/admin/posts/index_all.php');
     exit();
 }
 
@@ -41,7 +41,7 @@ if (isset($_GET['published']) && isset($_GET['p_id'])) {
     $count = update($table, $p_id, ['published' => $published]);
     $_SESSION['message'] = "Post published state changed successfully";
     $_SESSION['type'] = "success";
-    header('location: ' . BASE_URL . '/admin/posts/index.php');
+    header('location: ' . BASE_URL . '/admin/posts/index_all.php');
     exit();
 }
 
@@ -72,7 +72,7 @@ if (isset($_POST['add-post'])) {
         $post_id = create($table, $_POST);
         $_SESSION['message'] = "Post created successfully";
         $_SESSION['type'] = "success";
-        header('location: ' . BASE_URL . '/admin/posts/index.php');
+        header('location: ' . BASE_URL . '/admin/posts/index_all.php');
         exit();
     } else {
         $title = $_POST['title'];
@@ -108,7 +108,7 @@ if (isset($_POST['update-post'])) {
         $post_id = update($table, $id, $_POST);
         $_SESSION['message'] = "Post updated successfully";
         $_SESSION['type'] = "success";
-        header('location: ' . BASE_URL . '/admin/posts/index.php');
+        header('location: ' . BASE_URL . '/admin/posts/index_all.php');
         exit();
     } else {
         $title = $_POST['title'];

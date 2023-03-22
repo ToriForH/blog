@@ -5,22 +5,23 @@ include(ROOT_PATH. "../../app/helpers/middleware.php");
 include(ROOT_PATH. "../../app/helpers/validateUser.php");
 
 $table = 'users';
-
-$users = selectAll($table);
-$manager_users = selectAll($table, ['manager' => 1]);
+function users($condition = [])
+{
+    $users = selectAll('users', $condition);
+    return $users;
+}
 
 $errors = array();
 $id = '';
-$username ='';
-$email ='';
-$password ='';
-$passwordConf ='';
+$username = '';
+$email = '';
+$password = '';
+$passwordConf = '';
 $role = '';
 $admin = '';
-$manager = '';
+$moder = '';
 
 if (isset($_POST['create-user'])) {
-    //adminsOnly();
     $errors = validateUser($_POST);
 
     if (empty($_POST['role'])) {
@@ -30,9 +31,9 @@ if (isset($_POST['create-user'])) {
     if(count($errors) == 0) {
         $_POST['admin'] = 0;
         if ($_POST['role'] == 'User') {
-            $_POST['manager'] = 0;
+            $_POST['moder'] = 0;
         } else {
-            $_POST['manager'] = 1;
+            $_POST['moder'] = 1;
         }
         if ($_POST['role'] == 'Admin') {
             $_POST['admin'] = 1;
@@ -61,16 +62,21 @@ if(isset($_GET['id'])) {
 }
 
 if (isset($_GET['delete_id'])) {
-    //adminsOnly();
-    $count = delete($table, $_GET['delete_id']);
-    $_SESSION['message'] = "User deleted successfully";
-    $_SESSION['type'] = "success";
-    header('location: ' . BASE_URL . '/admin/users/index.php');
-    exit();
+    if ($_GET['delete_id'] == 1) {
+        $_SESSION['message'] = "You can't delete a superadmin";
+        $_SESSION['type'] = "error";
+        header('location: ' . BASE_URL . '/admin/users/index.php');
+        exit();
+    } else {
+        $count = delete($table, $_GET['delete_id']);
+        $_SESSION['message'] = "User deleted successfully";
+        $_SESSION['type'] = "success";
+        header('location: ' . BASE_URL . '/admin/users/index.php');
+        exit();
+    }
 }
 
 if (isset($_POST['update-user'])) {
-    //adminsOnly();
     $errors = validateUser($_POST);
 
     if (empty($_POST['role'])) {
@@ -81,9 +87,9 @@ if (isset($_POST['update-user'])) {
         $id = $_POST['id'];
         $_POST['admin'] = 0;
         if ($_POST['role'] == 'User') {
-            $_POST['manager'] = 0;
+            $_POST['moder'] = 0;
         } else {
-            $_POST['manager'] = 1;
+            $_POST['moder'] = 1;
         }
         if ($_POST['role'] == 'Admin') {
             $_POST['admin'] = 1;
