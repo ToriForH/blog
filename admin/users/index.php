@@ -1,5 +1,5 @@
 <?php include("../../path.php");
-include(ROOT_PATH. "../../app/controllers/usersAdmin.php");
+include(ROOT_PATH . "../../app/controllers/users.php");
 adminsOnly();
 $condition = '';
 $title = 'Manage All Users';
