@@ -48,7 +48,9 @@
             <?php include(ROOT_PATH . "../../app/helpers/formErrors.php"); ?>
 
             <form action="edit.php?id=<?php echo $id; ?>" method="post">
-                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                <?php if($title == "Edit User"): ?>
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
+                <?php endif; ?>
                 <div>
                     <label>Username</label>
                     <input type="text" name="username" value="<?php echo $username; ?>" class="text-input">

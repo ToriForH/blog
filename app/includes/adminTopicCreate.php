@@ -21,7 +21,7 @@
     <!-- Admin Styling -->
     <link rel="stylesheet" href="../../assets/css/admin.css">
 
-    <title>Admin Section - Add Topic</title>
+    <title>Admin Section - <?php echo $title; ?></title>
 </head>
 <body>
 
@@ -45,10 +45,13 @@
 
         <div class="content">
 
-            <h2 class="page-title">Add Topic</h2>
+            <h2 class="page-title"><?php echo $title; ?></h2>
             <?php include(ROOT_PATH . "../../app/helpers/formErrors.php"); ?>
 
             <form action="create.php" method="post">
+                <?php if($title == "Edit Topic"): ?>
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
+                <?php endif; ?>
                 <div>
                     <label>Name</label>
                     <input type="text" name="name" value="<?php echo $name; ?>" class="text-input main">
