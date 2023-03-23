@@ -50,7 +50,7 @@
 
             <?php include(ROOT_PATH . "../../app/helpers/formErrors.php"); ?>
 
-            <form action="create.php" method="post" enctype="multipart/form-data">
+            <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
                 <?php if($pageTitle == "Edit Post"): ?>
                     <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <?php endif; ?>
@@ -85,7 +85,7 @@
                 <div class="button-group">
                     <button type="submit" name ="<?php echo $submitName; ?>" class="btn btn-big"><?php echo $submitTitle; ?></button>
                     <?php if($_SESSION['moder']): ?>
-                        <button type="submit" name="add-post" class="btn btn-big">Publish Post</button>
+                        <button type="submit" name="<?php echo $publishName; ?>" class="btn btn-big">Publish Post</button>
                     <?php endif; ?>
                 </div>
 

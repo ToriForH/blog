@@ -47,8 +47,8 @@
 
             <?php include(ROOT_PATH . "../../app/helpers/formErrors.php"); ?>
 
-            <form action="edit.php?id=<?php echo $id; ?>" method="post">
-                <?php if($title == "Edit User"): ?>
+            <form action="<?php echo $action; ?>" method="post">
+                <?php if($title != 'Add User'): ?>
                     <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <?php endif; ?>
                 <div>
@@ -60,13 +60,18 @@
                     <input type="email" name="email" value="<?php echo $email; ?>" class="text-input">
                 </div>
                 <div>
-                    <label>Password</label>
+                    <?php if($title != 'Add User'): ?>
+                        <label>New Password</label>
+                    <?php else: ?>
+                        <label>Password</label>
+                    <?php endif; ?>
                     <input type="password" name="password" value="<?php echo $password; ?>" class="text-input">
                 </div>
                 <div>
                     <label>Password Confirmation</label>
                     <input type="password" name="passwordConf" value="<?php echo $passwordConf; ?>" class="text-input">
                 </div>
+                <?php if($title != 'My profile'): ?>
                 <div>
                     <label>Role</label>
                     <select name="role" class="text-input">
@@ -80,8 +85,12 @@
                         <option value="Admin">Admin</option>
                     </select>
                 </div>
-                <div>
+                <?php endif; ?>
+                <div class="button-group">
                     <button type="submit" name="<?php echo $submitName; ?>" class="btn btn-big"><?php echo $submitTitle; ?></button>
+                    <?php if($action == 'profile.php'): ?>
+                        <button type="submit" name="delete-profile" class="btn btn-big">Delete My Profile</button>
+                    <?php endif; ?>
                 </div>
             </form>
         </div>

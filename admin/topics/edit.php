@@ -8,5 +8,7 @@ if ($_SESSION['moder']) {
     $submitTitle = "Suggest Updated Topic";
 }
 $title = "Edit Topic";
+$action = 'edit.php';
+$publishName = "publish-updated-topic";
 include(ROOT_PATH. "../../app/includes/adminTopicCreate.php");
 ?>

@@ -1,3 +1,9 @@
+<?php include("../../path.php");
+include(ROOT_PATH . "../../app/controllers/requests.php");
+include(ROOT_PATH. "../../app/database/db.php");
+?>
+
+
 <!-- footer -->
 <div class="footer">
     <div class="footer-content">
@@ -32,10 +38,10 @@
         <div class="footer-section contact-form">
             <h2>Contact Us</h2>
             <br>
-            <form action="index.html" method="post">
+            <form action="contact.php" method="post">
                 <input type="email" name="email" class="text-input contact-input" placeholder="Your email address...">
                 <textarea rows="4" name="message" class="text-input contact-input" placeholder="Your message..."></textarea>
-                <button type="submit" class="btn btn-send contact-btn">
+                <button type="submit" name="add-request" class="btn btn-send contact-btn">
                     <i class="fa-solid fa-envelope"></i>
                     Send
                 </button>

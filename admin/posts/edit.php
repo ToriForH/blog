@@ -8,5 +8,7 @@ if ($_SESSION['moder']) {
 } else {
     $submitTitle = "Suggest Updated Post";
 }
+$action = "edit.php";
+$publishName = "publish-updated-post";
 include(ROOT_PATH. "../../app/includes/adminPostCreate.php");
 ?>

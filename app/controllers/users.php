@@ -83,6 +83,10 @@ if (isset($_POST['update-user'])) {
         array_push($errors, "You must choose a role");
     }
 
+    if ($_POST['id'] == 1 && $_POST['role'] != 'Admin') {
+        array_push($errors, "You can't change superadmin role");
+    }
+
     if(count($errors) == 0) {
         $id = $_POST['id'];
         $_POST['admin'] = 0;
@@ -110,5 +114,43 @@ if (isset($_POST['update-user'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
         $role = $_POST['role'];
+    }
+}
+
+if (isset($_POST['update-profile'])) {
+    $errors = validateUser($_POST);
+
+    if(count($errors) == 0) {
+        $id = $_SESSION['id'];
+        unset($_POST['update-profile'], $_POST['passwordConf'], $_POST['id']);
+        if (empty($_POST['password'])) {
+            unset($_POST['password']);
+        } else {
+            $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        }
+        $user_id = update($table, $id, $_POST);
+        $_SESSION['message'] = "Profile data changed successfully";
+        $_SESSION['type'] = "success";
+        header('location: ' . BASE_URL . '/admin/dashboard.php');
+        exit();
+    } else {
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+    }
+}
+
+if (isset($_GET['delete_profile'])) {
+    if ($_GET['id'] == 1) {
+        $_SESSION['message'] = "Superadmin profile couldn't be deleted";
+        $_SESSION['type'] = "error";
+        header('location: ' . BASE_URL . '/admin/dashboard.php');
+        exit();
+    } else {
+        $count = delete($table, $_GET['id']);
+        $_SESSION['message'] = "Your profile deleted successfully";
+        $_SESSION['type'] = "success";
+        header('location: ' . BASE_URL . '/index.php');
+        exit();
     }
 }

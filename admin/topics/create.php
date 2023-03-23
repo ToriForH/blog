@@ -8,6 +8,8 @@ if ($_SESSION['moder']) {
     $submitTitle = "Suggest Topic";
 }
 $title = "Add Topic";
+$action = 'create.php';
+$publishName = "add-topic";
 include(ROOT_PATH. "../../app/includes/adminTopicCreate.php");
 ?>
 

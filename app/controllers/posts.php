@@ -135,6 +135,42 @@ if (isset($_POST['suggest-post'])) {
     }
 }
 
+if (isset($_POST['publish-updated-post'])) {
+    if (!$_SESSION['moder']) {
+        modersOnly();
+    }
+    $errors = validatePost($_POST);
+
+    if (!empty($_FILES['image']['name'])) {
+        $image_name = time() . '_' . $_FILES['image']['name'];
+        $destination = ROOT_PATH . '../../assets/images/' . $image_name;
+
+        $result = move_uploaded_file(($_FILES['image']['tmp_name']),  $destination);
+
+        if ($result) {
+            $_POST['image'] = $image_name;
+        } else {
+            array_push($errors, "Failed to upload image");
+        }
+    }
+
+    if (count($errors) == 0) {
+        $id = $_POST['id'];
+        unset($_POST['publish-updated-post'], $_POST['id']);
+        $_POST['published'] = 1;
+        $_POST['body'] = htmlentities($_POST['body']);
+        $post_id = update($table, $id, $_POST);
+        $_SESSION['message'] = "Updated post published successfully";
+        $_SESSION['type'] = "success";
+        header('location: ' . BASE_URL . '/admin/posts/index.php');
+        exit();
+    } else {
+        $title = $_POST['title'];
+        $body = $_POST['body'];
+        $topic_id = $_POST['topic_id'];
+    }
+}
+
 if (isset($_POST['update-post'])) {
     $errors = validatePost($_POST);
     if (!empty($_FILES['image']['name'])) {
@@ -159,7 +195,11 @@ if (isset($_POST['update-post'])) {
         $_POST['body'] = htmlentities($_POST['body']);
 
         $post_id = update($table, $id, $_POST);
-        $_SESSION['message'] = "Post updated successfully";
+        if ($_SESSION['moder']) {
+            $_SESSION['message'] = "Post draft updated successfully";
+        } else {
+            $_SESSION['message'] = "Update saved. Please, wait for confirmation from admin";
+        }
         $_SESSION['type'] = "success";
         header('location: ' . BASE_URL . '/admin/posts/index.php');
         exit();

@@ -39,7 +39,7 @@ if (isset($_POST['add-topic'])) {
     }
     $errors = validateTopic($_POST);
     if (count($errors) == 0) {
-        unset($_POST['add-topic'], $_POST['suggest-topic']);
+        unset($_POST['add-topic']);
         $_POST['user_id'] = $_SESSION['id'];
         $_POST['published'] = '1';
         $_SESSION['message'] = 'Topic created and published successfully';
@@ -98,6 +98,26 @@ if (isset($_GET['del_id'])) {
     exit();
 }
 
+if (isset($_POST['publish-updated-topic'])) {
+    if (!$_SESSION['moder']) {
+        modersOnly();
+    }
+    $errors = validateTopic($_POST);
+    if (count($errors) == 0) {
+        $id = $_POST['id'];
+        unset($_POST['publish-updated-topic'], $_POST['id']);
+        $_POST['published'] = '1';
+        $_SESSION['message'] = 'Updated topic published successfully';
+        $topic_id = update('topics', $id, $_POST);
+        $_SESSION['type'] = 'success';
+        header('location: ' . BASE_URL . '/admin/topics/index_all.php');
+        exit();
+    } else {
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+    }
+}
+
 if (isset($_POST['update-topic'])) {
     $errors = validateTopic($_POST);
 
@@ -106,9 +126,9 @@ if (isset($_POST['update-topic'])) {
         unset($_POST['update-topic'], $_POST['id']);
         if ($_SESSION['role'] == 'User') {
             $_POST['published'] = '0';
-            $_SESSION['message'] = 'Update is accepted. Please, wait for confirmation from admin';
+            $_SESSION['message'] = 'Update saved. Please, wait for confirmation from admin';
         } else {
-            $_SESSION['message'] = 'Topic updated successfully';
+            $_SESSION['message'] = 'Topic draft updated successfully';
         }
         $topic_id = update($table, $id, $_POST);
         $_SESSION['type'] = 'success';
