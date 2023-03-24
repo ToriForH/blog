@@ -140,17 +140,18 @@ if (isset($_POST['update-profile'])) {
     }
 }
 
-if (isset($_GET['delete_profile'])) {
-    if ($_GET['id'] == 1) {
+if (isset($_POST['delete_profile'])) {
+    if ($_SESSION['id'] == 1) {
         $_SESSION['message'] = "Superadmin profile couldn't be deleted";
         $_SESSION['type'] = "error";
         header('location: ' . BASE_URL . '/admin/dashboard.php');
-        exit();
     } else {
-        $count = delete($table, $_GET['id']);
+        $id = $_SESSION['id'];
+        session_destroy();
+        $count = delete($table, $id);
         $_SESSION['message'] = "Your profile deleted successfully";
         $_SESSION['type'] = "success";
         header('location: ' . BASE_URL . '/index.php');
-        exit();
     }
+    exit();
 }
