@@ -24,10 +24,11 @@ if (isset($_POST['add-request'])) {
     $errors = validateRequest($_POST);
 
     if (count($errors) == 0) {
+        dd($_POST);
         unset($_POST['add-request']);
         $_POST['answered'] = 0;
         $_POST['user_id'] = '';
-        dd($_POST);
+
         $post_id = create($table, $_POST);
         $_SESSION['message'] = "Message sent successfully";
         $_SESSION['type'] = "success";

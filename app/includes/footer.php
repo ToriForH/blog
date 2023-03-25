@@ -19,20 +19,24 @@ include(ROOT_PATH. "../../app/database/db.php");
             </div>
             <div class="socials">
                 <a href="https://facebook.com/profile.php?id=100008948389333"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/exo_xaocy/"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
         <div class="footer-section links">
             <h2>Quick Links</h2>
             <br>
             <ul>
-                <a href="#"><li>My posts</li></a>
-                <a href="#"><li>Guide</li></a>
-                <a href="#"><li>Gallery</li></a>
-                <a href="#"><li>Team</li></a>
-                <a href="#"><li>Terms and Conditions</li></a>
+                <a href="index.php"><li>Home</li></a>
+                <a href="gallery.php"><li>Gallery</li></a>
+                <?php if(isset($_SESSION['id'])): ?>
+                    <a href="admin/dashboard.php"><li>Dashboard</li></a>
+                    <a href="logout.php"><li>Logout</li></a>
+                <?php else: ?>
+                    <a href="register.php"><li>Sign Up</li></a>
+                    <a href="login.php"><li>Log In</li></a>
+                <?php endif; ?>
             </ul>
         </div>
         <div class="footer-section contact-form">

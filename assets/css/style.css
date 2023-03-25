@@ -211,7 +211,7 @@ header a.logout:hover {
   padding: 20px 20px;
   font-size: 1.1em;
   border-radius: 5px;
-  min-height: 780px;
+  height: auto;
 }
 
 .content .main-content.single .post-title {

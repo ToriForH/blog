@@ -64,14 +64,14 @@ if (isset($_POST['search-term'])) {
         <div class="post clearfix">
             <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="" class="post-image">
             <div class="post-preview">
-                <h2><a href="single.php?id=<?php echo $post['id']; ?>"><?php echo $post['title']; ?></a> </h2>
+                <h2><a href="single.php?post_id=<?php echo $post['id']; ?>"><?php echo $post['title']; ?></a> </h2>
                 <i class="fa-solid fa-user"> <?php echo getValue('users', $post['user_id'], 'username'); ?></i>
                 &nbsp;
                 <i class="fa-regular fa-calendar-days"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?></i>
                 <p class="preview-text">
                     <?php echo html_entity_decode(substr($post['body'], 0, 140) . '. . .'); ?>
                 </p>
-                <a href="single.php?id=<?php echo $post['id']; ?>" class="btn read-more">Read More</a>
+                <a href="single.php?post_id=<?php echo $post['id']; ?>" class="btn read-more">Read More</a>
             </div>
         </div>
         <?php endforeach; ?>
@@ -89,7 +89,7 @@ if (isset($_POST['search-term'])) {
             <h2 class="section-title">Topics</h2>
             <ul>
                 <?php foreach ($topics as $key => $topic): ?>
-                    <li><a href="<?php echo BASE_URL . '/index_all.php?t_id=' . $topic['id'] . '&name=' . $topic['name']; ?>"><?php echo $topic['name']; ?></a></li>
+                    <li><a href="<?php echo BASE_URL . '/index.php?t_id=' . $topic['id'] . '&name=' . $topic['name']; ?>"><?php echo $topic['name']; ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>

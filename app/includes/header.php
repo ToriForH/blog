@@ -5,8 +5,8 @@
     <i class="fa-solid fa-bars menu-toggle"></i>
     <ul class="nav">
         <li><a href="<?php echo BASE_URL . '/index.php' ?>">Home</a> </li>
-        <li><a href="#">About</a> </li>
-        <li><a href="#">Contact Us</a> </li>
+        <!-- <li><a href="#">About</a> </li> -->
+        <li><a href="<?php echo BASE_URL . '/contact.php' ?>">Contact Us</a> </li>
 
         <?php if(isset($_SESSION['id'])): ?>
         <li>
@@ -22,7 +22,7 @@
         </li>
         <?php else: ?>
             <li><a href="<?php echo BASE_URL . '/register.php' ?>">Sign Up</a> </li>
-            <li><a href="<?php echo BASE_URL . '/login.php' ?>">Log in</a></li>
+            <li><a href="<?php echo BASE_URL . '/login.php' ?>">Log In</a></li>
         <?php endif; ?>
     </ul>
 </header>
