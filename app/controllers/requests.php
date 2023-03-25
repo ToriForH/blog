@@ -18,16 +18,20 @@ $id = '';
 $email = '';
 $message = '';
 $answered = '';
-$user_id = '';
 
 if (isset($_POST['add-request'])) {
-    $errors = validateRequest($_POST);
+
+    if(empty($_POST['email'])) {
+        array_push($errors, 'Email is required');
+    }
+
+    if (empty($_POST['message'])) {
+        array_push($errors, 'You must write your message');
+    }
 
     if (count($errors) == 0) {
-        dd($_POST);
         unset($_POST['add-request']);
         $_POST['answered'] = 0;
-        $_POST['user_id'] = '';
 
         $post_id = create($table, $_POST);
         $_SESSION['message'] = "Message sent successfully";
@@ -57,10 +61,11 @@ if (isset($_GET['answered']) && isset($_GET['r_id'])) {
     $count = update($table, $r_id, ['answered' => $answered, 'user_id' => $admin_id]);
     if ($_GET['answered'] == 1) {
         $_SESSION['message'] = "Request marked as answered";
+        $_SESSION['type'] = "success";
     } else {
         $_SESSION['message'] = "Request marked as unanswered";
+        $_SESSION['type'] = "error";
     }
-    $_SESSION['type'] = "success";
     header('location: ' . BASE_URL . '/admin/requests/index.php');
     exit();
 }

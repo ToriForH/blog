@@ -22,7 +22,7 @@ include(ROOT_PATH. "app/controllers/requests.php");
     <!-- Custom Styling -->
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <title>Login</title>
+    <title>Contact Form</title>
 </head>
 <body>
 
@@ -41,18 +41,15 @@ include(ROOT_PATH. "app/controllers/requests.php");
             <form action="contact.php" method="post">
                 <?php include(ROOT_PATH . "app/helpers/formErrors.php"); ?>
                 <div>
-                    <label>Your Email</label>
+                    <label>Email</label>
                     <input type="email" name="email" value="<?php echo $email; ?>" class="text-input contact-input" placeholder="Your email address...">
                 </div>
                 <div>
                     <label>Message</label>
-                    <textarea name="message" id="body" class="text-input contact-input" placeholder="Your message..."><?php echo $message; ?></textarea>
+                    <textarea rows="20" name="message" class="text-input contact-input" placeholder="Your message..."><?php echo $message; ?></textarea>
                 </div>
                 <div>
-                    <button type="submit" name="add-request" class="btn btn-send contact-btn">
-                        <i class="fa-solid fa-envelope"></i>
-                        Send
-                    </button>
+                    <button type="submit" name="add-request" class="btn btn-big">Send Request</button>
                 </div>
             </form>
 
