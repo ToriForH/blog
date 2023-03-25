@@ -76,7 +76,7 @@
                                 <?php if ($request['answered']): ?>
                                     <a href="index.php?answered=0&r_id=<?php echo $request['id']; ?>" class="publish">mark active</a>
                                 <?php else: ?>
-                                    <a href="index.php?answered=1&p_id=<?php echo $request['id']; ?>" class="publish">mark answered</a>
+                                    <a href="index.php?answered=1&r_id=<?php echo $request['id']; ?>" class="publish">mark answered</a>
                                 <?php endif; ?>
                         </td>
                     </tr>
