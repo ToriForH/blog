@@ -124,8 +124,8 @@ if (isset($_POST['update-topic'])) {
     if (count($errors) == 0) {
         $id = $_POST['id'];
         unset($_POST['update-topic'], $_POST['id']);
-        if ($_SESSION['role'] == 'User') {
-            $_POST['published'] = '0';
+        $_POST['published'] = '0';
+        if ($_SESSION['moder'] == 0) {
             $_SESSION['message'] = 'Update saved. Please, wait for confirmation from admin';
         } else {
             $_SESSION['message'] = 'Topic draft updated successfully';

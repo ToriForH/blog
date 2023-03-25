@@ -39,6 +39,7 @@
             <a href="index.php" class="btn btn-big">Published Topic</a>
             <?php if($_SESSION['moder']): ?>
                 <a href="index_all.php" class="btn btn-big">Manage All Topics</a>
+                <a href="index_suggested.php" class="btn btn-big">Manage Suggested Topics</a>
             <?php endif; ?>
             <a href="index_my.php" class="btn btn-big">Manage My Topics</a>
         </div>

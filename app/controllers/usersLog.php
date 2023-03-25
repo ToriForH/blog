@@ -11,6 +11,7 @@ $username = '';
 $email = '';
 $password = '';
 $passwordConf = '';
+$role = '';
 
 function loginUser($user)
 {
@@ -37,7 +38,7 @@ if (isset($_POST['register-btn'])) {
         unset($_POST['register-btn'], $_POST['passwordConf']);
         $_POST['admin'] = 0;
         $_POST['moder'] = 0;
-
+        $_POST['role'] = 'User';
         $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         $user_id = create($table, $_POST);

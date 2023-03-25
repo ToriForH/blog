@@ -34,12 +34,14 @@
 
     <!-- Admin Content -->
     <div class="admin-content">
+        <?php if($title != 'My profile'): ?>
         <div class="button-group">
             <a href="create.php" class="btn btn-big">Add User</a>
             <a href="index.php" class="btn btn-big">Manage All Users</a>
             <a href="index_admin.php" class="btn btn-big">Manage Moders and Admins</a>
             <a href="index_regular.php" class="btn btn-big">Manage Only Regular Users</a>
         </div>
+        <?php endif; ?>
 
         <div class="content">
 
