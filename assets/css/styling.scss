@@ -1,0 +1,193 @@
+$logo-text: 'Kanit', san-serif;
+$content-text: 'Acme', sans-serif;
+$content-background: #502A50;
+$text-color: #FFC90A;
+$admin-background: #8A098A;
+$header-background: #9C1A9C;
+$hover-background: #660966;
+$span-color: #F6FA0F;
+$logout-red: #FD2410;
+$logout-black: #353535;
+$body-title: #FBD969;
+$success-message: #0B5A18;
+$success-background: #47F063;
+$error-message: #850E10;
+$error-background: #ED5456;
+$button-hover: #A70F77;
+
+html, body {
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  background: $content-background;
+  font-family: $content-text;
+}
+
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.text-input {
+  padding: .7rem;
+  display: block;
+  width: 85%;
+  border-radius: 5px;
+  border: 2px solid $button-hover;
+  outline: none;
+  color: #434343;
+}
+
+.msg {
+  width: 95%;
+  margin: 5px auto;
+  padding: 8px;
+  border-radius: 5px;
+  list-style: none;
+
+  .success {
+    border: 1px solid $success-message;
+    color: $success-message;
+    background: $success-background;
+  }
+
+  .error {
+    border: 1px solid $error-message;
+    color: $error-message;
+    background: $error-background;
+  }
+}
+
+.btn {
+  padding: .5rem 1.1rem;
+  background: $content-background;
+  border: 2px solid transparent;
+  border-radius: 0.2rem;
+  color: $text-color;
+  font-size: 1em;
+  font-family: $content-text;
+  transition: 1s;
+}
+
+.btn:hover {
+  background: $button-hover;
+  transition: 1s;
+}
+
+header {
+  border: 1px solid red;
+  top: 0px;
+  background: $header-background;
+  height: 61px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 88888;
+
+  .logo {
+    float: left;
+    margin-left: 1.5em;
+  }
+
+  * {
+    color: $text-color;
+    font-family: $content-text;
+    text-decoration: none;
+    transition: 1s;
+  }
+
+  *:hover {
+    background: $hover-background;
+    transition: 1s;
+  }
+
+  .logo-text {
+    font-family: $logo-text;
+    margin: 10px;
+    span {
+      color: $span-color;
+    }
+  }
+
+  .menu-toggle {
+    display: none;
+    padding: 20px;
+  }
+
+  ul {
+    float: right;
+
+    li {
+      float: left;
+      position: relative;
+
+      a {
+        display: block;
+        padding: 20px;
+        font-size: 1.1em;
+      }
+
+      a:hover {
+        background: $hover-background;
+      }
+
+      .fa-user {
+        width: 150px;
+      }
+
+      ul {
+        position: absolute;
+        right: 0px;
+        top: 61px;
+        width: 150px;
+        display: none;
+        overflow: hidden;
+
+        li {
+          width: 100%;
+          height: 35px;
+
+          a {
+            padding: 10px;
+            background:$header-background;
+            color: $text-color;
+            font-size: 0.9em;
+
+            .logout {
+              color: $logout-red;
+              background: $logout-black;
+            }
+
+            .logout:hover {
+              color: $logout-black;
+              background: $logout-red;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.content .main-content .post {
+  .read-more {
+    position: absolute;
+    right: 11px;
+    bottom: 10px;
+    border: 2px solid $content-background;
+    color: $content-background;
+    background: white;
+    border-radius: 0.2rem;
+    font-family: $logo-text;
+    font-size: 0.8em;
+    line-height: 0px;
+    transition: 1s;
+  }
+
+  .read-more:hover {
+    background: $content-background;
+    color: $text-color;
+    transition: 1s;
+  }
+}

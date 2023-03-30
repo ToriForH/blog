@@ -13,7 +13,11 @@ $posts = selectPublished('posts', ['published' => 1]);
             <?php if ($count < 5 && $p['id'] != $post['id']): ?>
                 <div class="post clearfix">
                     <img src="<?php echo BASE_URL . '/assets/images/' . $p['image']; ?>" alt="">
+                    <?php if(strlen($p['title']) > 15): ?>
+                    <a href="single.php?post_id=<?php echo $p['id']; ?>" class="title"><h4><?php echo substr($p['title'], 0, 15) . '...'; ?></h4></a>
+                    <?php else: ?>
                     <a href="single.php?post_id=<?php echo $p['id']; ?>" class="title"><h4><?php echo $p['title']; ?></h4></a>
+                    <?php endif; ?>
                 </div>
                 <?php $count++; endif; ?>
         <?php endforeach; ?>

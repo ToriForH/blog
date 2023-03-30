@@ -1,190 +1,24 @@
-html,
-body {
-  height: 100%;
-  padding: 0px;
-  margin: 0px;
-  background: #502A50;
-  font-family: 'Acme', sans-serif;
-}
-
-.clearfix::after {
-  content: '';
-  display: block;
-  clear: both;
-}
-
-.btn {
-  padding: .8rem 1.3rem;
-  background: #A70F77;
-  border: 2px solid transparent;
-  border-radius: 0.2rem;
-  color: #502A50;
-}
-
-.btn-send {
-  padding: .5rem 1.1rem;
-  color: white;
-  background: #9C1A9C;
-  font-family: 'Acme', sans-serif;
-}
-
-.btn-reg {
-  padding: .5rem 1.1rem;
-  font-size: 1em;
-  font-family: 'Acme', sans-serif;
-  color: #FFC90A;
-  background: #502A50;
-}
-
-.text-input {
-  padding: .7rem;
-  display: block;
-  width: 85%;
-  border-radius: 5px;
-  border: 2px solid #B171B1;
-  outline: none;
-  color: grey;
-}
-
-.msg {
- width: 95%;
- margin: 5px auto;
- padding: 8px;
- border-radius: 5px;
- list-style: none;
-}
-
-.success {
-  border: 1px solid #0B5A18;
-  background: #47F063;
-}
-
-.msg.success {
-  color: #0B5A18;
-}
-
-.error {
-  border: 1px solid #850E10;
-  background: #ED5456;
-}
-
-.msg.error {
-  color: #850E10;
-}
-
 /* NAVBAR */
-
-header {
-  background: #9C1A9C;
-  height: 61px;
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: 88888;
-}
-
-header * {
-  font-family: 'Kanit', san-serif;
-  color: #FFC90A;
-}
-
-header .logo {
-  float: left;
-  height: inherit;
-  margin-left: 1.5em;
-  text-decoration: none;
-}
-
-header .logo-text {
-  margin: 10px;
-  font-family: 'Acme', sans-serif;
-}
-
-header .logo-text span{
-  color: #F6FA0F;
-  font-family: 'Acme', sans-serif;
-}
-
 header ul {
-  float: right;
   margin: 0px;
   padding: 0px;
   list-style: none;
 }
 
-header ul li {
-  float: left;
-  position: relative;
-}
-
-header ul li ul {
-  position: absolute;
-  right: 0px;
-  top: 61px;
-  width: 141.4px;
-  display: none;
-}
 
 header ul li:hover ul{
   display: block;
 }
 
-header ul li ul li {
-  width: 100%;
-  height: 35px;
-}
 
-header ul li ul li a {
-  padding: 10px;
-  background:#9C1A9C;
-  color: #FBD969;
-  font-size: 0.9em;
-}
 
-header ul li ul li a.logout {
-  color: #FD2410;
-  background: #353535;
-}
 
-header ul li a {
-  display: block;
-  padding: 20px;
-  font-size: 1.1em;
-  text-decoration: none;
-}
-
-header ul li a:hover{
-  height: 21px;
-  background: #660966;
-}
-
-header .menu-toggle {
-  display: none;
-  max-left: 0px;
-  padding: 20px;
-  text-decoration: none;
-}
-
-header .menu-toggle:hover{
-  height: 21px;
-  background: #660966;
-}
 
 header ul li ul {
   width: 100%;
   background: #EB22EB;
   max-height: 0px;
-  overflow: hidden;
-}
 
- header ul li ul {
-   position: absolute;
-   display: block;
- }
-
-header a.logout:hover {
-  color: #353535;
-  background: #FD2410;
 }
 
 
@@ -192,93 +26,8 @@ header a.logout:hover {
   max-height: 100em;
 }
 
-.page-wrapper a{
-  color: #5F065F;
-}
-
 .page-wrapper a:hover {
   color: #9C1A9C;
-}
-
-/* POST SLIDER */
-.post-slider {
-  position: relative;
-}
-
-.post-slider .slider-title{
-  text-align: center;
-  color: #FBD969;
-  margin: 30px auto;
-}
-
-.post-slider .next {
-  position: absolute;
-  top: 50%;
-  right: 70px;
-  font-size: 2em;
-  color: #FBD969;
-}
-
-.post-slider .prev {
-  position: absolute;
-  top: 50%;
-  left: 70px;
-  font-size: 2em;
-  color: #FBD969;
-}
-
-.post-slider .next:hover {
-  font-size: 2.2em;
-}
-
-.post-slider .prev:hover {
-  font-size: 2.2em;
-}
-
-.post-slider .post-wrapper {
-  width: 80%;
-  height: 350px;
-  margin: 0px auto;
-  overflow: hidden;
-  padding: 10px 0px 10px 0px;
-}
-
-.post-slider .post-wrapper .post{
-  display: inline-block;
-  height: 330px;
-  margin: 0px 10px;
-  background: white;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.post-slider .post-wrapper .post .slider-image{
-  width: auto;
-  max-width: 100%;
-  height: 220px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.post-slider .post-wrapper .post .post-info {
-  padding: 0px;
-  line-height: 20px;
-  height: 100px;
-}
-
-.post-slider .post-wrapper .post h4 a {
-  font-size: 1.8em;
-  text-decoration: none;
-}
-
-.post-slider .post-wrapper .post h4 {
-  margin-bottom: 0px;
-}
-
-.post-slider .post-wrapper .post i {
-  font-size: 0.6em;
-  color: #9C1A9C;
-  margin: 0px;
 }
 
 /* CONTENT */
@@ -307,9 +56,8 @@ header a.logout:hover {
 }
 
 .content .main-content.single img {
-  height: 400px;
+  max-height: 400px;
   width: auto;
-  max-width: 1000px;
   display: block;
   margin: auto;
 }
@@ -317,7 +65,6 @@ header a.logout:hover {
 .content .main-content.single .post-content {
   color: #502A50;
   font-family: 'Kanit', san-serif;
-  font-size: 1.5em;
 }
 
 .content .main-content .post {
@@ -329,27 +76,9 @@ header a.logout:hover {
   position: relative;
 }
 
-.content .main-content .post .read-more {
-  position: absolute;
-  right: 11px;
-  bottom: 10px;
-  border: 2px solid #502A50;
-  background: white;
-  border-radius: 0.2rem;
-  font-family: 'Kanit', san-serif;
-  font-size: 0.8em;
-  line-height: 0px;
-}
-
-.content .main-content .post .read-more:hover {
-  background: #502A50;
-  color: #FFC90A;
-  transition: 0.25s;
-}
 
 .content .main-content .post .post-image {
-  width: auto;
-  max-width: 35%;
+  width: 35%;
   height: 100%;
   float:left;
   border-top-left-radius: 5px;
@@ -531,24 +260,6 @@ header a.logout:hover {
 
 }
 
-/* CONTACT */
-.content .contact {
-  color: #5F065F;
-  padding-left: 20px;
-  background: white;
-  border-radius: 5px;
-}
-
-.contact .btn:hover {
-  background: #9C1A9C;
-}
-
-.contact-info {
-  text-align: center;
-  font-size: 1.3em;
-  margin-bottom: 10px;
-}
-
 /* FOOTER */
 .footer {
   background: #4C424C;
@@ -670,10 +381,6 @@ header a.logout:hover {
   padding: 5px;
   }
 
-  .content .contact {
-    width: 90%;
-  }
-
   .content .sidebar.single {
   width: 90%;
   margin-top: 40px;
@@ -711,14 +418,6 @@ header a.logout:hover {
 }
 
 @media only screen and (max-width: 862px) {
-
-  .post-slider .next {
-    right: 40px;
-  }
-
-  .post-slider .prev {
-    left: 40px;
-  }
 
   .auth-content {
     width: 50%;
@@ -849,15 +548,6 @@ header ul {
 }
 
 @media only screen and (max-width: 620px) {
-
-  .post-slider .next {
-    right: 20px;
-  }
-
-  .post-slider .prev {
-    left: 20px;
-  }
-
   .content .main-content .post {
     height: auto;
   }

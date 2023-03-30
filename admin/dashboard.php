@@ -35,7 +35,7 @@ usersOnly();
 <?php include(ROOT_PATH. "../app/includes/adminHeader.php"); ?>
 
 <!-- Admin Page Wrapper -->
-<div class="admin-wrapper clearfix">
+<div class="admin-wrapper">
     <?php include(ROOT_PATH. "../app/includes/adminSidebar.php"); ?>
     <!-- Admin Content -->
     <div class="admin-content">

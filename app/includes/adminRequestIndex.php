@@ -63,11 +63,13 @@
                         <td><?php echo $key + 1; ?></td>
                         <td><?php echo $request['email'] ?></td>
                         <td><?php echo substr($request['message'], 0, 50) . '. . .'; ?></td>
-                        <?php if ($request['answered']): ?>
-                            <td>Active</td>
-                        <?php else: ?>
-                            <td>Answered</td>
-                        <?php endif; ?>
+                        <td>
+                            <?php if ($request['answered']): ?>
+                                Active
+                            <?php else: ?>
+                                Answered
+                            <?php endif; ?>
+                        </td>
                         <?php if($title != "Active Requests"): ?>
                             <th><?php getValue('users', $request['admin_id'], 'username'); ?></th>
                         <?php endif; ?>

@@ -4,6 +4,7 @@ include(ROOT_PATH. "app/database/db.php");
 include(ROOT_PATH. "app/controllers/topics.php");
 include(ROOT_PATH. "app/controllers/posts.php");
 
+$slider_posts = selectPublished('posts', ['topic_id' => 1]);
 $posts = array();
 $postsTitle = 'Recent Posts';
 $topics = selectAll('topics', ['published' => 1]);
@@ -53,6 +54,33 @@ if (isset($_POST['search-term'])) {
 
 <!-- Page Wrapper -->
 <div class="page-wrapper">
+
+    <!-- Post Slider -->
+    <div class="post-slider">
+        <h1 class="slider-title">Shit Posts</h1>
+        <i class="fa-solid fa-chevron-left prev"></i>
+        <i class="fa-solid fa-chevron-right next"></i>
+
+        <div class="post-wrapper">
+            <?php foreach ($slider_posts as $post): ?>
+            <div class="post">
+                <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="" class="slider-image">
+                <div class="post-info">
+                    <?php if(strlen($post['title']) > 15): ?>
+                        <h4><a href="single.php?post_id=<?php echo $post['id']; ?>"><?php echo substr($post['title'], 0, 15) . '...'; ?></a> </h4>
+                    <?php else: ?>
+                        <h4><a href="single.php?post_id=<?php echo $post['id']; ?>"><?php echo $post['title']; ?></a> </h4>
+                    <?php endif; ?>
+                    <i class="fa-solid fa-user"> <?php echo getValue('users', $post['user_id'], 'username'); ?></i>
+                    &nbsp;
+                    <i class="fa-regular fa-calendar-days"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?></i>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <!-- //Post Slider -->
+
 
 <!-- Content -->
 <div class="content clearfix">
@@ -105,6 +133,9 @@ if (isset($_POST['search-term'])) {
 
 <!-- JQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Carousel -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 <!-- Custom Script -->
 <script src="assets/js/scripts.js"></script>

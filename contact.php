@@ -35,8 +35,8 @@ include(ROOT_PATH. "app/controllers/requests.php");
     <!-- Content -->
     <div class="content clearfix">
 
-        <!-- Main Content Wrapper -->
-        <div class="main-content single">
+        <!-- Contact -->
+        <div class="main-content contact">
             <h1 class="contact-title">Contact form</h1>
             <form action="contact.php" method="post">
                 <?php include(ROOT_PATH . "app/helpers/formErrors.php"); ?>
@@ -49,23 +49,29 @@ include(ROOT_PATH. "app/controllers/requests.php");
                     <textarea rows="20" name="message" class="text-input contact-input" placeholder="Your message..."><?php echo $message; ?></textarea>
                 </div>
                 <div>
-                    <button type="submit" name="add-request" class="btn btn-big">Send Request</button>
+                    <button type="submit" name="add-request" class="btn btn-reg">Send Request</button>
                 </div>
             </form>
 
             <div class="contact-info">
-                <span><i class="fa-solid fa-phone"></i> &nbsp; +380989234737</span>
-                <span><i class="fa-solid fa-envelope"></i> &nbsp; viktoriia.herchanivska@gmail.com</span>
-            </div>
-            <div class="socials">
-                <a href="https://facebook.com/profile.php?id=100008948389333"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+                <p>Our contacts: </p>
+                <div>
+                    <span><i class="fa-solid fa-phone"></i> &nbsp; +380989234737</span>
+                </div>
+                <div>
+                    <span><i class="fa-solid fa-envelope"></i> &nbsp; viktoriia.herchanivska@gmail.com</span>
+                </div>
+                <p>Our social media: </p>
+                <div>
+                    <a href="https://facebook.com/profile.php?id=100008948389333"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
             </div>
 
         </div>
-        <!-- //Main Content -->
+        <!-- //Contact -->
 
         <?php include(ROOT_PATH . "app/includes/singleSidebar.php"); ?>
 

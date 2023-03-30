@@ -2,7 +2,7 @@
 
 include(ROOT_PATH. "../../app/database/db.php");
 include(ROOT_PATH. "../../app/helpers/middleware.php");
-include(ROOT_PATH. "../../app/helpers/validateRequest.php");
+//include(ROOT_PATH. "../../app/helpers/validateRequest.php");
 
 $table = 'requests';
 $users = selectAll('users', ['admin' => 1]);
