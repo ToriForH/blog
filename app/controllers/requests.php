@@ -2,7 +2,7 @@
 
 include(ROOT_PATH. "../../app/database/db.php");
 include(ROOT_PATH. "../../app/helpers/middleware.php");
-//include(ROOT_PATH. "../../app/helpers/validateRequest.php");
+// include(ROOT_PATH. "../../app/helpers/validateRequest.php"); not work for some reason
 
 $table = 'requests';
 $users = selectAll('users', ['admin' => 1]);
@@ -20,6 +20,7 @@ $message = '';
 $answered = '';
 
 if (isset($_POST['add-request'])) {
+    //$errors = validateRequest($_POST);
 
     if(empty($_POST['email'])) {
         array_push($errors, 'Email is required');

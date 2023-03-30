@@ -38,7 +38,7 @@ adminsOnly();
 <?php include(ROOT_PATH. "../../app/includes/adminHeader.php"); ?>
 
 <!-- Admin Page Wrapper -->
-<div class="admin-wrapper clearfix">
+<div class="admin-wrapper">
 
     <?php include(ROOT_PATH. "../../app/includes/adminSidebar.php"); ?>
 
@@ -50,23 +50,23 @@ adminsOnly();
             <a href="index_answered.php" class="btn btn-big">Answered Requests</a>
         </div>
 
-        <div class="content">
+        <div class="content request">
             <h2 class="page-title"><?php echo $title; ?></h2>
 
             <?php include(ROOT_PATH . "../../app/helpers/formErrors.php"); ?>
 
             <input type="hidden" name="id" value="<?php echo $id; ?>">
             <div>
-                <a><h2 class="request">Email</h2></a>
-                <a><h2 class="request"><?php echo $request['email']; ?></h2></a>
+                <a><h2>Email</h2></a>
+                <a><h2><?php echo $request['email']; ?></h2></a>
             </div>
             <div>
-                <a><h2 class="request">Message</h2></a>
-                <a><h3 class="request"><?php echo $request['message'] ?></h3></a>
+                <a><h2>Message</h2></a>
+                <a><h3><?php echo $request['message'] ?></h3></a>
             </div>
             <div>
-                <a><h2 class="request">State: </h2></a>
-                <a><h3 class="request">
+                <a><h2 >State: </h2></a>
+                <a><h3>
                     <?php if ($request['answered']): ?>
                         This request is already answered by <?php echo getValue('users', $request['user_id'], 'username') ?>
                     <?php else: ?>

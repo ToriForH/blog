@@ -71,7 +71,7 @@
                             <?php endif; ?>
                         </td>
                         <?php if($title != "Active Requests"): ?>
-                            <th><?php getValue('users', $request['admin_id'], 'username'); ?></th>
+                            <th><?php echo getValue('users', $request['user_id'], 'username'); ?></th>
                         <?php endif; ?>
                         <td><a href="read.php?id=<?php echo $request['id']; ?>" class="edit">read</a></td>
                         <td>
