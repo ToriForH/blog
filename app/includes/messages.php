@@ -7,7 +7,7 @@
 
 
     <?php
-        /* unset($_SESSION['message']);
-        unset($_SESSION['type']); */
+        unset($_SESSION['message']);
+        unset($_SESSION['type']);
     ?>
 <?php endif; ?>
