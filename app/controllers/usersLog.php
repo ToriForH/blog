@@ -64,5 +64,8 @@ if (isset($_POST['login-btn'])) {
         } else {
             array_push($errors, 'Wrong password or username');
         }
+    } else {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
     }
 }

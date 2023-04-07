@@ -36,6 +36,15 @@ body {
   background: #502A50;
 }
 
+btn-close {
+  padding: .5rem 1.1rem;
+  background: wheat;
+  color: #4C424C;
+  top: 0%;
+  position: absolute;
+  float: right;
+}
+
 .text-input {
   padding: .7rem;
   display: block;
@@ -47,11 +56,11 @@ body {
 }
 
 .msg {
- width: 95%;
- margin: 5px auto;
- padding: 8px;
- border-radius: 5px;
- list-style: none;
+  width: 85%;
+  margin: 5px auto;
+  padding: 8px;
+  border-radius: 5px;
+  list-style: none;
 }
 
 .success {
