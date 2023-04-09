@@ -29,8 +29,9 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  $('ul li').on('click', function() {
+  $('.username').on('click', function() {
     $('.us').toggleClass('showing');
+    $('.username').toggleClass('showing');
   });
 });
 

@@ -42,7 +42,7 @@ html, body {
 
 .btn {
   padding: 0.5rem 1.1rem;
-  background: #502A50;
+  background: #9C1A9C;
   border: 2px solid transparent;
   border-radius: 0.2rem;
   color: #FFC90A;
@@ -57,9 +57,8 @@ html, body {
 }
 
 header {
-  top: 0;
   background: #9C1A9C;
-  height: 61px;
+  height: 62px;
   position: sticky;
   width: 100%;
   z-index: 88888;
@@ -67,10 +66,12 @@ header {
 header .logo {
   float: left;
   margin-left: 1.5em;
+  text-decoration: none;
 }
 header * {
   color: #FFC90A;
   font-family: "Acme", sans-serif;
+  text-decoration: none;
 }
 header .logo-text {
   font-family: "Kanit", san-serif;
@@ -81,18 +82,21 @@ header .logo-text span {
   font-family: "Kanit", san-serif;
 }
 header .menu-toggle {
-  display: none;
+  font-size: 1.5em;
   padding: 20px;
-  left: 0;
+  display: none;
+  float: right;
   text-decoration: none;
+  height: 23px;
+  transition: 1s;
 }
 header .menu-toggle:hover {
   background: #660966;
+  transition: 1s;
 }
 header ul {
   float: right;
   margin: 0;
-  padding: 0;
   list-style: none;
 }
 header ul li {
@@ -102,21 +106,33 @@ header ul li {
 header ul li a {
   display: block;
   padding: 20px;
-  font-size: 1.1em;
+  font-size: 1.2em;
+  transition: 1s;
+  height: 23px;
+}
+header ul li a .arrow-down {
+  display: inline;
+}
+header ul li a .arrow-up {
+  display: none;
+}
+header ul li a.showing .arrow-down {
+  display: none;
+}
+header ul li a.showing .arrow-up {
+  display: inline;
 }
 header ul li a:hover {
   background: #660966;
-}
-header ul li .fa-user {
-  width: 150px;
+  transition: 1s;
 }
 header ul li ul {
   position: absolute;
-  right: 0px;
-  top: 61px;
+  right: 0;
+  top: 62px;
   width: 150px;
-  display: none;
   overflow: hidden;
+  display: none;
 }
 header ul li ul li {
   width: 100%;
@@ -124,19 +140,139 @@ header ul li ul li {
 }
 header ul li ul li a {
   padding: 10px;
-  background: #9C1A9C;
+  background: #8A098A;
   color: #FFC90A;
-  font-size: 0.9em;
+  font-size: 1em;
 }
-header ul li ul li a .logout {
+header ul li ul .logout {
   color: #FD2410;
   background: #353535;
+  transition: 1s;
 }
-header ul li ul li a .logout:hover {
+header ul li ul .logout:hover {
   color: #353535;
   background: #FD2410;
+  transition: 1s;
+}
+header ul li ul.showing {
+  display: block;
 }
 
+.showing {
+  max-height: 100em;
+}
+
+.post-slider {
+  position: relative;
+}
+.post-slider .next {
+  right: 70px;
+}
+.post-slider .prev {
+  left: 70px;
+}
+.post-slider .next, .post-slider .prev {
+  position: absolute;
+  top: 50%;
+  font-size: 2em;
+  color: #FBD969;
+  cursor: pointer;
+}
+.post-slider .next:hover, .post-slider .prev:hover {
+  font-size: 2.2em;
+}
+.post-slider .slider-title {
+  text-align: center;
+  color: #FBD969;
+  margin: 30px auto;
+}
+.post-slider .post-wrapper {
+  width: 80%;
+  height: 350px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 10px 0 10px 0;
+}
+.post-slider .post-wrapper .post {
+  position: relative;
+  display: inline-block;
+  height: 330px;
+  margin: 0 10px;
+  background: white;
+  border-radius: 5px;
+  text-align: center;
+}
+.post-slider .post-wrapper .post .slider-image {
+  height: 250px;
+  width: auto;
+  max-width: 100%;
+  border-radius: 5px;
+}
+.post-slider .post-wrapper .post .post-info .slider-post-title {
+  text-decoration: none;
+  font-size: 1.7em;
+}
+.post-slider .post-wrapper .post .post-info i {
+  font-size: 0.6em;
+  color: #A70F77;
+}
+
+.page-wrapper a {
+  color: #502A50;
+  transition: 1s;
+}
+.page-wrapper a:hover {
+  color: #9C1A9C;
+  transition: 1s;
+}
+
+.content {
+  width: 85%;
+  margin: 30px auto 30px;
+}
+.content .main-content {
+  width: 75%;
+  float: left;
+}
+.content .main-content .post {
+  width: 95%;
+  height: 200px;
+  margin: 30px auto;
+  border-radius: 5px;
+  background: white;
+  position: relative;
+}
+.content .main-content .post .post-image {
+  width: auto;
+  max-width: 35%;
+  height: 100%;
+  float: left;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  margin-right: 20px;
+  overflow: hidden;
+}
+.content .main-content .post .post-preview {
+  padding: 15px;
+  line-height: 5px;
+  max-height: 200px;
+  overflow: hidden;
+}
+.content .main-content .post .post-preview .title {
+  text-decoration: none;
+  font-size: 1.4em;
+}
+.content .main-content .post .post-preview i {
+  font-size: 0.7em;
+  color: #A70F77;
+}
+.content .main-content .post .post-preview .preview-text {
+  font-size: 1.5em;
+  line-height: 20px;
+}
+.content .main-content .post .post-preview .btn {
+  font-size: 1.3em;
+}
 .content .main-content .post .read-more {
   position: absolute;
   right: 11px;
@@ -146,14 +282,49 @@ header ul li ul li a .logout:hover {
   background: white;
   border-radius: 0.2rem;
   font-family: "Kanit", san-serif;
-  font-size: 0.8em;
-  line-height: 0px;
+  text-decoration: none;
   transition: 1s;
 }
 .content .main-content .post .read-more:hover {
   background: #502A50;
   color: #FFC90A;
   transition: 1s;
+}
+.content .sidebar {
+  width: 20%;
+  float: right;
+}
+.content .sidebar .section {
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.content .sidebar .section .section-title {
+  margin: 10px 0px 20px 0px;
+  color: #502A50;
+  font-size: 1.8em;
+}
+.content .sidebar .search {
+  margin-top: 85px;
+}
+.content .sidebar .topics ul {
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid #502A50;
+  font-size: 1.4em;
+}
+.content .sidebar .topics ul li a {
+  display: block;
+  padding: 10px 0 10px 0;
+  border-bottom: 1px solid #502A50;
+  transition: 0.5s;
+  color: #502A50;
+}
+.content .sidebar .topics ul li a:hover {
+  padding-left: 10px;
+  transition: 0.5s;
+  color: #A70F77;
 }
 
 /*# sourceMappingURL=style.css.map */

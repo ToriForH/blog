@@ -66,14 +66,16 @@ if (isset($_POST['search-term'])) {
             <div class="post">
                 <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="" class="slider-image">
                 <div class="post-info">
-                    <?php if(strlen($post['title']) > 15): ?>
-                        <h4><a href="single.php?post_id=<?php echo $post['id']; ?>"><?php echo substr($post['title'], 0, 15) . '...'; ?></a> </h4>
+                    <?php if(strlen($post['title']) > 20): ?>
+                        <span><a class="slider-post-title" href="single.php?post_id=<?php echo $post['id']; ?>"><?php echo substr($post['title'], 0, 20) . '...'; ?></a> </span>
                     <?php else: ?>
-                        <h4><a href="single.php?post_id=<?php echo $post['id']; ?>"><?php echo $post['title']; ?></a> </h4>
+                        <span><a class="slider-post-title" href="single.php?post_id=<?php echo $post['id']; ?>"><?php echo $post['title']; ?></a> </span>
                     <?php endif; ?>
-                    <i class="fa-solid fa-user"> <?php echo getValue('users', $post['user_id'], 'username'); ?></i>
-                    &nbsp;
-                    <i class="fa-regular fa-calendar-days"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?></i>
+                    <div>
+                        <i class="fa-solid fa-user"> <?php echo getValue('users', $post['user_id'], 'username'); ?></i>
+                        &nbsp;
+                        <i class="fa-regular fa-calendar-days"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?></i>
+                    </div>
                 </div>
             </div>
             <?php endforeach; ?>
@@ -92,13 +94,29 @@ if (isset($_POST['search-term'])) {
         <div class="post clearfix">
             <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="" class="post-image">
             <div class="post-preview">
-                <h2><a href="single.php?post_id=<?php echo $post['id']; ?>"><?php echo $post['title']; ?></a> </h2>
-                <i class="fa-solid fa-user"> <?php echo getValue('users', $post['user_id'], 'username'); ?></i>
-                &nbsp;
-                <i class="fa-regular fa-calendar-days"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?></i>
-                <p class="preview-text">
+                <div>
+                    <?php if(strlen($post['title']) > 30): ?>
+                        <h2><a class="title" href="single.php?post_id=<?php echo $post['id']; ?>"><?php echo substr($post['title'], 0, 30) . '...'; ?></a> </h2>
+                    <?php else: ?>
+                        <h2><a class="title" href="single.php?post_id=<?php echo $post['id']; ?>"><?php echo $post['title']; ?></a> </h2>
+                    <?php endif; ?>
+                </div>
+                <div>
+                    <i class="fa-solid fa-user"> <?php echo getValue('users', $post['user_id'], 'username'); ?></i>
+                    &nbsp;
+                    <i class="fa-regular fa-calendar-days"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?></i>
+                </div>
+                <div>
+                    <?php if(strlen($post['body']) > 140): ?>
+                        <span class="preview-text">
                     <?php echo html_entity_decode(substr($post['body'], 0, 140) . '. . .'); ?>
-                </p>
+                    </span>
+                    <?php else: ?>
+                        <span class="preview-text">
+                    <?php echo html_entity_decode($post['body']); ?>
+                    </span>
+                    <?php endif; ?>
+                </div>
                 <a href="single.php?post_id=<?php echo $post['id']; ?>" class="btn read-more">Read More</a>
             </div>
         </div>

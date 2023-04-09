@@ -14,6 +14,7 @@ $success-background: #47F063;
 $error-message: #850E10;
 $error-background: #ED5456;
 $button-hover: #A70F77;
+$slider-color: #FBD969;
 
 html, body {
   height: 100%;
@@ -61,7 +62,7 @@ html, body {
 
 .btn {
   padding: .5rem 1.1rem;
-  background: $content-background;
+  background: $header-background;
   border: 2px solid transparent;
   border-radius: 0.2rem;
   color: $text-color;
@@ -76,9 +77,8 @@ html, body {
 }
 
 header {
-  top: 0;
   background: $header-background;
-  height: 61px;
+  height: 62px;
   position: sticky;
   width: 100%;
   z-index: 88888;
@@ -86,11 +86,13 @@ header {
   .logo {
     float: left;
     margin-left: 1.5em;
+    text-decoration: none;
   }
 
   * {
     color: $text-color;
     font-family: $content-text;
+    text-decoration: none;
   }
 
   .logo-text {
@@ -103,20 +105,23 @@ header {
   }
 
   .menu-toggle {
-    display: none;
+    font-size: 1.5em;
     padding: 20px;
-    left: 0;
+    display: none;
+    float: right;
     text-decoration: none;
+    height: 23px;
+    transition: 1s;
   }
 
   .menu-toggle:hover {
     background: $hover-background;
+    transition: 1s;
   }
 
   ul {
     float: right;
     margin: 0;
-    padding: 0;
     list-style: none;
 
     li {
@@ -126,24 +131,39 @@ header {
       a {
         display: block;
         padding: 20px;
-        font-size: 1.1em;
+        font-size: 1.2em;
+        transition: 1s;
+        height: 23px;
+
+        .arrow-down {
+          display: inline;
+        }
+        .arrow-up {
+          display: none;
+        }
+      }
+
+      a.showing {
+        .arrow-down {
+          display: none;
+        }
+        .arrow-up {
+          display: inline;
+        }
       }
 
       a:hover {
         background: $hover-background;
-      }
-
-      .fa-user {
-        width: 150px;
+        transition: 1s;
       }
 
       ul {
         position: absolute;
-        right: 0px;
-        top: 61px;
+        right: 0;
+        top: 62px;
         width: 150px;
-        display: none;
         overflow: hidden;
+        display: none;
 
         li {
           width: 100%;
@@ -151,44 +171,232 @@ header {
 
           a {
             padding: 10px;
-            background:$header-background;
+            background: $admin-background;
             color: $text-color;
-            font-size: 0.9em;
-
-            .logout {
-              color: $logout-red;
-              background: $logout-black;
-            }
-
-            .logout:hover {
-              color: $logout-black;
-              background: $logout-red;
-            }
+            font-size: 1em;
           }
         }
+
+        .logout {
+          color: $logout-red;
+          background: $logout-black;
+          transition: 1s;
+        }
+
+        .logout:hover {
+          color: $logout-black;
+          background: $logout-red;
+          transition: 1s;
+        }
+      }
+      ul.showing {
+        display: block;
+      }
+    }
+
+  }
+}
+
+.showing {
+  max-height: 100em;
+}
+
+.post-slider {
+  position: relative;
+
+  .next {
+    right: 70px;
+  }
+  .prev {
+    left: 70px;
+  }
+  .next, .prev {
+    position: absolute;
+    top: 50%;
+    font-size: 2em;
+    color: $slider-color;
+    cursor: pointer;
+  }
+
+  .next:hover, .prev:hover {
+    font-size: 2.2em;
+  }
+
+  .slider-title{
+    text-align: center;
+    color: $slider-color;
+    margin: 30px auto;
+  }
+
+  .post-wrapper {
+    width: 80%;
+    height: 350px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 10px 0 10px 0;
+
+    .post{
+      position: relative;
+      display: inline-block;
+      height: 330px;
+      margin: 0 10px;
+      background: white;
+      border-radius: 5px;
+      text-align: center;
+
+      .slider-image {
+        height: 250px;
+        width: auto;
+        max-width: 100%;
+        border-radius: 5px;
+      }
+
+      .post-info {
+        .slider-post-title {
+          text-decoration: none;
+          font-size: 1.7em;
+        }
+
+        i {
+          font-size: 0.6em;
+          color: $button-hover;
+        }
+
       }
     }
   }
 }
 
-.content .main-content .post {
-  .read-more {
-    position: absolute;
-    right: 11px;
-    bottom: 10px;
-    border: 2px solid $content-background;
+.page-wrapper {
+  a {
     color: $content-background;
-    background: white;
-    border-radius: 0.2rem;
-    font-family: $logo-text;
-    font-size: 0.8em;
-    line-height: 0px;
     transition: 1s;
   }
 
-  .read-more:hover {
-    background: $content-background;
-    color: $text-color;
+  a:hover {
+    color: $header-background;
     transition: 1s;
   }
 }
+
+.content {
+  width: 85%;
+  margin: 30px auto 30px;
+
+  .main-content {
+    width: 75%;
+    float: left;
+
+    .post {
+      width: 95%;
+      height: 200px;
+      margin: 30px auto;
+      border-radius: 5px;
+      background: white;
+      position: relative;
+
+      .post-image {
+        width: auto;
+        max-width: 35%;
+        height: 100%;
+        float:left;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        margin-right: 20px;
+        overflow: hidden;
+      }
+
+      .post-preview {
+        padding: 15px;
+        line-height: 5px;
+        max-height: 200px;
+        overflow: hidden;
+
+        .title{
+          text-decoration: none;
+          font-size: 1.4em;
+        }
+
+        i {
+          font-size: 0.7em;
+          color: $button-hover;
+        }
+
+        .preview-text {
+          font-size: 1.5em;
+          line-height: 20px;
+        }
+
+        .btn {
+          font-size: 1.3em;
+        }
+      }
+
+      .read-more {
+        position: absolute;
+        right: 11px;
+        bottom: 10px;
+        border: 2px solid $content-background;
+        color: $content-background;
+        background: white;
+        border-radius: 0.2rem;
+        font-family: $logo-text;
+        text-decoration: none;
+        transition: 1s;
+      }
+
+      .read-more:hover {
+        background: $content-background;
+        color: $text-color;
+        transition: 1s;
+      }
+    }
+  }
+
+  .sidebar {
+    width: 20%;
+    float: right;
+
+    .section {
+      background: white;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+
+      .section-title {
+        margin: 10px 0px 20px 0px;
+        color: #502A50;
+        font-size: 1.8em;
+      }
+    }
+
+    .search {
+      margin-top: 85px;
+    }
+
+    .topics ul {
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid $content-background;
+      font-size: 1.4em;
+
+      li a{
+        display: block;
+        padding: 10px 0 10px 0;
+        border-bottom: 1px solid $content-background;
+        transition: 0.5s;
+        color: $content-background;
+      }
+
+      li a:hover {
+        padding-left: 10px;
+        transition: 0.5s;
+        color: $button-hover;
+      }
+    }
+  }
+}
+
+
+
+
