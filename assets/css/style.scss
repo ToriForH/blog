@@ -40,7 +40,7 @@ html, body {
 }
 
 .msg {
-  width: 95%;
+  width: 85%;
   margin: 5px auto;
   padding: 8px;
   border-radius: 5px;
@@ -76,12 +76,10 @@ html, body {
 }
 
 header {
-  border: 1px solid red;
-  top: 0px;
+  top: 0;
   background: $header-background;
   height: 61px;
   position: sticky;
-  top: 0;
   width: 100%;
   z-index: 88888;
 
@@ -93,13 +91,6 @@ header {
   * {
     color: $text-color;
     font-family: $content-text;
-    text-decoration: none;
-    transition: 1s;
-  }
-
-  *:hover {
-    background: $hover-background;
-    transition: 1s;
   }
 
   .logo-text {
@@ -107,16 +98,26 @@ header {
     margin: 10px;
     span {
       color: $span-color;
+      font-family: $logo-text;
     }
   }
 
   .menu-toggle {
     display: none;
     padding: 20px;
+    left: 0;
+    text-decoration: none;
+  }
+
+  .menu-toggle:hover {
+    background: $hover-background;
   }
 
   ul {
     float: right;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 
     li {
       float: left;
