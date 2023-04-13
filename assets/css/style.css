@@ -23,21 +23,31 @@ html, body {
 }
 
 .msg {
-  width: 85%;
-  margin: 5px auto;
+  width: 55%;
+  margin: 10px auto;
+  left: 25%;
   padding: 8px;
   border-radius: 5px;
   list-style: none;
+  position: absolute;
+  animation: hide 1s linear 5s 1 forwards;
 }
-.msg .success {
+
+@keyframes hide {
+  to {
+    opacity: 0;
+  }
+}
+.success {
   border: 1px solid #0B5A18;
-  color: #0B5A18;
   background: #47F063;
+  color: #0B5A18;
 }
-.msg .error {
+
+.error {
   border: 1px solid #850E10;
-  color: #850E10;
   background: #ED5456;
+  color: #850E10;
 }
 
 .btn {
@@ -185,6 +195,7 @@ header ul li ul.showing {
   text-align: center;
   color: #FBD969;
   margin: 30px auto;
+  font-family: "Kanit", san-serif;
 }
 .post-slider .post-wrapper {
   width: 80%;
@@ -208,7 +219,7 @@ header ul li ul.showing {
   max-width: 100%;
   border-radius: 5px;
 }
-.post-slider .post-wrapper .post .post-info .slider-post-title {
+.post-slider .post-wrapper .post .post-info .title {
   text-decoration: none;
   font-size: 1.7em;
 }
@@ -233,6 +244,12 @@ header ul li ul.showing {
 .content .main-content {
   width: 75%;
   float: left;
+}
+.content .main-content .recent-post-title {
+  color: #FBD969;
+  margin: 30px;
+  font-size: 2.2em;
+  font-family: "Kanit", san-serif;
 }
 .content .main-content .post {
   width: 95%;
@@ -290,6 +307,52 @@ header ul li ul.showing {
   color: #FFC90A;
   transition: 1s;
 }
+.content .single {
+  background: white;
+  padding-left: 20px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  height: auto;
+}
+.content .single .post-title {
+  text-align: center;
+  color: #502A50;
+  font-family: "Kanit", san-serif;
+}
+.content .single img {
+  height: 400px;
+  width: auto;
+  max-width: 95%;
+  display: block;
+  margin: auto;
+}
+.content .single .post-content {
+  color: black;
+  font-size: 1.5em;
+}
+.content .contact {
+  color: #5F065F;
+  padding-left: 20px;
+  background: white;
+  border-radius: 5px;
+}
+.content .contact .contact-title {
+  font-family: "Kanit", san-serif;
+}
+.content .contact div {
+  margin-top: 10px;
+}
+.content .contact .contact-info {
+  text-align: center;
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+.content .contact .contact-info a:hover {
+  color: #A70F77;
+}
+.content .contact .msg {
+  left: 13%;
+}
 .content .sidebar {
   width: 20%;
   float: right;
@@ -304,9 +367,31 @@ header ul li ul.showing {
   margin: 10px 0px 20px 0px;
   color: #502A50;
   font-size: 1.8em;
+  font-family: "Kanit", san-serif;
 }
 .content .sidebar .search {
   margin-top: 85px;
+}
+.content .sidebar .post {
+  padding-top: 10px;
+  border-top: 1px solid #502A50;
+  transition: 1s;
+}
+.content .sidebar .post img {
+  height: 60px;
+  width: auto;
+  max-width: 105px;
+  margin-right: 10px;
+  float: left;
+}
+.content .sidebar .post .title {
+  text-decoration: none;
+  font-size: 1.3em;
+  line-height: 10px;
+}
+.content .sidebar .post:hover {
+  padding-left: 10px;
+  transition: 1s;
 }
 .content .sidebar .topics ul {
   padding: 0;
@@ -325,6 +410,125 @@ header ul li ul.showing {
   padding-left: 10px;
   transition: 0.5s;
   color: #A70F77;
+}
+
+.auth-content {
+  width: 30%;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 5px;
+  color: #502A50;
+}
+.auth-content .msg {
+  width: 28%;
+}
+.auth-content .form-title {
+  text-align: center;
+  font-family: "Kanit", san-serif;
+}
+.auth-content form div {
+  margin-bottom: 10px;
+  padding-left: 30px;
+}
+.auth-content p {
+  text-align: center;
+}
+.auth-content p a {
+  color: #502A50;
+}
+.auth-content p a:hover {
+  color: #A70F77;
+}
+.auth-content .btn-reg {
+  display: block;
+  margin: auto;
+  font-size: 1.1em;
+}
+
+.footer {
+  background: #4C424C;
+  color: white;
+}
+.footer .footer-content {
+  height: auto;
+  display: flex;
+}
+.footer .footer-content .footer-section {
+  flex: 1;
+  padding-left: 25px;
+}
+.footer .footer-content .footer-section h1, .footer .footer-content .footer-section h2 {
+  color: #FFC90A;
+  font-family: "Kanit", san-serif;
+}
+.footer .footer-content .footer-section h1 span, .footer .footer-content .footer-section h2 span {
+  color: #F6FA0F;
+}
+.footer .footer-content .footer-section h2 {
+  margin-bottom: 0;
+}
+.footer .footer-content .about .contact {
+  font-size: 1.1em;
+  margin: 10px;
+}
+.footer .footer-content .about .socials {
+  text-align: center;
+}
+.footer .footer-content .about .socials a {
+  width: 40px;
+  height: 30px;
+  color: white;
+  display: inline-block;
+  font-size: 1.2em;
+  transition: 1s;
+}
+.footer .footer-content .about .socials a:hover {
+  color: #FFC90A;
+  transition: 1s;
+}
+.footer .footer-content .links ul {
+  list-style: none;
+  font-size: 1.3em;
+  padding: 0;
+  margin: 0 auto;
+}
+.footer .footer-content .links ul a {
+  text-decoration: none;
+  color: white;
+  transition: 1s;
+}
+.footer .footer-content .links ul a:hover {
+  color: #FFC90A;
+  transition: 1s;
+}
+.footer .footer-content .contact-form .contact-input {
+  background: #8A098A;
+  color: white;
+  margin-bottom: 5px;
+  line-height: 1.5rem;
+  border: none;
+}
+.footer .footer-content .contact-form .contact-input:focus {
+  background: #502A50;
+}
+.footer .footer-content .contact-form .btn-send {
+  margin-bottom: 10px;
+  color: white;
+  background: #502A50;
+}
+.footer .footer-content .contact-form .btn-send:hover {
+  color: #FFC90A;
+  background: #A70F77;
+}
+.footer .footer-bottom {
+  height: 30px;
+  width: 100%;
+  background: #353535;
+  text-align: center;
+  position: relative;
+  padding-top: 10px;
+  font-family: "Kanit", san-serif;
 }
 
 /*# sourceMappingURL=style.css.map */

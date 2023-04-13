@@ -25,7 +25,7 @@
 </head>
 <body>
 
-<?php include(ROOT_PATH . "../../app/includes/adminHeader.php"); ?>
+<?php include(ROOT_PATH . "../../app/includes/header.php"); ?>
 
 <!-- Admin Page Wrapper -->
 <div class="admin-wrapper clearfix">

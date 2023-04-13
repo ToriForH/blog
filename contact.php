@@ -37,9 +37,10 @@ include(ROOT_PATH. "app/controllers/requests.php");
 
         <!-- Contact -->
         <div class="main-content contact">
+
+            <?php include(ROOT_PATH . "app/helpers/formErrors.php"); ?>
             <h1 class="contact-title">Contact form</h1>
             <form action="contact.php" method="post">
-                <?php include(ROOT_PATH . "app/helpers/formErrors.php"); ?>
                 <div>
                     <label>Email</label>
                     <input type="email" name="email" value="<?php echo $email; ?>" class="text-input contact-input" placeholder="Your email address...">
@@ -49,7 +50,7 @@ include(ROOT_PATH. "app/controllers/requests.php");
                     <textarea rows="20" name="message" class="text-input contact-input" placeholder="Your message..."><?php echo $message; ?></textarea>
                 </div>
                 <div>
-                    <button type="submit" name="add-request" class="btn btn-reg">Send Request</button>
+                    <button type="submit" name="add-request" class="btn btn-send">Send Request</button>
                 </div>
             </form>
 
@@ -73,7 +74,7 @@ include(ROOT_PATH. "app/controllers/requests.php");
         </div>
         <!-- //Contact -->
 
-        <?php include(ROOT_PATH . "app/includes/singleSidebar.php"); ?>
+        <?php include(ROOT_PATH . "app/includes/sidebar.php"); ?>
 
     </div>
     <!-- //Content -->

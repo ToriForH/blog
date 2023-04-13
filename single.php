@@ -1,8 +1,8 @@
 <?php
 include("path.php");
 include(ROOT_PATH. "app/database/db.php");
-include(ROOT_PATH. "app/controllers/topics.php");
 include(ROOT_PATH. "app/controllers/posts.php");
+
 $post = '';
 if (isset($_GET['post_id'])) {
     $post = selectOne('posts', ['id' => $_GET['post_id']]);
@@ -51,7 +51,7 @@ if (isset($_GET['post_id'])) {
     </div>
     <!-- //Main Content -->
 
-    <?php include(ROOT_PATH . "app/includes/singleSidebar.php"); ?>
+    <?php include(ROOT_PATH . "app/includes/sidebar.php"); ?>
 
 </div>
 <!-- //Content -->

@@ -8,14 +8,14 @@ include(ROOT_PATH. "../../app/database/db.php");
 <div class="footer">
     <div class="footer-content">
         <div class="footer-section about">
-            <h1 class="logo-text"><span>Shitty</span>Blog</h1>
-            <p>
-                This is some shitty blog. Blog about shit. Blog with shit. World is full of shit. Shit is inside everyone. You think, but shit do.
-                Think about. Think a lot and may be one day you won't wake up in bed full of shit.
-            </p>
+                <h1 class="logo-text"><span>Shitty</span>Blog</h1>
+                <p>
+                    This is some shitty blog. Blog about shit. Blog with shit. World is full of shit. Shit is inside everyone. You think, but shit do.
+                    Think about. Think a lot and may be one day you won't wake up in bed full of shit.
+                </p>
             <div class="contact">
-                <span><i class="fa-solid fa-phone"></i> &nbsp; +380989234737</span>
-                <span><i class="fa-solid fa-envelope"></i> &nbsp; viktoriia.herchanivska@gmail.com</span>
+                <div><i class="fa-solid fa-phone"></i> &nbsp; +380989234737</div>
+                <div><i class="fa-solid fa-envelope"></i> &nbsp; viktoriia.herchanivska@gmail.com</div>
             </div>
             <div class="socials">
                 <a href="https://facebook.com/profile.php?id=100008948389333"><i class="fab fa-facebook"></i></a>
@@ -28,14 +28,14 @@ include(ROOT_PATH. "../../app/database/db.php");
             <h2>Quick Links</h2>
             <br>
             <ul>
-                <a href="index.php"><li>Home</li></a>
-                <a href="gallery.php"><li>Gallery</li></a>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="gallery.php">Gallery</a></li>
                 <?php if(isset($_SESSION['id'])): ?>
-                    <a href="admin/dashboard.php"><li>Dashboard</li></a>
-                    <a href="logout.php"><li>Logout</li></a>
+                    <li><a href="admin/dashboard.php">Dashboard</a></li>
+                    <li><a href="logout.php">Logout</a></li>
                 <?php else: ?>
-                    <a href="register.php"><li>Sign Up</li></a>
-                    <a href="login.php"><li>Log In</li></a>
+                    <li><a href="register.php">Sign Up</a></li>
+                    <li><a href="login.php">Log In</a></li>
                 <?php endif; ?>
             </ul>
         </div>
@@ -45,7 +45,7 @@ include(ROOT_PATH. "../../app/database/db.php");
             <form action="contact.php" method="post">
                 <input type="email" name="email" class="text-input contact-input" placeholder="Your email address...">
                 <textarea rows="4" name="message" class="text-input contact-input" placeholder="Your message..."></textarea>
-                <button type="submit" name="add-request" class="btn btn-send contact-btn">
+                <button type="submit" name="add-request" class="btn btn-send">
                     <i class="fa-solid fa-envelope"></i>
                     Send
                 </button>

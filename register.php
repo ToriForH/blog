@@ -31,10 +31,10 @@ guestsOnly();
 <div class="auth-content">
 
     <form action="register.php" method="post">
-        <h2 class="form-title">Register</h2>
 
         <?php include(ROOT_PATH . "app/helpers/formErrors.php"); ?>
 
+        <h2 class="form-title">Register</h2>
 
         <div>
             <label>Username</label>

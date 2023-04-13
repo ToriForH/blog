@@ -1,6 +1,7 @@
 <?php
 include("path.php");
 include(ROOT_PATH. "app/database/db.php");
+
 ?>
 <div class="left-sidebar">
     <ul>

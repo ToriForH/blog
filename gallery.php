@@ -41,13 +41,14 @@ $posts = selectPublished('posts', ['published' => 1]);
         <!-- Main Content Wrapper -->
         <div class="main-content single">
             <?php foreach ($posts as $post): ?>
-            <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="">
-            <p> </p>
+                <p> </p>
+                <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="">
+                <p> </p>
             <?php endforeach; ?>
         </div>
         <!-- //Main Content -->
 
-        <?php include(ROOT_PATH . "app/includes/singleSidebar.php"); ?>
+        <?php include(ROOT_PATH . "app/includes/sidebar.php"); ?>
 
     </div>
     <!-- //Content -->

@@ -1,13 +1,11 @@
 <?php
 include("path.php");
 include(ROOT_PATH. "app/database/db.php");
-include(ROOT_PATH. "app/controllers/topics.php");
 include(ROOT_PATH. "app/controllers/posts.php");
 
-$slider_posts = selectPublished('posts', ['topic_id' => 1]);
 $posts = array();
 $postsTitle = 'Recent Posts';
-$topics = selectAll('topics', ['published' => 1]);
+$mainPage = true;
 
 if (isset($_POST['search-term'])) {
     if ($_POST['search-term'] == '') {
@@ -19,7 +17,7 @@ if (isset($_POST['search-term'])) {
     }
 } else if (isset($_GET['t_id'])) {
     $posts = selectPublished('posts', ['published' => 1, 'topic_id' => $_GET['t_id']]);
-    $postsTitle = "Searching for posts under'" . $_GET['name'] . "'";
+    $postsTitle = "Searching for posts under '" . $_GET['name'] . "'";
 } else {
     $posts = selectPublished('posts', ['published' => 1]);
 }
@@ -55,34 +53,7 @@ if (isset($_POST['search-term'])) {
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 
-    <!-- Post Slider -->
-    <div class="post-slider">
-        <h1 class="slider-title">Shit Posts</h1>
-        <i class="fa-solid fa-chevron-left prev"></i>
-        <i class="fa-solid fa-chevron-right next"></i>
-
-        <div class="post-wrapper">
-            <?php foreach ($slider_posts as $post): ?>
-            <div class="post">
-                <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="" class="slider-image">
-                <div class="post-info">
-                    <?php if(strlen($post['title']) > 20): ?>
-                        <span><a class="slider-post-title" href="single.php?post_id=<?php echo $post['id']; ?>"><?php echo substr($post['title'], 0, 20) . '...'; ?></a> </span>
-                    <?php else: ?>
-                        <span><a class="slider-post-title" href="single.php?post_id=<?php echo $post['id']; ?>"><?php echo $post['title']; ?></a> </span>
-                    <?php endif; ?>
-                    <div>
-                        <i class="fa-solid fa-user"> <?php echo getValue('users', $post['user_id'], 'username'); ?></i>
-                        &nbsp;
-                        <i class="fa-regular fa-calendar-days"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?></i>
-                    </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-    <!-- //Post Slider -->
-
+    <?php include(ROOT_PATH . "app/includes/carousel.php"); ?>
 
 <!-- Content -->
 <div class="content clearfix">
@@ -124,22 +95,7 @@ if (isset($_POST['search-term'])) {
 
     </div>
     <!-- //Main Content -->
-    <div class="sidebar">
-        <div class="section search">
-            <h2 class="section-title">Search</h2>
-            <form action="index.php" method="post">
-                <input type="text" name="search-term" class="text-input" placeholder="Search...">
-            </form>
-        </div>
-        <div class="section topics">
-            <h2 class="section-title">Topics</h2>
-            <ul>
-                <?php foreach ($topics as $key => $topic): ?>
-                    <li><a href="<?php echo BASE_URL . '/index.php?t_id=' . $topic['id'] . '&name=' . $topic['name']; ?>"><?php echo $topic['name']; ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    </div>
+    <?php include(ROOT_PATH . "app/includes/sidebar.php"); ?>
 </div>
 <!-- //Content -->
 

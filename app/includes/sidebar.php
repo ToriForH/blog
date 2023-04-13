@@ -1,11 +1,22 @@
-<!-- Sidebar -->
 <?php
 include("path.php");
+include(ROOT_PATH. "../../app/controllers/topics.php");
+
 $topics = selectAll('topics', ['published' => 1]);
 $posts = selectPublished('posts', ['published' => 1]);
 ?>
-<div class="sidebar single">
 
+<div class="sidebar">
+
+    <?php if($mainPage): ?>
+
+    <div class="section search">
+        <h2 class="section-title">Search</h2>
+        <form action="index.php" method="post">
+            <input type="text" name="search-term" class="text-input" placeholder="Search...">
+        </form>
+    </div>
+    <?php else: ?>
     <div class="section recent">
         <h2 class="section-title">Recent posts</h2>
 
@@ -13,16 +24,17 @@ $posts = selectPublished('posts', ['published' => 1]);
             <?php if ($count < 5 && $p['id'] != $post['id']): ?>
                 <div class="post clearfix">
                     <img src="<?php echo BASE_URL . '/assets/images/' . $p['image']; ?>" alt="">
-                    <?php if(strlen($p['title']) > 15): ?>
-                    <a href="single.php?post_id=<?php echo $p['id']; ?>" class="title"><h4><?php echo substr($p['title'], 0, 15) . '...'; ?></h4></a>
+                    <?php if(strlen($p['title']) > 14): ?>
+                        <a href="single.php?post_id=<?php echo $p['id']; ?>" class="title"><h4><?php echo substr($p['title'], 0, 12) . '...'; ?></h4></a>
                     <?php else: ?>
-                    <a href="single.php?post_id=<?php echo $p['id']; ?>" class="title"><h4><?php echo $p['title']; ?></h4></a>
+                        <a href="single.php?post_id=<?php echo $p['id']; ?>" class="title"><h4><?php echo $p['title']; ?></h4></a>
                     <?php endif; ?>
                 </div>
                 <?php $count++; endif; ?>
         <?php endforeach; ?>
 
     </div>
+    <?php endif; ?>
 
     <div class="section topics">
         <h2 class="section-title">Topics</h2>
@@ -33,4 +45,3 @@ $posts = selectPublished('posts', ['published' => 1]);
         </ul>
     </div>
 </div>
-<!-- //Sidebar -->

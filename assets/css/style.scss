@@ -8,13 +8,13 @@ $hover-background: #660966;
 $span-color: #F6FA0F;
 $logout-red: #FD2410;
 $logout-black: #353535;
-$body-title: #FBD969;
 $success-message: #0B5A18;
 $success-background: #47F063;
 $error-message: #850E10;
 $error-background: #ED5456;
 $button-hover: #A70F77;
-$slider-color: #FBD969;
+$body-title: #FBD969;
+$footer-background: #4C424C;
 
 html, body {
   height: 100%;
@@ -41,23 +41,32 @@ html, body {
 }
 
 .msg {
-  width: 85%;
-  margin: 5px auto;
+  width: 55%;
+  margin: 10px auto;
+  left: 25%;
   padding: 8px;
   border-radius: 5px;
   list-style: none;
+  position: absolute;
+  animation: hide 1s linear 5s 1 forwards;
+}
 
-  .success {
-    border: 1px solid $success-message;
-    color: $success-message;
-    background: $success-background;
+@keyframes hide {
+  to {
+    opacity: 0;
   }
+}
 
-  .error {
-    border: 1px solid $error-message;
-    color: $error-message;
-    background: $error-background;
-  }
+.success {
+  border: 1px solid $success-message;
+  background: $success-background;
+  color: $success-message;
+}
+
+.error {
+  border: 1px solid $error-message;
+  background: $error-background;
+  color: $error-message;
 }
 
 .btn {
@@ -214,7 +223,7 @@ header {
     position: absolute;
     top: 50%;
     font-size: 2em;
-    color: $slider-color;
+    color: $body-title;
     cursor: pointer;
   }
 
@@ -222,10 +231,11 @@ header {
     font-size: 2.2em;
   }
 
-  .slider-title{
+  .slider-title {
     text-align: center;
-    color: $slider-color;
+    color: $body-title;
     margin: 30px auto;
+    font-family: $logo-text;
   }
 
   .post-wrapper {
@@ -252,7 +262,7 @@ header {
       }
 
       .post-info {
-        .slider-post-title {
+        .title {
           text-decoration: none;
           font-size: 1.7em;
         }
@@ -286,6 +296,13 @@ header {
   .main-content {
     width: 75%;
     float: left;
+
+    .recent-post-title {
+      color: $body-title;
+      margin: 30px;
+      font-size: 2.2em;
+      font-family: $logo-text;
+    }
 
     .post {
       width: 95%;
@@ -353,9 +370,66 @@ header {
     }
   }
 
+  .single {
+    background: white;
+    padding-left: 20px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    height: auto;
+
+    .post-title {
+      text-align: center;
+      color: $content-background;
+      font-family: $logo-text;
+    }
+
+    img {
+      height: 400px;
+      width: auto;
+      max-width: 95%;
+      display: block;
+      margin: auto;
+    }
+
+    .post-content {
+      color: black;
+      font-size: 1.5em;
+    }
+  }
+
+  .contact {
+    color: #5F065F;
+    padding-left: 20px;
+    background: white;
+    border-radius: 5px;
+
+    .contact-title {
+      font-family: $logo-text;
+    }
+
+    div {
+      margin-top: 10px;
+    }
+
+    .contact-info {
+      text-align: center;
+      font-size: 1.3em;
+      margin-bottom: 10px;
+
+      a:hover{
+        color: $button-hover;
+      }
+    }
+
+    .msg {
+      left: 13%;
+    }
+  }
+
   .sidebar {
     width: 20%;
     float: right;
+
 
     .section {
       background: white;
@@ -367,11 +441,37 @@ header {
         margin: 10px 0px 20px 0px;
         color: #502A50;
         font-size: 1.8em;
+        font-family: $logo-text;
       }
     }
 
     .search {
       margin-top: 85px;
+    }
+
+    .post {
+      padding-top: 10px;
+      border-top: 1px solid $content-background;
+      transition: 1s;
+
+      img {
+        height: 60px;
+        width: auto;
+        max-width: 105px;
+        margin-right: 10px;
+        float: left;
+      }
+
+      .title {
+        text-decoration: none;
+        font-size: 1.3em;
+        line-height: 10px;
+      }
+    }
+
+    .post:hover {
+      padding-left: 10px;
+      transition: 1s;
     }
 
     .topics ul {
@@ -397,6 +497,151 @@ header {
   }
 }
 
+.auth-content {
+  width: 30%;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 5px;
+  color: $content-background;
 
+  .msg {
+    width: 28%;
+  }
 
+  .form-title {
+    text-align: center;
+    font-family: $logo-text;
+  }
 
+  form {
+    div {
+      margin-bottom: 10px;
+      padding-left: 30px;
+    }
+  }
+
+  p {
+    text-align: center;
+    a{
+      color: $content-background;
+    }
+    a:hover {
+      color: $button-hover;
+    }
+  }
+
+  .btn-reg {
+    display: block;
+    margin: auto;
+    font-size: 1.1em;
+  }
+}
+
+.footer {
+  background: $footer-background;
+  color: white;
+
+  .footer-content {
+    height: auto;
+    display: flex;
+
+    .footer-section {
+      flex: 1;
+      padding-left: 25px;
+
+      h1, h2 {
+        color: $text-color;
+        font-family: $logo-text;
+
+        span {
+          color: $span-color;
+        }
+      }
+
+      h2 {
+        margin-bottom: 0;
+      }
+    }
+
+    .about {
+      .contact {
+        font-size: 1.1em;
+        margin: 10px;
+      }
+
+      .socials {
+        text-align: center;
+
+        a {
+          width: 40px;
+          height: 30px;
+          color: white;
+          display: inline-block;
+          font-size: 1.2em;
+          transition: 1s;
+        }
+
+        a:hover {
+          color: $text-color;
+          transition: 1s;
+        }
+      }
+    }
+
+    .links {
+      ul {
+        list-style: none;
+        font-size: 1.3em;
+        padding: 0;
+        margin: 0 auto;
+
+        a {
+          text-decoration: none;
+          color: white;
+          transition: 1s;
+        }
+
+        a:hover {
+          color: $text-color;
+          transition: 1s;
+        }
+      }
+    }
+
+    .contact-form {
+      .contact-input {
+        background: $admin-background;
+        color: white;
+        margin-bottom: 5px;
+        line-height: 1.5rem;
+        border: none;
+      }
+
+      .contact-input:focus {
+        background: $content-background;
+      }
+
+      .btn-send {
+        margin-bottom: 10px;
+        color: white;
+        background: $content-background;
+      }
+
+      .btn-send:hover {
+        color: $text-color;
+        background: $button-hover;
+      }
+    }
+  }
+
+  .footer-bottom {
+    height: 30px;
+    width: 100%;
+    background: $logout-black;
+    text-align: center;
+    position: relative;
+    padding-top: 10px;
+    font-family: $logo-text;
+  }
+}
