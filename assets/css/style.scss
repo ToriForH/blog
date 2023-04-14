@@ -2,7 +2,7 @@ $logo-text: 'Kanit', san-serif;
 $content-text: 'Acme', sans-serif;
 $content-background: #502A50;
 $text-color: #FFC90A;
-$admin-background: #8A098A;
+$admin-header: #8A098A;
 $header-background: #9C1A9C;
 $hover-background: #660966;
 $span-color: #F6FA0F;
@@ -18,8 +18,8 @@ $footer-background: #4C424C;
 
 html, body {
   height: 100%;
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
   background: $content-background;
   font-family: $content-text;
 }
@@ -88,6 +88,7 @@ html, body {
 header {
   background: $header-background;
   height: 62px;
+  top: 0;
   position: sticky;
   width: 100%;
   z-index: 88888;
@@ -180,7 +181,7 @@ header {
 
           a {
             padding: 10px;
-            background: $admin-background;
+            background: $admin-header;
             color: $text-color;
             font-size: 1em;
           }
@@ -225,6 +226,9 @@ header {
     font-size: 2em;
     color: $body-title;
     cursor: pointer;
+    height: 30px;
+    width: 20px;
+    padding: 10px;
   }
 
   .next:hover, .prev:hover {
@@ -611,7 +615,7 @@ header {
 
     .contact-form {
       .contact-input {
-        background: $admin-background;
+        background: $admin-header;
         color: white;
         margin-bottom: 5px;
         line-height: 1.5rem;
@@ -643,5 +647,200 @@ header {
     position: relative;
     padding-top: 10px;
     font-family: $logo-text;
+  }
+}
+
+@media only screen and (max-width: 1420px) {
+  .content {
+    .main-content, .contact {
+      width: 90%;
+      padding: 5px;
+    }
+
+    .sidebar {
+      width: 90%;
+      padding: 5px;
+      float: left;
+
+      .section {
+        width: 40%;
+        float: left;
+      }
+
+      .search {
+        margin-top: 0;
+        float: left;
+      }
+
+      .topics {
+        float: right;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1070px) {
+
+  .post-slider {
+
+    .next {
+      right: 40px;
+    }
+
+    .prev {
+      left: 40px;
+    }
+  }
+
+  .content {
+    width: 95%;
+    margin: 30px auto 30px;
+
+    .post-preview {
+      font-size: 0.8em;
+    }
+  }
+
+  .auth-content {
+    width: 50%;
+  }
+
+  .footer .footer-content .about .contact {
+    font-size: 0.8em;
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  .post-slider {
+
+    height: 300px;
+
+    .next {
+    right: 30px;
+    }
+    .prev {
+      left: 30px;
+    }
+
+    .post-wrapper .post {
+      height: 200px;
+
+      .slider-image {
+        height: 150px;
+      }
+
+      .post-info{
+        .title {
+          font-size: 1.3em;
+        }
+      }
+    }
+  }
+
+  .content {
+    width: 100%;
+    padding: 5px;
+
+    .main-content{
+      width: 95%;
+
+      .single-image {
+        height: 200px;
+      }
+    }
+
+    .post {
+      width: 100%;
+
+      .post-preview {
+        font-size: 0.7em;
+
+        .title {
+          line-height: 20px;
+        }
+      }
+    }
+
+    .sidebar {
+      width: 90%;
+      margin-left: 20px;
+    }
+
+    .search, .topics {
+      width: 40%;
+      margin-right: 0;
+    }
+  }
+
+  .footer .footer-content {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .auth-content {
+    width: 90%;
+  }
+
+  header {
+    .menu-toggle {
+      display: block;
+    }
+
+    .nav {
+      display: none;
+    }
+
+    .nav.showing {
+      display: block;
+      width: 200px;
+      right: 0;
+    }
+
+    ul {
+      position: absolute;
+      top: 62px;
+      width: 100%;
+
+
+      li{
+        background: $admin-header;
+        width: 200px;
+        border-bottom: 1px solid $content-background;
+
+        ul {
+          width: 100%;
+
+          li{
+            border-top: 1px solid $content-background;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .post-slider {
+    .next {
+      right: 10px;
+    }
+
+    .prev {
+      left: 10px;
+    }
+  }
+
+  .content .main-content .post {
+    height: 130px;
+
+    .preview-text {
+      display: none;
+    }
+  }
+
+  .footer .footer-bottom {
+    font-size: 0.8em;
+    height: 50px;
   }
 }

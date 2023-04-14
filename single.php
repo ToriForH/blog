@@ -44,7 +44,7 @@ if (isset($_GET['post_id'])) {
     <!-- Main Content Wrapper -->
     <div class="main-content single">
         <h1 class="post-title"><?php echo $post['title']; ?></h1>
-        <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="">
+        <img class="single-image" src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="">
         <div class="post-content">
             <?php echo html_entity_decode($post['body']); ?>
         </div>

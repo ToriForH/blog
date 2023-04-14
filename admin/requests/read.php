@@ -51,9 +51,7 @@ adminsOnly();
         </div>
 
         <div class="content request">
-            <h2 class="page-title"><?php echo $title; ?></h2>
-
-            <?php include(ROOT_PATH . "../../app/helpers/formErrors.php"); ?>
+            <h2 class="page-title"><?php echo $title; ?> №<?php echo $id; ?></h2>
 
             <input type="hidden" name="id" value="<?php echo $id; ?>">
             <div>

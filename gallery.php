@@ -42,7 +42,7 @@ $posts = selectPublished('posts', ['published' => 1]);
         <div class="main-content single">
             <?php foreach ($posts as $post): ?>
                 <p> </p>
-                <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="">
+                <img class="single-image" src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="">
                 <p> </p>
             <?php endforeach; ?>
         </div>

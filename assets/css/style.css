@@ -1,7 +1,7 @@
 html, body {
   height: 100%;
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
   background: #502A50;
   font-family: "Acme", sans-serif;
 }
@@ -69,6 +69,7 @@ html, body {
 header {
   background: #9C1A9C;
   height: 62px;
+  top: 0;
   position: sticky;
   width: 100%;
   z-index: 88888;
@@ -187,6 +188,9 @@ header ul li ul.showing {
   font-size: 2em;
   color: #FBD969;
   cursor: pointer;
+  height: 30px;
+  width: 20px;
+  padding: 10px;
 }
 .post-slider .next:hover, .post-slider .prev:hover {
   font-size: 2.2em;
@@ -529,6 +533,150 @@ header ul li ul.showing {
   position: relative;
   padding-top: 10px;
   font-family: "Kanit", san-serif;
+}
+
+@media only screen and (max-width: 1420px) {
+  .content .main-content, .content .contact {
+    width: 90%;
+    padding: 5px;
+  }
+  .content .sidebar {
+    width: 90%;
+    padding: 5px;
+    float: left;
+  }
+  .content .sidebar .section {
+    width: 40%;
+    float: left;
+  }
+  .content .sidebar .search {
+    margin-top: 0;
+    float: left;
+  }
+  .content .sidebar .topics {
+    float: right;
+  }
+}
+@media only screen and (max-width: 1070px) {
+  .post-slider .next {
+    right: 40px;
+  }
+  .post-slider .prev {
+    left: 40px;
+  }
+  .content {
+    width: 95%;
+    margin: 30px auto 30px;
+  }
+  .content .post-preview {
+    font-size: 0.8em;
+  }
+  .auth-content {
+    width: 50%;
+  }
+  .footer .footer-content .about .contact {
+    font-size: 0.8em;
+  }
+}
+@media only screen and (max-width: 780px) {
+  .post-slider {
+    height: 300px;
+  }
+  .post-slider .next {
+    right: 30px;
+  }
+  .post-slider .prev {
+    left: 30px;
+  }
+  .post-slider .post-wrapper .post {
+    height: 200px;
+  }
+  .post-slider .post-wrapper .post .slider-image {
+    height: 150px;
+  }
+  .post-slider .post-wrapper .post .post-info .title {
+    font-size: 1.3em;
+  }
+  .content {
+    width: 100%;
+    padding: 5px;
+  }
+  .content .main-content {
+    width: 95%;
+  }
+  .content .main-content .single-image {
+    height: 200px;
+  }
+  .content .post {
+    width: 100%;
+  }
+  .content .post .post-preview {
+    font-size: 0.7em;
+  }
+  .content .post .post-preview .title {
+    line-height: 20px;
+  }
+  .content .sidebar {
+    width: 90%;
+    margin-left: 20px;
+  }
+  .content .search, .content .topics {
+    width: 40%;
+    margin-right: 0;
+  }
+  .footer .footer-content {
+    flex-direction: column;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .auth-content {
+    width: 90%;
+  }
+  header .menu-toggle {
+    display: block;
+  }
+  header .nav {
+    display: none;
+  }
+  header .nav.showing {
+    display: block;
+    width: 200px;
+    right: 0;
+  }
+  header ul {
+    position: absolute;
+    top: 62px;
+    width: 100%;
+  }
+  header ul li {
+    background: #8A098A;
+    width: 200px;
+    border-bottom: 1px solid #502A50;
+  }
+  header ul li ul {
+    width: 100%;
+  }
+  header ul li ul li {
+    border-top: 1px solid #502A50;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .post-slider .next {
+    right: 10px;
+  }
+  .post-slider .prev {
+    left: 10px;
+  }
+  .content .main-content .post {
+    height: 130px;
+  }
+  .content .main-content .post .preview-text {
+    display: none;
+  }
+  .footer .footer-bottom {
+    font-size: 0.8em;
+    height: 50px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
