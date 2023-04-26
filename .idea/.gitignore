@@ -1,3 +1,5 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+*.css
+*.css.map
