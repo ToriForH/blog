@@ -93,6 +93,16 @@ if (isset($_POST['search-term'])) {
         </div>
         <?php endforeach; ?>
 
+        <div class="pagination-links">
+            <a href="#" class="link active">1</a>
+            <a href="#" class="link">2</a>
+            <a href="#" class="link">3</a>
+            <a href="#" class="link">4</a>
+            <a href="#" class="link">5</a>
+            <a href="#" class="link">6</a>
+            <a href="#" class="link">7</a>
+        </div>
+
     </div>
     <!-- //Main Content -->
     <?php include(ROOT_PATH . "app/includes/sidebar.php"); ?>
