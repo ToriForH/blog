@@ -123,38 +123,43 @@
         return $record[$value];
     }
 
-    function searchPost($term)
-    {
-        global $conn;
-        $match = '%' . $term . '%';
-        $sql = "SELECT * FROM posts WHERE published=? AND title LIKE ? OR body LIKE ? ORDER BY created_at DESC";
-        $stmt = executeQuery($sql, ['published' => 1, 'title' => $match, 'body' => $match]);
-        $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        return $records;
-    }
-
-function selectPublished($table, $condition = [])
+function searchPost($term)
 {
     global $conn;
-    $sql = "SELECT * FROM $table";
-    if (empty($condition)) {
-        $sql = $sql . " ORDER BY created_at DESC";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-    } else {
-        $i = 0;
-        foreach ($condition as $key => $value) {
-            if ($i == 0) {
-                $sql = $sql . " WHERE $key=?";
-            } else {
-                $sql = $sql . " AND $key=?";
-            }
-            $i++;
-        }
-        $sql = $sql . " ORDER BY created_at DESC";
-        $stmt = executeQuery($sql, $condition);
+    $match = '%' . $term . '%';
+    $sql = "SELECT * FROM posts WHERE published=? AND title LIKE ? OR body LIKE ? ORDER BY created_at DESC";
+    $stmt = executeQuery($sql, ['published' => 1, 'title' => $match, 'body' => $match]);
+    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $records;
+}
 
+function searchTopic($table, $condition = [])
+{
+    global $conn;
+    $sql = "SELECT * FROM $table WHERE published=1";
+    foreach ($condition as $key => $value) {
+        $sql = $sql . " AND $key=?";
     }
+    $sql = $sql . " ORDER BY created_at DESC";
+    $stmt = executeQuery($sql, $condition);
+    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $records;
+}
+
+function selectPublished($table, $page)
+{
+    global $conn;
+    //$start = ($page - 1) * 10;
+    $sql = "SELECT * FROM $table WHERE published=1 ORDER BY created_at DESC LIMIT 0,10";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    /*$sql = "SELECT * FROM $table WHERE published=1 ORDER BY created_at DESC";
+    $start = ($page - 1) * 10;
+    $data = ['offset' => $start];
+    foreach ($data as $key => $value) {
+        $sql = $sql . " LIMIT $key=?,10";
+    }
+    $stmt = executeQuery($sql, $data); */
     $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     return $records;
 }

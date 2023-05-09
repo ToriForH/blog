@@ -10,16 +10,19 @@ $mainPage = true;
 if (isset($_POST['search-term'])) {
     if ($_POST['search-term'] == '') {
         unset($_POST['search-term']);
-        header('location: ' . BASE_URL . '/index_all.php');
+        header('location: ' . BASE_URL . '/index.php');
     } else {
         $postsTitle = "Searching for '" . $_POST['search-term'] . "'";
         $posts = searchPost($_POST['search-term']);
     }
 } else if (isset($_GET['t_id'])) {
-    $posts = selectPublished('posts', ['published' => 1, 'topic_id' => $_GET['t_id']]);
+    $posts = searchTopic('posts', ['topic_id' => $_GET['t_id']]);
     $postsTitle = "Searching for posts under '" . $_GET['name'] . "'";
-} else {
-    $posts = selectPublished('posts', ['published' => 1]);
+} /*else if (isset($_GET['page'])) {
+    $posts = selectPublished('posts', ['page' => $_GET['page']]);
+    $postsTitle = "Page" . $_GET['page'];
+}*/ else {
+    $posts = selectPublished('posts', ['page' => 1]);
 }
 
 ?>
@@ -59,7 +62,7 @@ if (isset($_POST['search-term'])) {
 <div class="content clearfix">
     <!-- Main Content -->
     <div class="main-content">
-        <h1 class="recent-post-title"><?php echo $postsTitle; ?></h1>
+        <h1 class="recent-post-title"><?php echo $postsTitle; ?> </h1>
 
         <?php foreach ($posts as $post): ?>
         <div class="post clearfix">
@@ -93,15 +96,20 @@ if (isset($_POST['search-term'])) {
         </div>
         <?php endforeach; ?>
 
-        <div class="pagination-links">
-            <a href="#" class="link active">1</a>
-            <a href="#" class="link">2</a>
-            <a href="#" class="link">3</a>
-            <a href="#" class="link">4</a>
-            <a href="#" class="link">5</a>
-            <a href="#" class="link">6</a>
-            <a href="#" class="link">7</a>
+        <div >
+            <ul class="pagination-links">
+                <li><a href="#" class="link"><i class="fa-solid fa-chevron-left"></i></a></li>
+                <li><a href="#" class="link active"> 1 </a></li>
+                <li><a href="index.php?page=2" class="link"> 2 </a></li>
+                <li><a href="#" class="link"> 3 </a></li>
+                <li><a href="#" class="link"> 4 </a></li>
+                <li><a href="#" class="link"> 5 </a></li>
+                <li><a href="#" class="link"> 6 </a></li>
+                <li><a href="#" class="link"> 7 </a></li>
+                <li><a href="#" class="link"><i class="fa-solid fa-chevron-right"></i></a></li>
+            </ul>
         </div>
+
 
     </div>
     <!-- //Main Content -->

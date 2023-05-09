@@ -372,6 +372,32 @@ header {
         transition: 1s;
       }
     }
+
+    .pagination-links {
+      list-style: none;
+      text-align: center;
+      li {
+        display: inline-block;
+        .link {
+          color: $body-title;
+          text-decoration: none;
+          margin: 15px;
+          padding: 5px;
+          font-size: 1.5em;
+          font-family: $logo-text;
+        }
+        .link:hover {
+          color: $span-color;
+          text-decoration: underline;
+        }
+
+        .link.active{
+          color: $text-color;
+          text-decoration: underline;
+        }
+      }
+
+    }
   }
 
   .single {
@@ -442,7 +468,7 @@ header {
       margin-bottom: 20px;
 
       .section-title {
-        margin: 10px 0px 20px 0px;
+        margin: 10px 0 20px 0;
         color: #502A50;
         font-size: 1.8em;
         font-family: $logo-text;

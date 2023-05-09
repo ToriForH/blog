@@ -311,6 +311,29 @@ header ul li ul.showing {
   color: #FFC90A;
   transition: 1s;
 }
+.content .main-content .pagination-links {
+  list-style: none;
+  text-align: center;
+}
+.content .main-content .pagination-links li {
+  display: inline-block;
+}
+.content .main-content .pagination-links li .link {
+  color: #FBD969;
+  text-decoration: none;
+  margin: 15px;
+  padding: 5px;
+  font-size: 1.5em;
+  font-family: "Kanit", san-serif;
+}
+.content .main-content .pagination-links li .link:hover {
+  color: #F6FA0F;
+  text-decoration: underline;
+}
+.content .main-content .pagination-links li .link.active {
+  color: #FFC90A;
+  text-decoration: underline;
+}
 .content .single {
   background: white;
   padding-left: 20px;
@@ -368,7 +391,7 @@ header ul li ul.showing {
   margin-bottom: 20px;
 }
 .content .sidebar .section .section-title {
-  margin: 10px 0px 20px 0px;
+  margin: 10px 0 20px 0;
   color: #502A50;
   font-size: 1.8em;
   font-family: "Kanit", san-serif;
