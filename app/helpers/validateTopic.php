@@ -10,7 +10,7 @@ function validateTopic($topic)
 
     $existingTopic = selectOne('topics', ['name' => $topic['name']]);
     if ($existingTopic && $existingTopic['id'] != $topic['id']) {
-        array_push($errors, 'This topic already exists');
+        array_push($errors, 'This topic already exists or suggested');
     }
 
 

@@ -2,7 +2,7 @@
 
 include(ROOT_PATH. "../../app/database/db.php");
 include(ROOT_PATH. "../../app/helpers/middleware.php");
-// include(ROOT_PATH. "../../app/helpers/validateRequest.php"); not work for some reason
+//include(ROOT_PATH. "../../app/helpers/validateRequest.php"); //not work for some reason
 
 $table = 'requests';
 $users = selectAll('users', ['admin' => 1]);
@@ -33,6 +33,7 @@ if (isset($_POST['add-request'])) {
     if (count($errors) == 0) {
         unset($_POST['add-request']);
         $_POST['answered'] = 0;
+        $_POST['admin_id'] = 0;
 
         $post_id = create($table, $_POST);
         $_SESSION['message'] = "Message sent successfully";
@@ -50,7 +51,7 @@ if (isset($_GET['id'])) {
     $id = $request['id'];
     $email = $request['email'];
     $message = $request['message'];
-    $user_id = $request['user_id'];
+    $admin_id = $request['admin_id'];
     $answered = $request['answered'];
 }
 
@@ -59,7 +60,7 @@ if (isset($_GET['answered']) && isset($_GET['r_id'])) {
     $answered = $_GET['answered'];
     $admin_id = $_SESSION['id'];
     $r_id = $_GET['r_id'];
-    $count = update($table, $r_id, ['answered' => $answered, 'user_id' => $admin_id]);
+    $count = update($table, $r_id, ['answered' => $answered, 'admin_id' => $admin_id]);
     if ($_GET['answered'] == 1) {
         $_SESSION['message'] = "Request marked as answered";
         $_SESSION['type'] = "success";

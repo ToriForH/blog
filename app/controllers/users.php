@@ -33,10 +33,10 @@ if (isset($_POST['create-user'])) {
         if ($_POST['role'] == 'User') {
             $_POST['moder'] = 0;
         } else {
+            if ($_POST['role'] == 'Admin') {
+                $_POST['admin'] = 1;
+            }
             $_POST['moder'] = 1;
-        }
-        if ($_POST['role'] == 'Admin') {
-            $_POST['admin'] = 1;
         }
         unset($_POST['create-user'], $_POST['passwordConf']);
         $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
