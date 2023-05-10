@@ -133,33 +133,37 @@ function searchPost($term)
     return $records;
 }
 
-function searchTopic($table, $condition = [])
+function publishedCondition($table, $condition = [])
 {
     global $conn;
     $sql = "SELECT * FROM $table WHERE published=1";
-    foreach ($condition as $key => $value) {
-        $sql = $sql . " AND $key=?";
+    if (empty($condition)) {
+        $sql = $sql . " ORDER BY created_at DESC";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    } else {
+        foreach ($condition as $key => $value) {
+            $sql = $sql . " AND $key=?";
+        }
+        $sql = $sql . " ORDER BY created_at DESC";
+        $stmt = executeQuery($sql, $condition);
     }
-    $sql = $sql . " ORDER BY created_at DESC";
-    $stmt = executeQuery($sql, $condition);
     $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     return $records;
 }
 
-function selectPublished($table, $page)
+function paginatePublished($currentPage = 1, $recordsPerPage = 2)
 {
     global $conn;
-    //$start = ($page - 1) * 10;
-    $sql = "SELECT * FROM $table WHERE published=1 ORDER BY created_at DESC LIMIT 0,10";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    /*$sql = "SELECT * FROM $table WHERE published=1 ORDER BY created_at DESC";
-    $start = ($page - 1) * 10;
-    $data = ['offset' => $start];
-    foreach ($data as $key => $value) {
-        $sql = $sql . " LIMIT $key=?,10";
-    }
-    $stmt = executeQuery($sql, $data); */
+    $sql = "SELECT * FROM posts WHERE published=1 ORDER BY created_at DESC LIMIT ?,?";
+    $data = [
+        'offset' => ($currentPage - 1) * $recordsPerPage,
+        'numberOfRecords' => $recordsPerPage
+    ];
+    $stmt = executeQuery($sql, $data);
     $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    return $records;
+    return [
+        'posts' => $records,
+        'nextPage' => count($records) < $recordsPerPage ? false : $currentPage + 1
+    ];
 }

@@ -3,7 +3,7 @@ include("path.php");
 include(ROOT_PATH. "../../app/controllers/topics.php");
 
 $topics = selectAll('topics', ['published' => 1]);
-$posts = selectPublished('posts', ['published' => 1]);
+$posts = publishedCondition('posts', ['published' => 1]);
 ?>
 
 <div class="sidebar">

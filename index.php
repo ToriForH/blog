@@ -16,13 +16,13 @@ if (isset($_POST['search-term'])) {
         $posts = searchPost($_POST['search-term']);
     }
 } else if (isset($_GET['t_id'])) {
-    $posts = searchTopic('posts', ['topic_id' => $_GET['t_id']]);
+    $posts = publishedCondition('posts', ['topic_id' => $_GET['t_id']]);
     $postsTitle = "Searching for posts under '" . $_GET['name'] . "'";
-} /*else if (isset($_GET['page'])) {
-    $posts = selectPublished('posts', ['page' => $_GET['page']]);
+} else if (isset($_GET['page'])) {
+    $paginatedPosts = paginatePublished($_GET['page']);
     $postsTitle = "Page" . $_GET['page'];
-}*/ else {
-    $posts = selectPublished('posts', ['page' => 1]);
+} else {
+    $paginatedPosts = paginatePublished();
 }
 
 ?>
@@ -64,7 +64,7 @@ if (isset($_POST['search-term'])) {
     <div class="main-content">
         <h1 class="recent-post-title"><?php echo $postsTitle; ?> </h1>
 
-        <?php foreach ($posts as $post): ?>
+        <?php foreach ($paginatedPosts['posts'] as $post): ?>
         <div class="post clearfix">
             <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="" class="post-image">
             <div class="post-preview">

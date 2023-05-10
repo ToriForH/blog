@@ -3,7 +3,7 @@ include("path.php");
 include(ROOT_PATH. "app/database/db.php");
 include(ROOT_PATH. "app/controllers/topics.php");
 include(ROOT_PATH. "app/controllers/posts.php");
-$posts = selectPublished('posts', ['published' => 1]);
+$posts = publishedCondition('posts');
 
 ?>
 <!DOCTYPE html>

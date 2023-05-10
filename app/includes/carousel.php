@@ -1,6 +1,6 @@
 <?php
 $slider_topic = 1;
-$slider_posts = selectPublished('posts', ['topic_id' => $slider_topic]);
+$slider_posts = publishedCondition('posts', ['topic_id' => $slider_topic]);
 ?>
 
 <!-- Post Slider -->
