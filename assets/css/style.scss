@@ -392,9 +392,14 @@ header {
         }
 
         .link.active{
-          color: black; //$text-color;
-          //text-decoration: underline;
+          color: $text-color;
+          text-decoration: underline;
           pointer-events: none;
+          font-size: 1.6em;
+        }
+
+        .link.hidden {
+          display: none;
         }
       }
 

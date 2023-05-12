@@ -331,8 +331,13 @@ header ul li ul.showing {
   text-decoration: underline;
 }
 .content .main-content .pagination-links li .link.active {
-  color: black;
+  color: #FFC90A;
+  text-decoration: underline;
   pointer-events: none;
+  font-size: 1.6em;
+}
+.content .main-content .pagination-links li .link.hidden {
+  display: none;
 }
 .content .single {
   background: white;

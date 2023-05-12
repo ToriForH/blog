@@ -98,7 +98,7 @@ if (isset($_POST['search-term'])) {
 
         <div >
             <ul class="pagination-links">
-                <li><a href="#" class="link"><i class="fa-solid fa-chevron-left"></i></a></li>
+                <li><a href="index.php?page=<?php //echo $paginatedPosts['prevPage'] ?>" class="link"><i class="fa-solid fa-chevron-left"></i></a></li>
                 <li><a href="#" class="link active"> 1 </a></li>
                 <li><a href="index.php?page=2" class="link"> 2 </a></li>
                 <li><a href="#" class="link"> 3 </a></li>
@@ -106,7 +106,15 @@ if (isset($_POST['search-term'])) {
                 <li><a href="#" class="link"> 5 </a></li>
                 <li><a href="#" class="link"> 6 </a></li>
                 <li><a href="#" class="link"> 7 </a></li>
-                <li><a href="#" class="link"><i class="fa-solid fa-chevron-right"></i></a></li>
+                <li><a href="#" class="link"> 8 </a></li>
+                <li><a href="#" class="link"> 9 </a></li>
+                <li><a href="#" class="link"> 10 </a></li>
+                <li><a href="#" class="link"> 11 </a></li>
+                <li><a href="#" class="link"> 12 </a></li>
+                <li><a href="#" class="link"> 13 </a></li>
+                <li><a href="#" class="link"> 14 </a></li>
+                <li><a href="#" class="link"> 15 </a></li>
+                <li><a href="index.php?page=<?php //echo $paginatedPosts['nextPage'] ?>" class="link"><i class="fa-solid fa-chevron-right"></i></a></li>
             </ul>
         </div>
 

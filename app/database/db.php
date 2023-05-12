@@ -154,6 +154,7 @@ function publishedCondition($table, $condition = [])
 
 function paginatePublished($currentPage = 1, $recordsPerPage = 2)
 {
+    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
     global $conn;
     $sql = "SELECT * FROM posts WHERE published=1 ORDER BY created_at DESC LIMIT ?,?";
     $data = [
@@ -161,9 +162,52 @@ function paginatePublished($currentPage = 1, $recordsPerPage = 2)
         'numberOfRecords' => $recordsPerPage
     ];
     $stmt = executeQuery($sql, $data);
+    dd(totalPublished());
+    //$numberOfPublished = countRecords('posts', ['published' => 1]);
+    //$numberOfPages = ceil( totalPublished() / $recordsPerPage);
     $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     return [
         'posts' => $records,
-        'nextPage' => count($records) < $recordsPerPage ? false : $currentPage + 1
+        'prevPage' => $currentPage > 1 ? $currentPage - 1 : false,
+        'nextPage' => $currentPage + 1 <= $numberOfPages ? $currentPage + 1 : false
     ];
+}
+
+function countRecords($table, $condition = [])
+{
+    global $conn;
+    $sql = "SELECT COUNT(*) as total FROM $table";
+    if (empty($condition)) {
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    } else {
+        $i = 0;
+        foreach ($condition as $key => $value) {
+            if ($i == 0) {
+                $sql = $sql . " WHERE $key=?";
+            } else {
+                $sql = $sql . " AND $key=?";
+            }
+            $i++;
+        }
+        $stmt = executeQuery($sql, $condition);
+    }
+    $number = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $number['total'];
+
+    /* global $conn;
+    $sql = "SELECT COUNT(*) as total FROM posts WHERE published=1";
+    $posts = $conn->query($sql)->fetch();
+    return $posts['total']; */
+}
+
+function totalPublished() {
+    global $conn;
+    $sql = "SELECT COUNT(*) as total FROM posts WHERE published=1";
+    //$posts = $conn->query($sql)->fetch();
+    //return $posts['total'];
+    $posts = $conn->prepare($sql);
+    $posts->execute();
+    $number = $posts->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $number['total'];
 }
