@@ -336,9 +336,6 @@ header ul li ul.showing {
   pointer-events: none;
   font-size: 1.6em;
 }
-.content .main-content .pagination-links li .link.hidden {
-  display: none;
-}
 .content .single {
   background: white;
   padding-left: 20px;
