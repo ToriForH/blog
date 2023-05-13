@@ -12,9 +12,14 @@ if (isset($_POST['search-term'])) {
         unset($_POST['search-term']);
         header('location: ' . BASE_URL . '/index.php');
     } else {
-        $postsTitle = "Searching for '" . $_POST['search-term'] . "'";
-        $posts = searchPost($_POST['search-term']);
-        $paginatedPosts['posts'] = $posts;
+        if (isset($_GET['page'])) {
+            $currentPage = $_GET['page'];
+        } else {
+            $currentPage = 1;
+        }
+        $postsTitle = "Searching for '" . $_POST['search-term'] . "' page " . $_GET['page'];
+        $numberOfRecords = countSearch($_POST['search-term']);
+        $paginatedPosts = searchPost($_POST['search-term'], $numberOfRecords['total'], $currentPage);
     }
 } else if (isset($_GET['t_id'])) {
     $posts = publishedCondition('posts', ['topic_id' => $_GET['t_id']]);
@@ -23,7 +28,7 @@ if (isset($_POST['search-term'])) {
     $numberOfRecords = countRecords('posts');
     if (isset($_GET['page'])) {
         $paginatedPosts = paginatePublished($numberOfRecords['total'], $_GET['page']);
-        $postsTitle = "Page" . $_GET['page'];
+        $postsTitle = "Page " . $_GET['page'];
         $currentPage = ($_GET['page']);
     } else {
         $paginatedPosts = paginatePublished($numberOfRecords['total']);
