@@ -1,11 +1,13 @@
 <?php
-$slider_topic = 1;
-$slider_posts = publishedCondition('posts', ['topic_id' => $slider_topic]);
+$slider_topic = getValue('topics', 1, 'name');
+$countOfSlider = countTopicPosts($slider_topic);
+$slider = searchTopic($slider_topic, $countOfSlider['total'], 1, $countOfSlider['total']);
+$slider_posts = $slider['posts'];
 ?>
 
 <!-- Post Slider -->
 <div class="post-slider">
-    <h1 class="slider-title"><?php echo getValue('topics', $slider_topic, 'name'); ?> Posts</h1>
+    <h1 class="slider-title"><?php echo $slider_topic ?> Posts</h1>
     <i class="fa-solid fa-chevron-left prev"></i>
     <i class="fa-solid fa-chevron-right next"></i>
 

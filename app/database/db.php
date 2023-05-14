@@ -123,23 +123,6 @@
         return $record[$value];
     }
 
-function searchPost($term, $recordsNumber, $currentPage = 1, $recordsPerPage = 10)
-{
-    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-    global $conn;
-    $match = '%' . $term . '%';
-    $sql = "SELECT * FROM posts WHERE published=1 AND title LIKE ? OR body LIKE ? ORDER BY created_at DESC LIMIT ?,?";
-    $stmt = executeQuery($sql, ['title' => $match, 'body' => $match, 'offset' => ($currentPage - 1) * $recordsPerPage, 'numberOfRecords' => $recordsPerPage]);
-    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    $numberOfPages = ceil( $recordsNumber / $recordsPerPage);
-    return [
-        'posts' => $records,
-        'prevPage' => $currentPage > 1 ? $currentPage - 1 : false,
-        'nextPage' => $currentPage + 1 <= $numberOfPages ? $currentPage + 1 : false,
-        'pages' => $numberOfPages
-    ];
-}
-
 function publishedCondition($table, $condition = [])
 {
     global $conn;
@@ -181,6 +164,41 @@ function paginatePublished($recordsNumber, $currentPage = 1, $recordsPerPage = 1
     ];
 }
 
+function searchPost($term, $recordsNumber, $currentPage = 1, $recordsPerPage = 10)
+{
+    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+    global $conn;
+    $matchTitle = '%' . $term . '%';
+    $matchBody = '&lt;p&gt;' . '%' . $term . '%' . '&lt;/p&gt;';
+    $sql = "SELECT * FROM posts WHERE published=1 AND title LIKE ? OR body LIKE ? ORDER BY created_at DESC LIMIT ?,?";
+    $stmt = executeQuery($sql, ['title' => $matchTitle, 'body' => $matchBody, 'offset' => ($currentPage - 1) * $recordsPerPage, 'numberOfRecords' => $recordsPerPage]);
+    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $numberOfPages = ceil( $recordsNumber / $recordsPerPage);
+    return [
+        'posts' => $records,
+        'prevPage' => $currentPage > 1 ? $currentPage - 1 : false,
+        'nextPage' => $currentPage + 1 <= $numberOfPages ? $currentPage + 1 : false,
+        'pages' => $numberOfPages
+    ];
+}
+
+function searchTopic($topic, $recordsNumber, $currentPage = 1, $recordsPerPage = 10)
+{
+    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+    global $conn;
+    $match = '%' . $topic . '%';
+    $sql = "SELECT * FROM posts WHERE published=1 AND topic LIKE ? ORDER BY created_at DESC LIMIT ?,?";
+    $stmt = executeQuery($sql, ['topic' => $match, 'offset' => ($currentPage - 1) * $recordsPerPage, 'numberOfRecords' => $recordsPerPage]);
+    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $numberOfPages = ceil( $recordsNumber / $recordsPerPage);
+    return [
+        'posts' => $records,
+        'prevPage' => $currentPage > 1 ? $currentPage - 1 : false,
+        'nextPage' => $currentPage + 1 <= $numberOfPages ? $currentPage + 1 : false,
+        'pages' => $numberOfPages
+    ];
+}
+
 function countRecords($table, $condition = [])
 {
     global $conn;
@@ -201,9 +219,20 @@ function countRecords($table, $condition = [])
 function countSearch($term)
 {
     global $conn;
-    $match = '%' . $term . '%';
-    $sql = "SELECT COUNT(*) as total FROM posts WHERE published=1 AND title LIKE ? OR body LIKE ? ORDER BY created_at DESC";
-    $stmt = executeQuery($sql, ['title' => $match, 'body' => $match]);
+    $matchTitle = '%' . $term . '%';
+    $matchBody = '&lt;p&gt;' . '%' . $term . '%' . '&lt;/p&gt;';
+    $sql = "SELECT COUNT(*) as total FROM posts WHERE published=1 AND title LIKE ? OR body LIKE ?";
+    $stmt = executeQuery($sql, ['title' => $matchTitle, 'body' => $matchBody]);
+    $number = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $number[0];
+}
+
+function countTopicPosts($topic)
+{
+    global $conn;
+    $match = '%' . $topic . '%';
+    $sql = "SELECT COUNT(*) as total FROM posts WHERE published=1 AND topic LIKE ?";
+    $stmt = executeQuery($sql, ['topic' => $match]);
     $number = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     return $number[0];
 }

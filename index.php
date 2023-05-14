@@ -7,33 +7,37 @@ $posts = array();
 $postsTitle = 'Recent Posts';
 $mainPage = true;
 
-if (isset($_POST['search-term'])) {
-    if ($_POST['search-term'] == '') {
-        unset($_POST['search-term']);
+if (isset($_GET['search-term'])) {
+    if ($_GET['search-term'] == '') {
+        unset($_GET['search-term']);
         header('location: ' . BASE_URL . '/index.php');
     } else {
-        if (isset($_GET['page'])) {
-            $currentPage = $_GET['page'];
-        } else {
-            $currentPage = 1;
-        }
-        $postsTitle = "Searching for '" . $_POST['search-term'] . "' page " . $_GET['page'];
-        $numberOfRecords = countSearch($_POST['search-term']);
-        $paginatedPosts = searchPost($_POST['search-term'], $numberOfRecords['total'], $currentPage);
+        $currentPage = $_GET['page'];
+        $pageLink = "index.php?search-term=" . $_GET['search-term'] . "&page=";
+        $postsTitle = "Searching for '" . $_GET['search-term'];
+        $numberOfRecords = countSearch($_GET['search-term']);
+        $paginatedPosts = searchPost($_GET['search-term'], $numberOfRecords['total'], $_GET['page']);
     }
-} else if (isset($_GET['t_id'])) {
-    $posts = publishedCondition('posts', ['topic_id' => $_GET['t_id']]);
-    $postsTitle = "Searching for posts under '" . $_GET['name'] . "'";
+} else if (isset($_GET['topic'])) {
+    $currentPage = $_GET['page'];
+    $pageLink = "index.php?topic=" . $_GET['topic'] . "&page=";
+    $postsTitle = "Searching for posts under topic '" . $_GET['name'] . "'";
+    $numberOfRecords = countTopicPosts($_GET['topic']);
+    $paginatedPosts = searchTopic($_GET['topic'], $numberOfRecords['total'], $_GET['page']);
 } else {
+    $pageLink = "index.php?page=";
     $numberOfRecords = countRecords('posts');
     if (isset($_GET['page'])) {
         $paginatedPosts = paginatePublished($numberOfRecords['total'], $_GET['page']);
-        $postsTitle = "Page " . $_GET['page'];
         $currentPage = ($_GET['page']);
     } else {
         $paginatedPosts = paginatePublished($numberOfRecords['total']);
         $currentPage = 1;
     }
+}
+
+if (isset($_GET['page']) && $_GET['page'] != 1) {
+    $postsTitle = $postsTitle . ". Page " . $_GET['page'];
 }
 
 ?>
@@ -111,7 +115,7 @@ if (isset($_POST['search-term'])) {
         <div>
             <ul class="pagination-links">
                 <?php if($paginatedPosts['prevPage']): ?>
-                    <li><a href="index.php?page=<?php echo $paginatedPosts['prevPage'] ?>" class="link"><i class="fa-solid fa-chevron-left"></i></a></li>
+                    <li><a href="<?php echo $pageLink ?><?php echo $paginatedPosts['prevPage'] ?>" class="link"><i class="fa-solid fa-chevron-left"></i></a></li>
                 <?php endif; ?>
 
                 <?php if($paginatedPosts['pages'] > 10): ?>
@@ -121,13 +125,13 @@ if (isset($_POST['search-term'])) {
                             <?php if($i == $currentPage): ?>
                                 <a href="#" class="link active"> <?php echo $currentPage ?> </a>
                             <?php elseif($i > 2 && $i < ($currentPage - 2)): ?>
-                                <a href="index.php?page=<?php echo $i ?>" class="link"> ... </a>
+                                <a href="<?php echo $pageLink ?><?php echo $i ?>" class="link"> ... </a>
                                 <?php $i = $currentPage - 3; ?>
                             <?php elseif($i < ($paginatedPosts['pages'] - 1) && $i > ($currentPage + 2)): ?>
-                                <a href="index.php?page=<?php echo $i ?>" class="link"> ... </a>
+                                <a href="<?php echo $pageLink ?><?php echo $i ?>" class="link"> ... </a>
                                 <?php $i = $paginatedPosts['pages'] - 2; ?>
                             <?php else: ?>
-                                <a href="index.php?page=<?php echo $i ?>" class="link"> <?php echo $i?> </a>
+                                <a href="<?php echo $pageLink ?><?php echo $i ?>" class="link"> <?php echo $i?> </a>
                             <?php endif; ?>
                         </li>
                         <?php $i++;
@@ -139,14 +143,14 @@ if (isset($_POST['search-term'])) {
                             <?php if($currentPage == $i): ?>
                                 <a href="#" class="link active"> <?php echo $currentPage ?> </a>
                             <?php else: ?>
-                                <a href="index.php?page=<?php echo $i ?>" class="link"> <?php echo $i ?> </a>
+                                <a href="<?php echo $pageLink ?><?php echo $i ?>" class="link"> <?php echo $i ?> </a>
                             <?php endif; ?>
                         </li>
                         <?php $i++;
                     endwhile; ?>
                 <?php endif; ?>
                 <?php if($paginatedPosts['nextPage']): ?>
-                <li><a href="index.php?page=<?php echo $paginatedPosts['nextPage'] ?>" class="link"><i class="fa-solid fa-chevron-right"></i></a></li>
+                <li><a href="<?php echo $pageLink ?><?php echo $paginatedPosts['nextPage'] ?>" class="link"><i class="fa-solid fa-chevron-right"></i></a></li>
                 <?php endif; ?>
             </ul>
         </div>

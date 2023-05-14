@@ -19,7 +19,7 @@ $errors = array();
 $id = '';
 $title = '';
 $body = '';
-$topic_id = '';
+$topic = '';
 $published = '';
 
 if (isset($_GET['id'])) {
@@ -30,7 +30,7 @@ if (isset($_GET['id'])) {
     }
     $title = $post['title'];
     $body = $post['body'];
-    $topic_id = $post['topic_id'];
+    $topic = $post['topic'];
     $published = $post['published'];
 }
 
@@ -92,7 +92,7 @@ if (isset($_POST['add-post'])) {
     } else {
         $title = $_POST['title'];
         $body = $_POST['body'];
-        $topic_id = $_POST['topic_id'];
+        $topic = $_POST['topic'];
     }
 }
 
@@ -131,7 +131,7 @@ if (isset($_POST['suggest-post'])) {
     } else {
         $title = $_POST['title'];
         $body = $_POST['body'];
-        $topic_id = $_POST['topic_id'];
+        $topic = $_POST['topic'];
     }
 }
 
@@ -167,7 +167,7 @@ if (isset($_POST['publish-updated-post'])) {
     } else {
         $title = $_POST['title'];
         $body = $_POST['body'];
-        $topic_id = $_POST['topic_id'];
+        $topic = $_POST['topic'];
     }
 }
 
@@ -206,6 +206,11 @@ if (isset($_POST['update-post'])) {
     } else {
         $title = $_POST['title'];
         $body = $_POST['body'];
-        $topic_id = $_POST['topic_id'];
+        $topic = $_POST['topic'];
     }
+}
+
+if(isset($_POST['search-term'])) {
+    header('location: ' . BASE_URL . '/index.php?search-term=' . $_POST['search-term'] . '&page=1');
+    exit();
 }

@@ -71,10 +71,10 @@
                 </div>
                 <div>
                     <label>Topic</label>
-                    <select name="topic_id" class="text-input">
+                    <select name="topic" class="text-input">
                         <option value=""></option>
                         <?php foreach ($topics as $key => $topic): ?>
-                            <?php if (!empty($topic_id) && $topic_id == $topic['id']): ?>
+                            <?php if (!empty($topic) && $topic == $topic['name']): ?>
                                 <option selected value="<?php echo $topic['id'] ?>"><?php echo $topic['name'] ?></option>
                             <?php else: ?>
                                 <option value="<?php echo $topic['id'] ?>"><?php echo $topic['name'] ?></option>
