@@ -99,8 +99,41 @@ form div {
   margin-bottom: 40px;
 
   label {
-    color: $text-color;
+    //color: $text-color;
+    color: white;
     font-size: 1.2em;
+  }
+
+  a {
+    border: 1px solid red;
+  }
+
+  a.topics-menu {
+    border: 1px solid red;
+    background: white;
+
+    .arrow-down {
+      display: inline;
+    }
+    .arrow-up {
+      display: none;
+    }
+  }
+
+  ul.topics-checkboxes {
+    border-left: 1px solid $hover-background;
+    border-right: 1px solid $hover-background;
+    //display: none;
+
+    li {
+      list-style: none;
+      background: white;
+      border-bottom: 1px solid $hover-background;
+    }
+  }
+
+  ul.topics-checkboxes.showing {
+    display: block;
   }
 }
 

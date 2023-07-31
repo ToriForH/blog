@@ -35,6 +35,13 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function() {
+  $('.topics-menu').on('click', function() {
+    $('.topics-checkboxes').toggleClass('showing');
+    $('.topics-menu').toggleClass('showing');
+  });
+});
+
 ClassicEditor.create(document.querySelector("#body"), {
   toolbar: [
   "heading",

@@ -81,8 +81,33 @@ form div {
   margin-bottom: 40px;
 }
 form div label {
-  color: #FFC90A;
+  color: white;
   font-size: 1.2em;
+}
+form div a {
+  border: 1px solid red;
+}
+form div a.topics-menu {
+  border: 1px solid red;
+  background: white;
+}
+form div a.topics-menu .arrow-down {
+  display: inline;
+}
+form div a.topics-menu .arrow-up {
+  display: none;
+}
+form div ul.topics-checkboxes {
+  border-left: 1px solid #660966;
+  border-right: 1px solid #660966;
+}
+form div ul.topics-checkboxes li {
+  list-style: none;
+  background: white;
+  border-bottom: 1px solid #660966;
+}
+form div ul.topics-checkboxes.showing {
+  display: block;
 }
 
 .edit, .delete, .publish, .unpublish {

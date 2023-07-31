@@ -71,6 +71,20 @@
                 </div>
                 <div>
                     <label>Topic</label>
+                    <!-- SECOND selected topics list, arrow to open topics list -->
+                    <div>
+                        <a class="topics-menu">
+                            <input type="text" name="topic" value="">
+                            <i class="fa-solid fa-chevron-down arrow-down" style="font-size: 0.8em;"></i>
+                            <i class="fa-solid fa-chevron-up arrow-up" style="font-size: 0.8em;"></i>
+                        </a>
+                        <ul class="topics-checkboxes">
+                            <?php foreach ($topics as $key => $topic): ?>
+                                <li><label><input type="checkbox" name="topic" value="<?php echo $topic['id'] ?>"><?php echo $topic['name'] ?></label></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <!-- select will be deleted like deprecated -->
                     <select name="topic" class="text-input">
                         <option value=""></option>
                         <?php foreach ($topics as $key => $topic): ?>
@@ -81,6 +95,7 @@
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </select>
+                    <!-- select will be deleted like deprecated -->
                 </div>
                 <div class="button-group">
                     <button type="submit" name ="<?php echo $submitName; ?>" class="btn btn-big"><?php echo $submitTitle; ?></button>
