@@ -15,6 +15,10 @@ header {
   font-size: 1.3em;
 }
 
+.text-input.image {
+  color: white;
+}
+
 .admin-wrapper {
   top: 62px;
   position: absolute;
@@ -81,30 +85,50 @@ form div {
   margin-bottom: 40px;
 }
 form div label {
-  color: white;
+  color: #FFC90A;
   font-size: 1.2em;
 }
-form div a {
-  border: 1px solid red;
+form div label.topics-menu {
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #FFC90A;
+  padding: 5px;
+  font-size: 1.25em;
 }
-form div a.topics-menu {
-  border: 1px solid red;
-  background: white;
-}
-form div a.topics-menu .arrow-down {
+form div label.topics-menu .arrow-down {
   display: inline;
 }
-form div a.topics-menu .arrow-up {
+form div label.topics-menu .arrow-up {
   display: none;
 }
+form div label.topics-menu.showing {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 0;
+}
+form div label.topics-menu.showing .arrow-down {
+  display: none;
+}
+form div label.topics-menu.showing .arrow-up {
+  display: inline;
+}
 form div ul.topics-checkboxes {
-  border-left: 1px solid #660966;
-  border-right: 1px solid #660966;
+  border-radius: 5px;
+  border: 1px solid #FFC90A;
+  border-top-left-radius: 0;
+  border-bottom: 0;
+  width: 50%;
+  padding: 0;
+  margin: 5px 0;
+  background: #9C1A9C;
+  display: none;
+  max-height: 150px;
+  overflow-y: scroll;
 }
 form div ul.topics-checkboxes li {
   list-style: none;
-  background: white;
-  border-bottom: 1px solid #660966;
+  border-bottom: 1px solid #FFC90A;
+  border-radius: 5px;
 }
 form div ul.topics-checkboxes.showing {
   display: block;

@@ -4,6 +4,7 @@ $text-color: #FFC90A;
 $admin-header: #8A098A;
 $header-background: #9C1A9C;
 $hover-background: #660966;
+$content-background: #502A50;
 $publish: #1779F1;
 $delete: #F32428;
 $edit: #4ED406;
@@ -23,6 +24,10 @@ header {
 
 .text-input.main {
   font-size: 1.3em;
+}
+
+.text-input.image {
+  color: white;
 }
 
 .admin-wrapper {
@@ -99,18 +104,16 @@ form div {
   margin-bottom: 40px;
 
   label {
-    //color: $text-color;
-    color: white;
+    color: $text-color;
     font-size: 1.2em;
   }
 
-  a {
-    border: 1px solid red;
-  }
-
-  a.topics-menu {
-    border: 1px solid red;
-    background: white;
+  label.topics-menu {
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid $text-color;
+    padding: 5px;
+    font-size: 1.25em;
 
     .arrow-down {
       display: inline;
@@ -120,15 +123,37 @@ form div {
     }
   }
 
+  label.topics-menu.showing {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 0;
+    .arrow-down {
+      display: none;
+    }
+
+    .arrow-up {
+      display: inline;
+    }
+  }
+
   ul.topics-checkboxes {
-    border-left: 1px solid $hover-background;
-    border-right: 1px solid $hover-background;
-    //display: none;
+    border-radius: 5px;
+    border: 1px solid $text-color;
+    border-top-left-radius: 0;
+    border-bottom: 0;
+    width: 50%;
+    padding: 0;
+    margin: 5px 0;
+    background: $header-background;
+    display: none;
+    max-height: 150px;
+    overflow-y: scroll;
 
     li {
       list-style: none;
-      background: white;
-      border-bottom: 1px solid $hover-background;
+
+      border-bottom: 1px solid $text-color;
+      border-radius: 5px;
     }
   }
 

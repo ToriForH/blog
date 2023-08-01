@@ -19,11 +19,12 @@ if (isset($_GET['search-term'])) {
         $paginatedPosts = searchPost($_GET['search-term'], $numberOfRecords['total'], $_GET['page']);
     }
 } else if (isset($_GET['topic'])) {
+    $topic_id = getIdByName('topics', $_GET['topic']);
     $currentPage = $_GET['page'];
     $pageLink = "index.php?topic=" . $_GET['topic'] . "&page=";
     $postsTitle = "Searching for posts under topic '" . $_GET['topic'] . "'";
-    $numberOfRecords = countTopicPosts($_GET['topic']);
-    $paginatedPosts = searchTopic($_GET['topic'], $numberOfRecords['total'], $_GET['page']);
+    $numberOfRecords = countTopicPosts($topic_id);
+    $paginatedPosts = searchTopic($topic_id, $numberOfRecords['total'], $_GET['page']);
 } else {
     $pageLink = "index.php?page=";
     $numberOfRecords = countRecords('posts');

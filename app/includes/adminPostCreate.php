@@ -67,35 +67,22 @@
                     <?php if($pageTitle == "Edit Post"): ?>
                     <p>Don't select any image to save an old one</p>
                     <?php endif; ?>
-                    <input type="file" name="image" class="text-input">
+                    <input type="file" name="image" class="text-input image">
                 </div>
                 <div>
-                    <label>Topic</label>
-                    <!-- SECOND selected topics list, arrow to open topics list -->
-                    <div>
-                        <a class="topics-menu">
-                            <input type="text" name="topic" value="">
-                            <i class="fa-solid fa-chevron-down arrow-down" style="font-size: 0.8em;"></i>
-                            <i class="fa-solid fa-chevron-up arrow-up" style="font-size: 0.8em;"></i>
-                        </a>
+                    <label class="topics-menu">Topics
+                        <i class="fa-solid fa-chevron-down arrow-down" style="font-size: 0.8em;"></i>
+                        <i class="fa-solid fa-chevron-up arrow-up" style="font-size: 0.8em;"></i>
+                    </label>
                         <ul class="topics-checkboxes">
                             <?php foreach ($topics as $key => $topic): ?>
-                                <li><label><input type="checkbox" name="topic" value="<?php echo $topic['id'] ?>"><?php echo $topic['name'] ?></label></li>
+                            <?php if(str_contains($topic_id, $topic['id'])): ?>
+                                <li><label><input type="checkbox" name="topics_array[]" value="<?php echo $topic['id'] ?>" checked><?php echo $topic['name'] ?></label></li>
+                            <?php else: ?>
+                                <li><label><input type="checkbox" name="topics_array[]" value="<?php echo $topic['id'] ?>"><?php echo $topic['name'] ?></label></li>
+                            <?php endif; ?>
                             <?php endforeach; ?>
                         </ul>
-                    </div>
-                    <!-- select will be deleted like deprecated -->
-                    <select name="topic" class="text-input">
-                        <option value=""></option>
-                        <?php foreach ($topics as $key => $topic): ?>
-                            <?php if (!empty($topic) && $topic == $topic['name']): ?>
-                                <option selected value="<?php echo $topic['id'] ?>"><?php echo $topic['name'] ?></option>
-                            <?php else: ?>
-                                <option value="<?php echo $topic['id'] ?>"><?php echo $topic['name'] ?></option>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </select>
-                    <!-- select will be deleted like deprecated -->
                 </div>
                 <div class="button-group">
                     <button type="submit" name ="<?php echo $submitName; ?>" class="btn btn-big"><?php echo $submitTitle; ?></button>

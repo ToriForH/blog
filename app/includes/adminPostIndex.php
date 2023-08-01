@@ -64,7 +64,13 @@
                         <td><?php echo $key + 1; ?></td>
                         <td><?php echo $post['title'] ?></td>
                         <td><?php echo getValue('users', $post['user_id'], 'username'); ?></td>
-                        <td><?php echo $post['topic']; ?></td>
+                        <?php $topics_array = explode(", ", $post['topic_id']);
+                        $topics_name = array();
+                        foreach ($topics_array as $key => $topic) {
+                            array_push($topics_name, getValue('topics', $topic, 'name'));
+                        }
+                        $topics_str = implode(', ', $topics_name); ?>
+                        <td><?php echo $topics_str; ?></td>
                         <td><a href="edit.php?id=<?php echo $post['id']; ?>" class="edit">edit</a></td>
                         <td><a href="edit.php?delete_id=<?php echo $post['id']; ?>" class="delete">delete</a></td>
                         <?php if($_SESSION['moder']): ?>

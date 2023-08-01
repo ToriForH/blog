@@ -18,7 +18,7 @@ function validatePost($post)
     }
 
     if(empty($post['topic_id'])) {
-        array_push($errors, 'You must select a topic');
+        array_push($errors, 'You must select at least one topic');
     }
 
     return $errors;

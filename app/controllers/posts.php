@@ -19,7 +19,7 @@ $errors = array();
 $id = '';
 $title = '';
 $body = '';
-$topic = '';
+$topic_id = '';
 $published = '';
 
 if (isset($_GET['id'])) {
@@ -30,7 +30,7 @@ if (isset($_GET['id'])) {
     }
     $title = $post['title'];
     $body = $post['body'];
-    $topic = $post['topic'];
+    $topic_id = $post['topic_id'];
     $published = $post['published'];
 }
 
@@ -62,6 +62,8 @@ if (isset($_POST['add-post'])) {
     if (!$_SESSION['moder']) {
         modersOnly();
     }
+    $_POST['topic_id'] = implode(', ', $_POST['topics_array']);
+
     $errors = validatePost($_POST);
 
     if (!empty($_FILES['image']['name'])) {
@@ -81,6 +83,7 @@ if (isset($_POST['add-post'])) {
 
     if (count($errors) == 0) {
         unset($_POST['add-post']);
+        unset($_POST['topics_array']);
         $_POST['user_id'] = $_SESSION['id'];
         $_POST['published'] = 1;
         $_POST['body'] = htmlentities($_POST['body']);
@@ -92,11 +95,12 @@ if (isset($_POST['add-post'])) {
     } else {
         $title = $_POST['title'];
         $body = $_POST['body'];
-        $topic = $_POST['topic'];
+        $topic_id = $_POST['topic_id'];
     }
 }
 
 if (isset($_POST['suggest-post'])) {
+    $_POST['topic_id'] = implode(', ', $_POST['topics_array']);
     $errors = validatePost($_POST);
 
     if (!empty($_FILES['image']['name'])) {
@@ -116,6 +120,7 @@ if (isset($_POST['suggest-post'])) {
 
     if (count($errors) == 0) {
         unset($_POST['suggest-post']);
+        unset($_POST['topics_array']);
         $_POST['user_id'] = $_SESSION['id'];
         $_POST['published'] = 0;
         $_POST['body'] = htmlentities($_POST['body']);
@@ -131,7 +136,7 @@ if (isset($_POST['suggest-post'])) {
     } else {
         $title = $_POST['title'];
         $body = $_POST['body'];
-        $topic = $_POST['topic'];
+        $topic_id = $_POST['topic_id'];
     }
 }
 
@@ -153,10 +158,12 @@ if (isset($_POST['publish-updated-post'])) {
             array_push($errors, "Failed to upload image");
         }
     }
+    $_POST['topic_id'] = implode(', ', $_POST['topics_array']);
 
     if (count($errors) == 0) {
         $id = $_POST['id'];
         unset($_POST['publish-updated-post'], $_POST['id']);
+        unset($_POST['topics_array']);
         $_POST['published'] = 1;
         $_POST['body'] = htmlentities($_POST['body']);
         $post_id = update($table, $id, $_POST);
@@ -167,7 +174,7 @@ if (isset($_POST['publish-updated-post'])) {
     } else {
         $title = $_POST['title'];
         $body = $_POST['body'];
-        $topic = $_POST['topic'];
+        $topic_id = $_POST['topic_id'];
     }
 }
 
@@ -187,10 +194,12 @@ if (isset($_POST['update-post'])) {
     } else {
         unset($_POST['image']);
     }
+    $_POST['topic_id'] = implode(', ', $_POST['topics_array']);
 
     if (count($errors) == 0) {
         $id = $_POST['id'];
         unset($_POST['update-post'], $_POST['id']);
+        unset($_POST['topics_array']);
         $_POST['published'] = 0;
         $_POST['body'] = htmlentities($_POST['body']);
 
@@ -206,7 +215,7 @@ if (isset($_POST['update-post'])) {
     } else {
         $title = $_POST['title'];
         $body = $_POST['body'];
-        $topic = $_POST['topic'];
+        $topic_id = $_POST['topic_id'];
     }
 }
 

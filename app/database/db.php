@@ -123,6 +123,13 @@
         return $record[$value];
     }
 
+    function getIdByName($table, $name)
+    {
+        global $conn;
+        $record = selectOne($table, ['name' => $name]);
+        return $record['id'];
+    }
+
 function publishedCondition($table, $condition = [])
 {
     global $conn;
@@ -187,7 +194,7 @@ function searchTopic($topic, $recordsNumber, $currentPage = 1, $recordsPerPage =
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
     global $conn;
     $match = '%' . $topic . '%';
-    $sql = "SELECT * FROM posts WHERE published=1 AND topic LIKE ? ORDER BY created_at DESC LIMIT ?,?";
+    $sql = "SELECT * FROM posts WHERE published=1 AND topic_id LIKE ? ORDER BY created_at DESC LIMIT ?,?";
     $stmt = executeQuery($sql, ['topic' => $match, 'offset' => ($currentPage - 1) * $recordsPerPage, 'numberOfRecords' => $recordsPerPage]);
     $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     $numberOfPages = ceil( $recordsNumber / $recordsPerPage);
@@ -231,7 +238,7 @@ function countTopicPosts($topic)
 {
     global $conn;
     $match = '%' . $topic . '%';
-    $sql = "SELECT COUNT(*) as total FROM posts WHERE published=1 AND topic LIKE ?";
+    $sql = "SELECT COUNT(*) as total FROM posts WHERE published=1 AND topic_id LIKE ?";
     $stmt = executeQuery($sql, ['topic' => $match]);
     $number = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     return $number[0];
