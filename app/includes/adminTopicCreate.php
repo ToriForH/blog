@@ -64,7 +64,7 @@
                 <div class="button-group">
                     <button type="submit" name="<?php echo $submitName; ?>" class="btn btn-big"><?php echo $submitTitle; ?></button>
                     <?php if($_SESSION['moder']): ?>
-                        <button type="submit" name="<?php echo $publishName; ?>" class="btn btn-big">Publish Topic</button>
+                        <button type="submit" name="<?php echo $publishName; ?>" class="btn btn-big"><?php echo $publishTitle; ?></button>
                     <?php endif; ?>
                 </div>
             </form>

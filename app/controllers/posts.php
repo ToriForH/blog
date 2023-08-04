@@ -21,6 +21,7 @@ $title = '';
 $body = '';
 $topic_id = '';
 $published = '';
+$image = '';
 
 if (isset($_GET['id'])) {
     $post = selectOne($table, ['id' => $_GET['id']]);
@@ -74,6 +75,7 @@ if (isset($_POST['add-post'])) {
 
         if ($result) {
             $_POST['image'] = $image_name;
+            $image = $destination;
         } else {
             array_push($errors, "Failed to upload image");
         }
@@ -144,6 +146,7 @@ if (isset($_POST['publish-updated-post'])) {
     if (!$_SESSION['moder']) {
         modersOnly();
     }
+    $_POST['topic_id'] = implode(', ', $_POST['topics_array']);
     $errors = validatePost($_POST);
 
     if (!empty($_FILES['image']['name'])) {
@@ -158,8 +161,6 @@ if (isset($_POST['publish-updated-post'])) {
             array_push($errors, "Failed to upload image");
         }
     }
-    $_POST['topic_id'] = implode(', ', $_POST['topics_array']);
-
     if (count($errors) == 0) {
         $id = $_POST['id'];
         unset($_POST['publish-updated-post'], $_POST['id']);
@@ -179,6 +180,7 @@ if (isset($_POST['publish-updated-post'])) {
 }
 
 if (isset($_POST['update-post'])) {
+    $_POST['topic_id'] = implode(', ', $_POST['topics_array']);
     $errors = validatePost($_POST);
     if (!empty($_FILES['image']['name'])) {
         $image_name = time() . '_' . $_FILES['image']['name'];
@@ -194,8 +196,6 @@ if (isset($_POST['update-post'])) {
     } else {
         unset($_POST['image']);
     }
-    $_POST['topic_id'] = implode(', ', $_POST['topics_array']);
-
     if (count($errors) == 0) {
         $id = $_POST['id'];
         unset($_POST['update-post'], $_POST['id']);

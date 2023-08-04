@@ -74,95 +74,97 @@ if (isset($_GET['page']) && $_GET['page'] != 1) {
 
     <?php include(ROOT_PATH . "app/includes/carousel.php"); ?>
 
-<!-- Content -->
-<div class="content clearfix">
-    <!-- Main Content -->
-    <div class="main-content">
-        <h1 class="recent-post-title"><?php echo $postsTitle; ?> </h1>
+    <!-- Content -->
+    <div class="content clearfix">
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1 class="recent-post-title"><?php echo $postsTitle; ?> </h1>
 
-        <?php foreach ($paginatedPosts['posts'] as $post): ?>
-        <div class="post clearfix">
-            <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="" class="post-image">
-            <div class="post-preview">
-                <div>
-                    <?php if(strlen($post['title']) > 30): ?>
-                        <h2><a class="title" href="single.php?post_id=<?php echo $post['id']; ?>"><?php echo substr($post['title'], 0, 30) . '...'; ?></a> </h2>
-                    <?php else: ?>
-                        <h2><a class="title" href="single.php?post_id=<?php echo $post['id']; ?>"><?php echo $post['title']; ?></a> </h2>
+            <?php foreach ($paginatedPosts['posts'] as $post): ?>
+                <div class="post clearfix">
+                    <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="" class="post-image">
+                    <div class="post-preview">
+                        <div>
+                            <h2>
+                                <a class="title" href="single.php?post_id=<?php echo $post['id']; ?>">
+                                    <?php if(strlen($post['title']) > 30) {
+                                        echo substr($post['title'], 0, 30) . '...';
+                                    } else {
+                                        echo $post['title'];
+                                    }  ?>
+                                </a>
+                            </h2>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-user"> <?php echo getValue('users', $post['user_id'], 'username'); ?></i>
+                            &nbsp;
+                            <i class="fa-regular fa-calendar-days"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?></i>
+                        </div>
+                        <div>
+                            <span class="preview-text">
+                                <?php if(strlen($post['body']) > 100){
+                                    echo html_entity_decode(substr($post['body'], 0, 100) . '. . .');
+                                } else {
+                                    echo html_entity_decode($post['body']);
+                                } ?>
+                            </span>
+                        </div>
+                        <a href="single.php?post_id=<?php echo $post['id']; ?>" class="btn read-more">Read More</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+            <!-- Pagination Links -->
+            <div>
+                <ul class="pagination-links">
+                    <?php if($paginatedPosts['prevPage']): ?>
+                        <li><a href="<?php echo $pageLink ?><?php echo $paginatedPosts['prevPage'] ?>" class="link"><i class="fa-solid fa-chevron-left"></i></a></li>
                     <?php endif; ?>
-                </div>
-                <div>
-                    <i class="fa-solid fa-user"> <?php echo getValue('users', $post['user_id'], 'username'); ?></i>
-                    &nbsp;
-                    <i class="fa-regular fa-calendar-days"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?></i>
-                </div>
-                <div>
-                    <?php if(strlen($post['body']) > 140): ?>
-                        <span class="preview-text">
-                    <?php echo html_entity_decode(substr($post['body'], 0, 140) . '. . .'); ?>
-                    </span>
+
+                    <?php if($paginatedPosts['pages'] > 10): ?>
+                        <?php $i=1;
+                        while($paginatedPosts['pages'] >= $i): ?>
+                            <li>
+                                <?php if($i == $currentPage): ?>
+                                    <a href="#" class="link active"> <?php echo $currentPage ?> </a>
+                                <?php elseif($i > 2 && $i < ($currentPage - 2)): ?>
+                                    <a href="<?php echo $pageLink ?><?php echo $i ?>" class="link"> ... </a>
+                                    <?php $i = $currentPage - 3; ?>
+                                <?php elseif($i < ($paginatedPosts['pages'] - 1) && $i > ($currentPage + 2)): ?>
+                                    <a href="<?php echo $pageLink ?><?php echo $i ?>" class="link"> ... </a>
+                                    <?php $i = $paginatedPosts['pages'] - 2; ?>
+                                <?php else: ?>
+                                    <a href="<?php echo $pageLink ?><?php echo $i ?>" class="link"> <?php echo $i?> </a>
+                                <?php endif; ?>
+                            </li>
+                            <?php $i++;
+                        endwhile; ?>
                     <?php else: ?>
-                        <span class="preview-text">
-                    <?php echo html_entity_decode($post['body']); ?>
-                    </span>
+                        <?php $i=1;
+                        while($paginatedPosts['pages'] >= $i): ?>
+                            <li>
+                                <?php if($currentPage == $i): ?>
+                                    <a href="#" class="link active"> <?php echo $currentPage ?> </a>
+                                <?php else: ?>
+                                    <a href="<?php echo $pageLink ?><?php echo $i ?>" class="link"> <?php echo $i ?> </a>
+                                <?php endif; ?>
+                            </li>
+                            <?php $i++;
+                        endwhile; ?>
                     <?php endif; ?>
-                </div>
-                <a href="single.php?post_id=<?php echo $post['id']; ?>" class="btn read-more">Read More</a>
+                    <?php if($paginatedPosts['nextPage']): ?>
+                        <li><a href="<?php echo $pageLink ?><?php echo $paginatedPosts['nextPage'] ?>" class="link"><i class="fa-solid fa-chevron-right"></i></a></li>
+                    <?php endif; ?>
+                </ul>
             </div>
+            <!-- //Pagination Links -->
+
         </div>
-        <?php endforeach; ?>
+        <!-- //Main Content -->
 
-        <!-- Pagination Links -->
-        <div>
-            <ul class="pagination-links">
-                <?php if($paginatedPosts['prevPage']): ?>
-                    <li><a href="<?php echo $pageLink ?><?php echo $paginatedPosts['prevPage'] ?>" class="link"><i class="fa-solid fa-chevron-left"></i></a></li>
-                <?php endif; ?>
-
-                <?php if($paginatedPosts['pages'] > 10): ?>
-                    <?php $i=1;
-                    while($paginatedPosts['pages'] >= $i): ?>
-                        <li>
-                            <?php if($i == $currentPage): ?>
-                                <a href="#" class="link active"> <?php echo $currentPage ?> </a>
-                            <?php elseif($i > 2 && $i < ($currentPage - 2)): ?>
-                                <a href="<?php echo $pageLink ?><?php echo $i ?>" class="link"> ... </a>
-                                <?php $i = $currentPage - 3; ?>
-                            <?php elseif($i < ($paginatedPosts['pages'] - 1) && $i > ($currentPage + 2)): ?>
-                                <a href="<?php echo $pageLink ?><?php echo $i ?>" class="link"> ... </a>
-                                <?php $i = $paginatedPosts['pages'] - 2; ?>
-                            <?php else: ?>
-                                <a href="<?php echo $pageLink ?><?php echo $i ?>" class="link"> <?php echo $i?> </a>
-                            <?php endif; ?>
-                        </li>
-                        <?php $i++;
-                    endwhile; ?>
-                <?php else: ?>
-                    <?php $i=1;
-                    while($paginatedPosts['pages'] >= $i): ?>
-                        <li>
-                            <?php if($currentPage == $i): ?>
-                                <a href="#" class="link active"> <?php echo $currentPage ?> </a>
-                            <?php else: ?>
-                                <a href="<?php echo $pageLink ?><?php echo $i ?>" class="link"> <?php echo $i ?> </a>
-                            <?php endif; ?>
-                        </li>
-                        <?php $i++;
-                    endwhile; ?>
-                <?php endif; ?>
-                <?php if($paginatedPosts['nextPage']): ?>
-                <li><a href="<?php echo $pageLink ?><?php echo $paginatedPosts['nextPage'] ?>" class="link"><i class="fa-solid fa-chevron-right"></i></a></li>
-                <?php endif; ?>
-            </ul>
-        </div>
-        <!-- //Pagination Links -->
-
-
+        <?php include(ROOT_PATH . "app/includes/sidebar.php"); ?>
     </div>
-    <!-- //Main Content -->
-    <?php include(ROOT_PATH . "app/includes/sidebar.php"); ?>
-</div>
-<!-- //Content -->
+    <!-- //Content -->
 
 </div>
 <!-- // Page Wrapper -->

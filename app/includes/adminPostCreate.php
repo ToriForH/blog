@@ -64,8 +64,10 @@
                 </div>
                 <div>
                     <label>Image</label>
-                    <?php if($pageTitle == "Edit Post"): ?>
-                    <p>Don't select any image to save an old one</p>
+                    <?php if(isset($_GET['id'])): ?>
+                        <p>Old image:</p>
+                        <img class="edit-image" src="<?php echo BASE_URL . '/assets/images/' . $image ?>" alt="">
+                        <p>Select new image if you want to replace old one:</p>
                     <?php endif; ?>
                     <input type="file" name="image" class="text-input image">
                 </div>
@@ -87,7 +89,7 @@
                 <div class="button-group">
                     <button type="submit" name ="<?php echo $submitName; ?>" class="btn btn-big"><?php echo $submitTitle; ?></button>
                     <?php if($_SESSION['moder']): ?>
-                        <button type="submit" name="<?php echo $publishName; ?>" class="btn btn-big">Publish Post</button>
+                        <button type="submit" name="<?php echo $publishName; ?>" class="btn btn-big"><?php echo $publishTitle; ?></button>
                     <?php endif; ?>
                 </div>
 

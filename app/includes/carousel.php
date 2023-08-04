@@ -14,7 +14,9 @@ $slider_posts = $slider['posts'];
     <div class="post-wrapper">
         <?php foreach ($slider_posts as $post): ?>
             <div class="post">
-                <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="" class="slider-image">
+                <div class="image-wrapper">
+                    <img src="<?php echo BASE_URL . '/assets/images/' . $post['image']; ?>" alt="" class="slider-image">
+                </div>
                 <div class="post-info">
                     <?php if(strlen($post['title']) > 20): ?>
                         <span><a class="title" href="single.php?post_id=<?php echo $post['id']; ?>"><?php echo substr($post['title'], 0, 20) . '...'; ?></a> </span>

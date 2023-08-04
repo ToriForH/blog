@@ -10,30 +10,30 @@ $posts = publishedCondition('posts');
 
     <?php if($mainPage): ?>
 
-    <div class="section search">
-        <h2 class="section-title">Search</h2>
-        <form action="index.php" method="post">
-            <input type="text" name="search-term" class="text-input" placeholder="Search...">
-        </form>
-    </div>
+        <div class="section search">
+            <h2 class="section-title">Search</h2>
+            <form action="index.php" method="post">
+                <input type="text" name="search-term" class="text-input" placeholder="Search...">
+            </form>
+        </div>
     <?php else: ?>
-    <div class="section recent">
-        <h2 class="section-title">Recent posts</h2>
+        <div class="section recent">
+            <h2 class="section-title">Recent posts</h2>
 
-        <?php $count = 0; foreach ($posts as $p): ?>
-            <?php if ($count < 5 && $p['id'] != $post['id']): ?>
-                <div class="post clearfix">
-                    <img src="<?php echo BASE_URL . '/assets/images/' . $p['image']; ?>" alt="">
-                    <?php if(strlen($p['title']) > 14): ?>
-                        <a href="single.php?post_id=<?php echo $p['id']; ?>" class="title"><h4><?php echo substr($p['title'], 0, 12) . '...'; ?></h4></a>
-                    <?php else: ?>
-                        <a href="single.php?post_id=<?php echo $p['id']; ?>" class="title"><h4><?php echo $p['title']; ?></h4></a>
-                    <?php endif; ?>
-                </div>
+            <?php $count = 0; foreach ($posts as $p): ?>
+
+                <?php if ($count < 5 && $p['id'] != $post['id']): ?>
+                    <div class="post clearfix">
+                        <img src="<?php echo BASE_URL . '/assets/images/' . $p['image']; ?>" alt="">
+                        <?php if(strlen($p['title']) > 14): ?>
+                            <a href="single.php?post_id=<?php echo $p['id']; ?>" class="title"><h4><?php echo substr($p['title'], 0, 12) . '...'; ?></h4></a>
+                        <?php else: ?>
+                            <a href="single.php?post_id=<?php echo $p['id']; ?>" class="title"><h4><?php echo $p['title']; ?></h4></a>
+                        <?php endif; ?>
+                    </div>
                 <?php $count++; endif; ?>
-        <?php endforeach; ?>
-
-    </div>
+            <?php endforeach; ?>
+        </div>
     <?php endif; ?>
 
     <div class="section topics">

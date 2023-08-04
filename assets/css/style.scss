@@ -258,12 +258,22 @@ header {
       border-radius: 5px;
       text-align: center;
 
-      .slider-image {
+      .image-wrapper {
         height: 250px;
-        width: auto;
-        max-width: 100%;
-        border-radius: 5px;
+        width: 100%;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        overflow: hidden;
+        position: relative;
+
+        .slider-image {
+          width: 100%;
+          bottom: 0;
+          position: absolute;
+          display: flex;
+        }
       }
+
 
       .post-info {
         .title {
@@ -294,6 +304,8 @@ header {
 }
 
 .content {
+  //font-style: normal;
+  //font-weight: normal;
   width: 85%;
   margin: 30px auto 30px;
 
@@ -315,6 +327,7 @@ header {
       border-radius: 5px;
       background: white;
       position: relative;
+      overflow: hidden;
 
       .post-image {
         width: auto;
@@ -328,10 +341,10 @@ header {
       }
 
       .post-preview {
-        padding: 15px;
-        line-height: 5px;
-        max-height: 200px;
+        padding-top: 15px;
+        max-height: 185px;
         overflow: hidden;
+        word-wrap: break-word;
 
         .title{
           text-decoration: none;
@@ -343,13 +356,12 @@ header {
           color: $button-hover;
         }
 
-        .preview-text {
-          font-size: 1.5em;
-          line-height: 20px;
+        h2 {
+          margin: 0;
         }
 
-        .btn {
-          font-size: 1.3em;
+        .preview-text {
+          font-size: 1.5em;
         }
       }
 
@@ -364,6 +376,9 @@ header {
         font-family: $logo-text;
         text-decoration: none;
         transition: 1s;
+        padding: 0;
+        font-size: 1.1em;
+        max-height: 25px;
       }
 
       .read-more:hover {
@@ -482,22 +497,29 @@ header {
     }
 
     .post {
-      padding-top: 10px;
+      padding: 10px;
       border-top: 1px solid $content-background;
       transition: 1s;
 
       img {
-        height: 60px;
+        height: 100%;
         width: auto;
+        border-radius: 5px;
         max-width: 105px;
         margin-right: 10px;
         float: left;
+        border: 1px solid $content-background;
       }
+
+
 
       .title {
         text-decoration: none;
         font-size: 1.3em;
-        line-height: 10px;
+
+        h4 {
+          margin: 0 auto;
+        }
       }
     }
 
@@ -723,10 +745,6 @@ header {
   .content {
     width: 95%;
     margin: 30px auto 30px;
-
-    .post-preview {
-      font-size: 0.8em;
-    }
   }
 
   .auth-content {
@@ -781,7 +799,7 @@ header {
       width: 100%;
 
       .post-preview {
-        font-size: 0.7em;
+        font-size: 0.9em;
 
         .title {
           line-height: 20px;

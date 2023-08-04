@@ -5,6 +5,7 @@ $submitName = "suggest-post";
 $submitTitle = '';
 if ($_SESSION['moder']) {
     $submitTitle = "Add Post As Draft";
+    $publishTitle = "Publish Post";
 } else {
     $submitTitle = "Suggest Post";
 }

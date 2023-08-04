@@ -4,6 +4,7 @@ $submitName = 'update-topic';
 $submitTitle = '';
 if ($_SESSION['moder']) {
     $submitTitle = "Draft Updated Topic";
+    $publishTitle = "Publish Updates";
 } else {
     $submitTitle = "Suggest Updated Topic";
 }

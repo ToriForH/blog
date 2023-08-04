@@ -133,6 +133,9 @@ form div ul.topics-checkboxes li {
 form div ul.topics-checkboxes.showing {
   display: block;
 }
+form div .edit-image {
+  height: 150px;
+}
 
 .edit, .delete, .publish, .unpublish {
   text-decoration: none;
