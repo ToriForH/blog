@@ -8,10 +8,10 @@ include(ROOT_PATH. "../../app/database/db.php");
 <div class="footer">
     <div class="footer-content">
         <div class="footer-section about">
-                <h1 class="logo-text"><span>Shitty</span>Blog</h1>
+                <h1 class="logo-text"><span>Somename</span>Blog</h1>
                 <p>
-                    This is some shitty blog. Blog about shit. Blog with shit. World is full of shit. Shit is inside everyone. You think, but shit do.
-                    Think about. Think a lot and may be one day you won't wake up in bed full of shit.
+                    This is some text about blog. I write here anything just to fill up some lines. And one another sentence. It is almost done. I need just a little more text.
+                    And some text here. Suggest this sentence could be the last, perhaps, I don't sure.
                 </p>
             <div class="contact">
                 <div><i class="fa-solid fa-phone"></i> &nbsp; +380989234737</div>
