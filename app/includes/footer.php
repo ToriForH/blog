@@ -1,6 +1,21 @@
 <?php include("../../path.php");
 include(ROOT_PATH . "../../app/controllers/requests.php");
 include(ROOT_PATH. "../../app/database/db.php");
+
+$links = selectAll('navigation', ['footer' => 1]);
+if(isset($_SESSION['id'])) {
+    foreach ($links as $key => $link) {
+        if( $link['name'] == 'Log In' || $link['name'] == 'Sign Up') {
+            unset($links[$key]);
+        }
+    }
+} else {
+    foreach ($links as $key => $link) {
+        if( $link['name'] == 'Logout' || $link['name'] == 'Dashboard') {
+            unset($links[$key]);
+        }
+    }
+}
 ?>
 
 
@@ -28,15 +43,9 @@ include(ROOT_PATH. "../../app/database/db.php");
             <h2>Quick Links</h2>
             <br>
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="gallery.php">Gallery</a></li>
-                <?php if(isset($_SESSION['id'])): ?>
-                    <li><a href="admin/dashboard.php">Dashboard</a></li>
-                    <li><a href="logout.php">Logout</a></li>
-                <?php else: ?>
-                    <li><a href="register.php">Sign Up</a></li>
-                    <li><a href="login.php">Log In</a></li>
-                <?php endif; ?>
+                <?php foreach ($links as $key => $link): ?>
+                    <li><a href="<?php echo BASE_URL . $link['link']; ?>"><?php echo $link['name']; ?></a></li>
+                <?php endforeach; ?>
             </ul>
         </div>
         <div class="footer-section contact-form">

@@ -3,9 +3,9 @@ include("path.php");
 include(ROOT_PATH. "app/database/db.php");
 include(ROOT_PATH. "app/controllers/posts.php");
 
-$posts = array();
+$paginatedPosts = array();
 $postsTitle = 'Recent Posts';
-$mainPage = true;
+// $mainPage = true; no usages
 
 if (isset($_GET['search-term'])) {
     if ($_GET['search-term'] == '') {

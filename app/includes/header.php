@@ -1,12 +1,27 @@
+<?php include("../../path.php");
+
+$links = selectAll('navigation', ['header' => 1]);
+
+if(isset($_SESSION['id'])) {
+    $user_menu = selectAll('navigation', ['user_menu' => 1]);
+    foreach ($links as $key => $link) {
+        if( $link['name'] == 'Log In' || $link['name'] == 'Sign Up') {
+            unset($links[$key]);
+        }
+    }
+}
+?>
+
 <header>
     <a href="<?php echo BASE_URL . '/index.php' ?>" class="logo">
         <h1 class="logo-text"><span>Somename</span> Blog</h1>
     </a>
         <i class="fa-solid fa-bars menu-toggle"></i>
         <ul class="nav">
-            <li><a href="<?php echo BASE_URL . '/index.php' ?>">Home</a> </li>
-            <!-- <li><a href="#">About</a> </li> -->
-            <li><a href="<?php echo BASE_URL . '/contact.php' ?>">Contact Us</a> </li>
+
+            <?php foreach ($links as $key => $link): ?>
+            <li><a href="<?php echo BASE_URL . $link['link']; ?>"><?php echo $link['name']; ?></a> </li>
+            <?php endforeach; ?>
 
             <?php if(isset($_SESSION['id'])): ?>
                 <li>
@@ -17,13 +32,11 @@
                         <i class="fa-solid fa-chevron-up arrow-up" style="font-size: 0.8em;"></i>
                     </a>
                     <ul class="us">
-                        <li><a href="<?php echo BASE_URL . '/admin/dashboard.php' ?>">Dashboard</a> </li>
-                        <li><a href="<?php echo BASE_URL . '/logout.php' ?>" class="logout">Logout</a> </li>
+                        <?php foreach ($user_menu as $key => $link): ?>
+                        <li><a href="<?php echo BASE_URL . $link['link']; ?>"><?php echo $link['name']; ?></a> </li>
+                        <?php endforeach; ?>
                     </ul>
                 </li>
-            <?php else: ?>
-                <li><a href="<?php echo BASE_URL . '/register.php' ?>">Sign Up</a> </li>
-                <li><a href="<?php echo BASE_URL . '/login.php' ?>">Log In</a></li>
             <?php endif; ?>
         </ul>
 </header>
