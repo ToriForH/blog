@@ -17,7 +17,7 @@ function validatePost($post)
         array_push($errors, 'Body is required');
     }
 
-    if(empty($post['topic_id'])) {
+    if(empty($post['topic_ids'])) {
         array_push($errors, 'You must select at least one topic');
     }
 

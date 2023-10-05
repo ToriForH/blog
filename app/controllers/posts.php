@@ -19,7 +19,7 @@ $errors = array();
 $id = '';
 $title = '';
 $body = '';
-$topic_id = '';
+$topic_ids = '';
 $published = '';
 $image = '';
 
@@ -31,7 +31,7 @@ if (isset($_GET['id'])) {
     }
     $title = $post['title'];
     $body = $post['body'];
-    $topic_id = $post['topic_id'];
+    $topic_ids = postTopics($_GET['id']);
     $published = $post['published'];
 }
 
@@ -63,7 +63,6 @@ if (isset($_POST['add-post'])) {
     if (!$_SESSION['moder']) {
         modersOnly();
     }
-    $_POST['topic_id'] = implode(', ', $_POST['topics_array']);
 
     $errors = validatePost($_POST);
 
@@ -85,11 +84,16 @@ if (isset($_POST['add-post'])) {
 
     if (count($errors) == 0) {
         unset($_POST['add-post']);
-        unset($_POST['topics_array']);
         $_POST['user_id'] = $_SESSION['id'];
         $_POST['published'] = 1;
         $_POST['body'] = htmlentities($_POST['body']);
         $post_id = create($table, $_POST);
+
+
+        //setNewTopics from $topic_ids
+        $tops = setPostTopics($post_id, $topic_ids);
+
+
         $_SESSION['message'] = "Post published successfully";
         $_SESSION['type'] = "success";
         header('location: ' . BASE_URL . '/admin/posts/index.php');
@@ -97,12 +101,11 @@ if (isset($_POST['add-post'])) {
     } else {
         $title = $_POST['title'];
         $body = $_POST['body'];
-        $topic_id = $_POST['topic_id'];
+        $topic_ids = $_POST['topic_ids'];
     }
 }
 
 if (isset($_POST['suggest-post'])) {
-    $_POST['topic_id'] = implode(', ', $_POST['topics_array']);
     $errors = validatePost($_POST);
 
     if (!empty($_FILES['image']['name'])) {
@@ -121,12 +124,18 @@ if (isset($_POST['suggest-post'])) {
     }
 
     if (count($errors) == 0) {
-        unset($_POST['suggest-post']);
-        unset($_POST['topics_array']);
+        $topic_ids = $_POST['topic_ids'];
+        unset($_POST['suggest-post'], $_POST['topic_ids']);
         $_POST['user_id'] = $_SESSION['id'];
         $_POST['published'] = 0;
         $_POST['body'] = htmlentities($_POST['body']);
         $post_id = create($table, $_POST);
+
+
+        //setNewTopics from $topic_ids
+        $tops = setPostTopics($post_id, $topic_ids);
+
+
         if ($_SESSION['moder']) {
             $_SESSION['message'] = "Post draft saved successfully";
         } else {
@@ -138,7 +147,7 @@ if (isset($_POST['suggest-post'])) {
     } else {
         $title = $_POST['title'];
         $body = $_POST['body'];
-        $topic_id = $_POST['topic_id'];
+        $topic_ids = $_POST['topic_ids'];
     }
 }
 
@@ -146,7 +155,6 @@ if (isset($_POST['publish-updated-post'])) {
     if (!$_SESSION['moder']) {
         modersOnly();
     }
-    $_POST['topic_id'] = implode(', ', $_POST['topics_array']);
     $errors = validatePost($_POST);
 
     if (!empty($_FILES['image']['name'])) {
@@ -163,11 +171,13 @@ if (isset($_POST['publish-updated-post'])) {
     }
     if (count($errors) == 0) {
         $id = $_POST['id'];
-        unset($_POST['publish-updated-post'], $_POST['id']);
-        unset($_POST['topics_array']);
+        $topic_ids = $_POST['topic_ids'];
+        $post_id = $_POST['id'];
+        unset($_POST['publish-updated-post'], $_POST['id'], $_POST['topic_ids']);
         $_POST['published'] = 1;
         $_POST['body'] = htmlentities($_POST['body']);
-        $post_id = update($table, $id, $_POST);
+        $upd = update($table, $id, $_POST);
+        $upd_tops = setPostTopics($post_id, $topic_ids);
         $_SESSION['message'] = "Updated post published successfully";
         $_SESSION['type'] = "success";
         header('location: ' . BASE_URL . '/admin/posts/index.php');
@@ -175,12 +185,11 @@ if (isset($_POST['publish-updated-post'])) {
     } else {
         $title = $_POST['title'];
         $body = $_POST['body'];
-        $topic_id = $_POST['topic_id'];
+        $topic_ids = $_POST['topic_ids'];
     }
 }
 
 if (isset($_POST['update-post'])) {
-    $_POST['topic_id'] = implode(', ', $_POST['topics_array']);
     $errors = validatePost($_POST);
     if (!empty($_FILES['image']['name'])) {
         $image_name = time() . '_' . $_FILES['image']['name'];
@@ -198,12 +207,13 @@ if (isset($_POST['update-post'])) {
     }
     if (count($errors) == 0) {
         $id = $_POST['id'];
-        unset($_POST['update-post'], $_POST['id']);
-        unset($_POST['topics_array']);
+        $topic_ids = $_POST['topic_ids'];
+        $post_id = $_POST['id'];
+        unset($_POST['update-post'], $_POST['id'], $_POST['topic_ids']);
         $_POST['published'] = 0;
         $_POST['body'] = htmlentities($_POST['body']);
-
-        $post_id = update($table, $id, $_POST);
+        $upd = update($table, $id, $_POST);
+        $upd_tops = setPostTopics($post_id, $topic_ids);
         if ($_SESSION['moder']) {
             $_SESSION['message'] = "Post draft updated successfully";
         } else {
@@ -215,7 +225,7 @@ if (isset($_POST['update-post'])) {
     } else {
         $title = $_POST['title'];
         $body = $_POST['body'];
-        $topic_id = $_POST['topic_id'];
+        $topic_ids = $_POST['topic_ids'];
     }
 }
 

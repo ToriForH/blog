@@ -1,5 +1,5 @@
-<?php include("../../path.php");
-include(ROOT_PATH. "../../app/controllers/posts.php");
+<?php include("../../path.php"); ?>
+<?php include(ROOT_PATH. "../../app/controllers/posts.php");
 $pageTitle = "Add Post";
 $submitName = "suggest-post";
 $submitTitle = '';

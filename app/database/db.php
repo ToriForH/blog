@@ -111,6 +111,9 @@
     function delete($table, $id)
     {
         global $conn;
+        if($table == 'posts') {
+            $ex = deleteOldTopics($id);
+        }
         $sql = "DELETE FROM $table WHERE id=?";
         $stmt = executeQuery($sql, ['id' => $id]);
         return $stmt->affected_rows;
@@ -193,10 +196,19 @@ function searchTopic($topic, $recordsNumber, $currentPage = 1, $recordsPerPage =
 {
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
     global $conn;
-    $match = '%' . $topic . '%';
-    $sql = "SELECT * FROM posts WHERE published=1 AND topic_id LIKE ? ORDER BY created_at DESC LIMIT ?,?";
-    $stmt = executeQuery($sql, ['topic' => $match, 'offset' => ($currentPage - 1) * $recordsPerPage, 'numberOfRecords' => $recordsPerPage]);
-    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $post_ids = topicPostIds($topic);
+    $records = array();
+    $offset = 0;
+    foreach($post_ids as $id) {  // or as $key => $id
+        $sql = "SELECT * FROM posts WHERE published=1 AND id=? ORDER BY cteated_at DESC LIMIT ?,1";
+        $stmt = executeQuery($sql, ['id' => $id, 'offset' => ((($currentPage - 1) * $recordsPerPage) + $offset)]);
+        array_push($records, $stmt->get_result()->fetch_all(MYSQLI_ASSOC));
+        $offset++;
+        if($offset == $recordsPerPage) {
+            break;
+        }
+    }
+    dd($records);
     $numberOfPages = ceil( $recordsNumber / $recordsPerPage);
     return [
         'posts' => $records,
@@ -237,9 +249,59 @@ function countSearch($term)
 function countTopicPosts($topic)
 {
     global $conn;
-    $match = '%' . $topic . '%';
-    $sql = "SELECT COUNT(*) as total FROM posts WHERE published=1 AND topic_id LIKE ?";
-    $stmt = executeQuery($sql, ['topic' => $match]);
-    $number = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    return $number[0];
+    $post_ids = topicPostIds($topic);
+    $number = count($post_ids);
+    return $number;
+}
+
+function postTopics($post_id)
+{
+    global $conn;
+    $sql = "SELECT topic_id FROM post_topics WHERE post_id=?";
+    $stmt = executeQuery($sql, ['post_id' => $post_id]);
+    $topics_array = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $result = array();
+    foreach ($topics_array as $key => $value) {
+        foreach ($value as $k => $v) {
+            array_push($result, $v);
+        }
+    }
+    return $result;
+}
+
+function topicPostIds($topic_id)
+{
+    global $conn;
+    $sql = "SELECT post_id FROM post_topics WHERE topic_id=?";
+    $stmt = executeQuery($sql, ['topic_id' => $topic_id]);
+    $topics_array = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $result = array();
+    foreach ($topics_array as $key => $value) {
+        foreach ($value as $k => $v) {
+            array_push($result, $v);
+        }
+    }
+    return $result;
+}
+
+function setPostTopics($post_id, $topics)
+{
+    global $conn;
+    $deleted = deleteOldTopics($post_id);
+    $result = 0;
+    foreach ($topics as $key => $topic) {
+        $sql = "INSERT INTO post_topics SET post_id=?, topic_id=?";
+        $stmt = executeQuery($sql, ['post_id' => $post_id, 'topic_id' => $topic]);
+        $result = $result + ($stmt->insert_id);
+    }
+    return $result;
+}
+
+function deleteOldTopics($post_id)
+{
+    global $conn;
+    $sql = "DELETE FROM post_topics WHERE post_id=?";
+    $stmt = executeQuery($sql, ['post_id' => $post_id]);
+    $ex = $stmt->affected_rows;
+    return $ex;
 }

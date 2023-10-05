@@ -78,10 +78,10 @@
                     </label>
                         <ul class="topics-checkboxes">
                             <?php foreach ($topics as $key => $topic): ?>
-                            <?php if(str_contains($topic_id, $topic['id'])): ?>
-                                <li><label><input type="checkbox" name="topics_array[]" value="<?php echo $topic['id'] ?>" checked><?php echo $topic['name'] ?></label></li>
+                            <?php if(in_array($topic['id'], $topic_ids)): ?>
+                                <li><label><input type="checkbox" name="topic_ids[]" value="<?php echo $topic['id'] ?>" checked><?php echo $topic['name'] ?></label></li>
                             <?php else: ?>
-                                <li><label><input type="checkbox" name="topics_array[]" value="<?php echo $topic['id'] ?>"><?php echo $topic['name'] ?></label></li>
+                                <li><label><input type="checkbox" name="topic_ids[]" value="<?php echo $topic['id'] ?>"><?php echo $topic['name'] ?></label></li>
                             <?php endif; ?>
                             <?php endforeach; ?>
                         </ul>
