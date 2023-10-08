@@ -37,7 +37,7 @@
         <div class="button-group">
             <a href="create.php" class="btn btn-big">Add Topic</a>
             <a href="index.php" class="btn btn-big">Published Topic</a>
-            <?php if($_SESSION['moder']): ?>
+            <?php if($_SESSION['role'] > 1): ?>
                 <a href="index_all.php" class="btn btn-big">Manage All Topics</a>
                 <a href="index_suggested.php" class="btn btn-big">Manage Suggested Topics</a>
             <?php endif; ?>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="button-group">
                     <button type="submit" name="<?php echo $submitName; ?>" class="btn btn-big"><?php echo $submitTitle; ?></button>
-                    <?php if($_SESSION['moder']): ?>
+                    <?php if($_SESSION['role'] > 1): ?>
                         <button type="submit" name="<?php echo $publishName; ?>" class="btn btn-big"><?php echo $publishTitle; ?></button>
                     <?php endif; ?>
                 </div>

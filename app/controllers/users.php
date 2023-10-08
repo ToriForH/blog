@@ -18,8 +18,6 @@ $email = '';
 $password = '';
 $passwordConf = '';
 $role = '';
-$admin = '';
-$moder = '';
 
 if (isset($_POST['create-user'])) {
     $errors = validateUser($_POST);
@@ -29,15 +27,6 @@ if (isset($_POST['create-user'])) {
     }
 
     if(count($errors) == 0) {
-        $_POST['admin'] = 0;
-        if ($_POST['role'] == 'User') {
-            $_POST['moder'] = 0;
-        } else {
-            if ($_POST['role'] == 'Admin') {
-                $_POST['admin'] = 1;
-            }
-            $_POST['moder'] = 1;
-        }
         unset($_POST['create-user'], $_POST['passwordConf']);
         $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $user_id = create($table, $_POST);
@@ -82,22 +71,13 @@ if (isset($_POST['update-user'])) {
     if (empty($_POST['role'])) {
         array_push($errors, "You must choose a role");
     }
-
-    if ($_POST['id'] == 1 && $_POST['role'] != 'Admin') {
-        array_push($errors, "You can't change superadmin role");
+    $site_owner_ids = userIdsByRole(4);
+    if (in_array($_POST['id'], $site_owner_ids) && $_POST['role'] < 4) {
+        array_push($errors, "You can't change Super Administrator role");
     }
 
     if(count($errors) == 0) {
         $id = $_POST['id'];
-        $_POST['admin'] = 0;
-        if ($_POST['role'] == 'User') {
-            $_POST['moder'] = 0;
-        } else {
-            $_POST['moder'] = 1;
-        }
-        if ($_POST['role'] == 'Admin') {
-            $_POST['admin'] = 1;
-        }
         unset($_POST['update-user'], $_POST['passwordConf'], $_POST['id']);
         if (empty($_POST['password'])) {
             unset($_POST['password']);
@@ -141,8 +121,8 @@ if (isset($_POST['update-profile'])) {
 }
 
 if (isset($_POST['delete-profile'])) {
-    if ($_POST['id'] == 1) {
-        $_SESSION['message'] = "Superadmin profile couldn't be deleted";
+    if ($_POST['role'] == 4) {
+        $_SESSION['message'] = "Super Administrator profile couldn't be deleted";
         $_SESSION['type'] = "error";
         header('location: ' . BASE_URL . '/admin/dashboard.php');
     } else {

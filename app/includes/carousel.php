@@ -1,7 +1,7 @@
 <?php
 $slider_topic = 1;  //Main
 $countOfSlider = countTopicPosts($slider_topic);
-$slider = searchTopic($slider_topic, $countOfSlider['total'], 1, $countOfSlider['total']);
+$slider = searchTopic($slider_topic, $countOfSlider, 1, $countOfSlider);
 $slider_posts = $slider['posts'];
 ?>
 

@@ -34,7 +34,7 @@ if (isset($_GET['published']) && isset($_GET['p_id'])) {
 
 
 if (isset($_POST['add-topic'])) {
-    if (!$_SESSION['moder']) {
+    if ($_SESSION['role'] < 2) {
         modersOnly();
     }
     $errors = validateTopic($_POST);
@@ -59,7 +59,7 @@ if (isset($_POST['suggest-topic'])) {
         unset($_POST['suggest-topic']);
         $_POST['user_id'] = $_SESSION['id'];
         $_POST['published'] = '0';
-        if ($_SESSION['moder']) {
+        if ($_SESSION['role'] > 1) {
             $_SESSION['message'] = 'Topic draft saved successfully';
         } else {
             $_SESSION['message'] = 'Topic suggested successfully. Please, wait for confirmation from admin';
@@ -77,7 +77,7 @@ if (isset($_POST['suggest-topic'])) {
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $topicToUp = selectOne($table, ['id' => $id]);
-    if ($topicToUp['user_id'] != $_SESSION['id'] && !$_SESSION['moder']) {
+    if ($topicToUp['user_id'] != $_SESSION['id'] && $_SESSION['role'] < 2) {
         modersOnly();
     }
     $topic = selectOne($table, ['id' => $id]);
@@ -88,7 +88,7 @@ if (isset($_GET['id'])) {
 if (isset($_GET['del_id'])) {
     $id = $_GET['del_id'];
     $topicToDel = selectOne($table, ['id' => $id]);
-    if ($topicToDel['user_id'] != $_SESSION['id'] && !$_SESSION['moder']) {
+    if ($topicToDel['user_id'] != $_SESSION['id'] && $_SESSION['role'] < 2) {
         modersOnly();
     }
     $count = delete($table, $id);
@@ -99,7 +99,7 @@ if (isset($_GET['del_id'])) {
 }
 
 if (isset($_POST['publish-updated-topic'])) {
-    if (!$_SESSION['moder']) {
+    if ($_SESSION['role'] < 2) {
         modersOnly();
     }
     $errors = validateTopic($_POST);
@@ -125,7 +125,7 @@ if (isset($_POST['update-topic'])) {
         $id = $_POST['id'];
         unset($_POST['update-topic'], $_POST['id']);
         $_POST['published'] = '0';
-        if ($_SESSION['moder'] == 0) {
+        if ($_SESSION['role'] < 2) {
             $_SESSION['message'] = 'Update saved. Please, wait for confirmation from admin';
         } else {
             $_SESSION['message'] = 'Topic draft updated successfully';

@@ -1,3 +1,5 @@
+<?php $roles = selectAll('roles');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,9 +62,13 @@
                         <td><?php echo $key + 1; ?></td>
                         <td><?php echo $user['username']; ?></td>
                         <td><?php echo $user['email']; ?></td>
-                        <td><?php echo $user['role']; ?></td>
+                        <?php foreach ($roles as $k => $role): ?>
+                            <?php if($role['id'] == $user['role']): ?>
+                                <td><?php echo $role['name']; ?></td>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                         <td><a href="edit.php?id=<?php echo $user['id']; ?>" class="edit">edit</a></td>
-                        <?php if($user['id'] == 1): ?>
+                        <?php if($user['role'] == 4): ?>
                             <td>Superadmin</td>
                         <?php else: ?>
                             <td><a href="index.php?delete_id=<?php echo $user['id']; ?>" class="delete">delete</a></td>

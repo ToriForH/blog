@@ -1,3 +1,6 @@
+<?php $roles = selectAll('roles');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -77,14 +80,13 @@
                 <div>
                     <label>Role</label>
                     <select name="role" class="text-input">
-                        <?php if (!empty($role)): ?>
-                            <option selected value="<?php echo $role ?>"><?php echo $role ?></option>
-                        <?php else: ?>
-                            <option value=""></option>
-                        <?php endif; ?>
-                        <option value="User">User</option>
-                        <option value="Moder">Moder</option>
-                        <option value="Admin">Admin</option>
+                        <?php foreach ($roles as $key => $r): ?>
+                            <?php if (!empty($role) && $role == $r['id']): ?>
+                                <option selected value="<?php echo $r['id']; ?>"><?php echo $r['name']; ?></option>
+                            <?php else: ?>
+                                <option value="<?php echo $r['id']; ?>"><?php echo $r['name']; ?></option>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <?php endif; ?>

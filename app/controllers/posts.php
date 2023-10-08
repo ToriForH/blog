@@ -26,7 +26,7 @@ $image = '';
 if (isset($_GET['id'])) {
     $post = selectOne($table, ['id' => $_GET['id']]);
     $id = $post['id'];
-    if ($post['user_id'] != $_SESSION['id'] && !$_SESSION['moder']) {
+    if ($post['user_id'] != $_SESSION['id'] && $_SESSION['role'] < 2) {
         modersOnly();
     }
     $title = $post['title'];
@@ -38,7 +38,7 @@ if (isset($_GET['id'])) {
 if (isset($_GET['delete_id'])) {
     $id = $_GET['delete_id'];
     $postToDel = selectOne($table, ['id' => $id]);
-    if ($postToDel['user_id'] != $_SESSION['id'] && !$_SESSION['moder']) {
+    if ($postToDel['user_id'] != $_SESSION['id'] && $_SESSION['role'] < 2) {
         modersOnly();
     }
     $count = delete($table, $id);
@@ -60,7 +60,7 @@ if (isset($_GET['published']) && isset($_GET['p_id'])) {
 }
 
 if (isset($_POST['add-post'])) {
-    if (!$_SESSION['moder']) {
+    if ($_SESSION['role'] < 2) {
         modersOnly();
     }
 
@@ -130,13 +130,10 @@ if (isset($_POST['suggest-post'])) {
         $_POST['published'] = 0;
         $_POST['body'] = htmlentities($_POST['body']);
         $post_id = create($table, $_POST);
-
-
-        //setNewTopics from $topic_ids
         $tops = setPostTopics($post_id, $topic_ids);
 
 
-        if ($_SESSION['moder']) {
+        if ($_SESSION['role'] > 1) {
             $_SESSION['message'] = "Post draft saved successfully";
         } else {
             $_SESSION['message'] = "Post suggested successfully. Please, wait for confirmation from admin";
@@ -152,7 +149,7 @@ if (isset($_POST['suggest-post'])) {
 }
 
 if (isset($_POST['publish-updated-post'])) {
-    if (!$_SESSION['moder']) {
+    if ($_SESSION['role'] < 2) {
         modersOnly();
     }
     $errors = validatePost($_POST);
@@ -214,7 +211,7 @@ if (isset($_POST['update-post'])) {
         $_POST['body'] = htmlentities($_POST['body']);
         $upd = update($table, $id, $_POST);
         $upd_tops = setPostTopics($post_id, $topic_ids);
-        if ($_SESSION['moder']) {
+        if ($_SESSION['role'] > 1) {
             $_SESSION['message'] = "Post draft updated successfully";
         } else {
             $_SESSION['message'] = "Update saved. Please, wait for confirmation from admin";

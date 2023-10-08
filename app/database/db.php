@@ -200,15 +200,17 @@ function searchTopic($topic, $recordsNumber, $currentPage = 1, $recordsPerPage =
     $records = array();
     $offset = 0;
     foreach($post_ids as $id) {  // or as $key => $id
-        $sql = "SELECT * FROM posts WHERE published=1 AND id=? ORDER BY cteated_at DESC LIMIT ?,1";
-        $stmt = executeQuery($sql, ['id' => $id, 'offset' => ((($currentPage - 1) * $recordsPerPage) + $offset)]);
-        array_push($records, $stmt->get_result()->fetch_all(MYSQLI_ASSOC));
+        $sql = "SELECT * FROM posts WHERE published=1 AND id=?";
+        $stmt = executeQuery($sql, ['id' => $id]);
+        $post = $stmt->get_result()->fetch_assoc();
+        array_push($records, $post);
         $offset++;
         if($offset == $recordsPerPage) {
             break;
         }
     }
-    dd($records);
+    $records = array_filter($records);
+    $records = array_reverse($records);
     $numberOfPages = ceil( $recordsNumber / $recordsPerPage);
     return [
         'posts' => $records,
@@ -284,6 +286,21 @@ function topicPostIds($topic_id)
     return $result;
 }
 
+function getPostTopicIds($post_id)
+{
+    global $conn;
+    $sql = "SELECT topic_id FROM post_topics WHERE post_id=?";
+    $stmt = executeQuery($sql, ['post_id' => $post_id]);
+    $topics_array = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $result = array();
+    foreach ($topics_array as $key => $value) {
+        foreach ($value as $k => $v) {
+            array_push($result, $v);
+        }
+    }
+    return $result;
+}
+
 function setPostTopics($post_id, $topics)
 {
     global $conn;
@@ -304,4 +321,19 @@ function deleteOldTopics($post_id)
     $stmt = executeQuery($sql, ['post_id' => $post_id]);
     $ex = $stmt->affected_rows;
     return $ex;
+}
+
+function userIdsByRole($role_id) 
+{
+    global $conn;
+    $sql = "SELECT id FROM users WHERE role=?";
+    $stmt = executeQuery($sql, ['role' => $role_id]);
+    $users_array = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $result = array();
+    foreach ($users_array as $key => $value) {
+        foreach ($value as $k => $v) {
+            array_push($result, $v);
+        }
+    }
+    return $result;
 }

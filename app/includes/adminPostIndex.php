@@ -39,7 +39,7 @@
             <a href="index.php" class="btn btn-big">Manage My Posts</a>
             <a href="index_published.php" class="btn btn-big">Manage Published Posts</a>
             <a href="index_suggested.php" class="btn btn-big">Manage Suggested Posts</a>
-            <?php if ($_SESSION['moder']): ?>
+            <?php if ($_SESSION['role'] > 1): ?>
                 <a href="index_all.php" class="btn btn-big">Manage All Posts</a>
             <?php endif; ?>
         </div>
@@ -64,16 +64,16 @@
                         <td><?php echo $key + 1; ?></td>
                         <td><?php echo $post['title'] ?></td>
                         <td><?php echo getValue('users', $post['user_id'], 'username'); ?></td>
-                        <?php $topics_array = explode(", ", $post['topic_id']);
+                        <?php $topics_array = getPostTopicIds($post['id']);
                         $topics_name = array();
-                        foreach ($topics_array as $key => $topic) {
+                        foreach ($topics_array as $k => $topic) {
                             array_push($topics_name, getValue('topics', $topic, 'name'));
                         }
                         $topics_str = implode(', ', $topics_name); ?>
                         <td><?php echo $topics_str; ?></td>
                         <td><a href="edit.php?id=<?php echo $post['id']; ?>" class="edit">edit</a></td>
                         <td><a href="edit.php?delete_id=<?php echo $post['id']; ?>" class="delete">delete</a></td>
-                        <?php if($_SESSION['moder']): ?>
+                        <?php if($_SESSION['role'] > 1): ?>
                             <td>
                                 <?php if ($post['published']): ?>
                                     <a href="edit.php?published=0&p_id=<?php echo $post['id']; ?>" class="unpublish">unpublish</a>

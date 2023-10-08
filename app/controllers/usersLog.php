@@ -17,12 +17,11 @@ function loginUser($user)
 {
     $_SESSION['id'] = $user['id'];
     $_SESSION['username'] = $user['username'];
-    $_SESSION['admin'] = $user['admin'];
-    $_SESSION['moder'] = $user['moder'];
+    $_SESSION['role'] = $user['role'];
     $_SESSION['message'] = 'You are logged in successfully';
     $_SESSION['type'] = 'success';
 
-    if($_SESSION['moder']) {
+    if($_SESSION['role'] > 1) {
         header('location: ' . BASE_URL . '/admin/dashboard.php');
     } else {
         header('location: ' . BASE_URL . '/index.php');
@@ -36,9 +35,7 @@ if (isset($_POST['register-btn'])) {
 
     if(count($errors) == 0) {
         unset($_POST['register-btn'], $_POST['passwordConf']);
-        $_POST['admin'] = 0;
-        $_POST['moder'] = 0;
-        $_POST['role'] = 'User';
+        $_POST['role'] = 1;
         $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         $user_id = create($table, $_POST);

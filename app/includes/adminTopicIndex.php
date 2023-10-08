@@ -37,7 +37,7 @@
         <div class="button-group">
             <a href="create.php" class="btn btn-big">Add Topic</a>
             <a href="index.php" class="btn btn-big">Published Topic</a>
-            <?php if($_SESSION['moder']): ?>
+            <?php if($_SESSION['role'] > 1): ?>
                 <a href="index_all.php" class="btn btn-big">Manage All Topics</a>
                 <a href="index_suggested.php" class="btn btn-big">Manage Suggested Topics</a>
             <?php endif; ?>
@@ -63,7 +63,7 @@
                         <td><?php echo $key + 1; ?></td>
                         <td><?php echo $topic['name']; ?></td>
                         <td><?php echo getValue('users', $topic['user_id'], 'username'); ?></td>
-                        <?php if ($_SESSION['moder'] || $_SESSION['id'] == $topic['user_id']): ?>
+                        <?php if (($_SESSION['role'] > 1) || $_SESSION['id'] == $topic['user_id']): ?>
                             <td><a href="edit.php?id=<?php echo $topic['id']; ?>" class="edit">edit</a></td>
                             <td><a href="index.php?del_id=<?php echo $topic['id']; ?>" class="delete">delete</a></td>
                         <?php else: ?>
@@ -72,7 +72,7 @@
                         <?php endif; ?>
                         <?php if ($topic['published']): ?>
                             <td>is published</td>
-                        <?php elseif($_SESSION['moder']): ?>
+                        <?php elseif($_SESSION['role'] > 1): ?>
                             <td><a href="edit.php?published=1&p_id=<?php echo $topic['id']; ?>" class="publish">publish</a></td>
                         <?php else: ?>
                             <td>suggested</td>

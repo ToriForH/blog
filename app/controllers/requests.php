@@ -5,7 +5,6 @@ include(ROOT_PATH. "../../app/helpers/middleware.php");
 //include(ROOT_PATH. "../../app/helpers/validateRequest.php"); //not work for some reason
 
 $table = 'requests';
-$users = selectAll('users', ['admin' => 1]);
 
 function requests($condition = [])
 {

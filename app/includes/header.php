@@ -33,7 +33,11 @@ if(isset($_SESSION['id'])) {
                     </a>
                     <ul class="us">
                         <?php foreach ($user_menu as $key => $link): ?>
-                        <li><a href="<?php echo BASE_URL . $link['link']; ?>"><?php echo $link['name']; ?></a> </li>
+                            <?php if($link['link'] == '/logout.php'): ?>
+                                <li><a class="logout" href="<?php echo BASE_URL . $link['link']; ?>"><?php echo $link['name']; ?></a> </li>
+                            <?php else: ?>
+                                <li><a href="<?php echo BASE_URL . $link['link']; ?>"><?php echo $link['name']; ?></a> </li>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </ul>
                 </li>

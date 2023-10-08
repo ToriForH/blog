@@ -12,7 +12,7 @@ function usersOnly($redirect = '/index.php')
 
 function modersOnly($redirect = '/index.php')
 {
-    if (empty($_SESSION['id']) || $_SESSION['moder'] == 0) {
+    if (empty($_SESSION['id']) || $_SESSION['role'] < 2) {
         $_SESSION['message'] = 'You are not authorized';
         $_SESSION['type'] = 'error';
         header('location: ' . BASE_URL . $redirect);
@@ -22,7 +22,7 @@ function modersOnly($redirect = '/index.php')
 
 function adminsOnly($redirect = '/index.php')
 {
-    if (empty($_SESSION['id']) || $_SESSION['admin'] == 0) {
+    if (empty($_SESSION['id']) || $_SESSION['role'] < 3) {
         $_SESSION['message'] = 'You are not authorized';
         $_SESSION['type'] = 'error';
         header('location: ' . BASE_URL . $redirect);
