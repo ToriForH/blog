@@ -1,3 +1,7 @@
+<?php
+$topics = selectAll('topics', ['published' => 1]);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,11 +68,11 @@
                 </div>
                 <div>
                     <label>Image</label>
-                    <?php if(isset($_GET['id'])): ?>
+                    <?php /*if(isset($_GET['id'])): ?>
                         <p>Old image:</p>
                         <img class="edit-image" src="<?php echo BASE_URL . '/assets/images/' . $image ?>" alt="">
                         <p>Select new image if you want to replace old one:</p>
-                    <?php endif; ?>
+                    <?php endif; */?>
                     <input type="file" name="image" class="text-input image">
                 </div>
                 <div>
@@ -76,15 +80,15 @@
                         <i class="fa-solid fa-chevron-down arrow-down" style="font-size: 0.8em;"></i>
                         <i class="fa-solid fa-chevron-up arrow-up" style="font-size: 0.8em;"></i>
                     </label>
-                        <ul class="topics-checkboxes">
-                            <?php foreach ($topics as $key => $topic): ?>
+                    <ul class="topics-checkboxes">
+                        <?php foreach ($topics as $key => $topic): ?>
                             <?php if(in_array($topic['id'], $topic_ids)): ?>
                                 <li><label><input type="checkbox" name="topic_ids[]" value="<?php echo $topic['id'] ?>" checked><?php echo $topic['name'] ?></label></li>
                             <?php else: ?>
                                 <li><label><input type="checkbox" name="topic_ids[]" value="<?php echo $topic['id'] ?>"><?php echo $topic['name'] ?></label></li>
                             <?php endif; ?>
-                            <?php endforeach; ?>
-                        </ul>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
                 <div class="button-group">
                     <button type="submit" name ="<?php echo $submitName; ?>" class="btn btn-big"><?php echo $submitTitle; ?></button>

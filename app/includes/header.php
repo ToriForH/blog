@@ -10,11 +10,16 @@ if(isset($_SESSION['id'])) {
         }
     }
 }
+$temp_titles = selectAll('titles', ['visibility' => 1]);
+$titles = array();
+foreach ($temp_titles as $key => $value) {
+    $titles[$value['label']] = $value;
+}
 ?>
 
 <header>
     <a href="<?php echo BASE_URL . '/index.php' ?>" class="logo">
-        <h1 class="logo-text"><span>Somename</span> Blog</h1>
+        <h1 class="logo-text"><span><?php echo $titles['site_name']['title']; ?></span><?php echo $titles['site_name_second_part']['title']; ?></h1>
     </a>
         <i class="fa-solid fa-bars menu-toggle"></i>
         <ul class="nav">

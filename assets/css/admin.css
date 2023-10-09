@@ -51,6 +51,12 @@ header {
   padding: 20px 50px 50px;
   overflow-y: scroll;
 }
+.admin-wrapper .admin-content .content .dashboard-info {
+  color: #FFC90A;
+  font-family: "Kanit", san-serif;
+  font-size: 1.3em;
+  text-align: center;
+}
 .admin-wrapper .admin-content .content .msg {
   left: 40%;
   width: 50%;

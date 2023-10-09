@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 08, 2023 at 08:14 PM
+-- Generation Time: Oct 09, 2023 at 10:56 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -24,6 +24,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `id` int(11) NOT NULL,
+  `label` varchar(50) NOT NULL,
+  `contact` varchar(255) NOT NULL,
+  `visibility` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contacts`
+--
+
+INSERT INTO `contacts` (`id`, `label`, `contact`, `visibility`) VALUES
+(1, 'phone_number', '+380989234737', 1),
+(2, 'email_address', 'viktoriia_herchanivska@gmail.com', 1),
+(3, 'facebook_link', 'https://facebook.com/profile.php?id=100008948389333', 1),
+(4, 'instagram_link', 'https://www.instagram.com/exo_xaocy/', 1),
+(5, 'twitter_link', 'twitter.com', 1),
+(6, 'youtube_link', 'youtube.com', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `info`
 --
 
@@ -31,14 +56,14 @@ CREATE TABLE `info` (
   `id` int(11) NOT NULL,
   `label` varchar(50) NOT NULL,
   `info_text` text NOT NULL,
-  `visibillity` tinyint(4) NOT NULL
+  `visibility` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `info`
 --
 
-INSERT INTO `info` (`id`, `label`, `info_text`, `visibillity`) VALUES
+INSERT INTO `info` (`id`, `label`, `info_text`, `visibility`) VALUES
 (1, 'footer_info', 'This is some text about blog. I write here anything just to fill up some lines. And one another sentence. It is almost done. I need just a little more text. And some text here. Suggest this sentence could be the last, perhaps, I don\'t sure.', 1),
 (2, 'dashboard_info', 'We recommend to use dashboard function via PC since it is not suitable for other device such as phone or tablet etc.', 1);
 
@@ -62,7 +87,6 @@ CREATE TABLE `navigation` (
 --
 
 INSERT INTO `navigation` (`id`, `name`, `link`, `header`, `user_menu`, `footer`) VALUES
-(1, 'Name', '/index.php', 0, 0, 0),
 (2, 'Home', '/index.php', 1, 0, 1),
 (3, 'Contact Us', '/contact.php', 1, 0, 0),
 (4, 'Dashboard', '/admin/dashboard.php', 0, 1, 1),
@@ -217,7 +241,6 @@ CREATE TABLE `titles` (
   `id` int(11) NOT NULL,
   `label` varchar(50) NOT NULL,
   `title` varchar(250) DEFAULT NULL,
-  `link` varchar(255) DEFAULT NULL,
   `visibility` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -225,25 +248,19 @@ CREATE TABLE `titles` (
 -- Dumping data for table `titles`
 --
 
-INSERT INTO `titles` (`id`, `label`, `title`, `link`, `visibility`) VALUES
-(1, 'site_name', 'Somename', '/index.php', 1),
-(2, 'site_name_second_part', 'Blog', NULL, 1),
-(3, 'carousel_name', 'Main Posts', NULL, 1),
-(4, 'carousel_topic', '1', NULL, 1),
-(5, 'recent_posts_title', 'Recent Posts', NULL, 1),
-(6, 'search_bar_title', 'Search', NULL, 1),
-(7, 'topic_bar_title', 'Topics', NULL, 1),
-(8, 'footer_links_title', 'Quick Links', NULL, 1),
-(9, 'contact_form_title', 'Contact Us', NULL, 1),
-(10, 'phone_number', '+380989234737', NULL, 1),
-(11, 'email_adress', 'viktoriia_herchanivska@gmail.com', NULL, 1),
-(12, 'facebook_link', NULL, 'https://facebook.com/profile.php?id=100008948389333', 1),
-(13, 'instagram_link', NULL, 'https://www.instagram.com/exo_xaocy/', 1),
-(14, 'twitter_link', NULL, 'twitter.com', 1),
-(15, 'youtube_link', NULL, 'youtube.com', 1),
-(16, 'footer_blog_name', NULL, '', 1),
-(18, 'c_sign', 'Created by Viktoriia Herchanivska | viktoriia.herchanivska@gmail.com', '', 1),
-(19, 'open_post', 'Read More', '', 1);
+INSERT INTO `titles` (`id`, `label`, `title`, `visibility`) VALUES
+(1, 'site_name', 'Somename', 1),
+(2, 'site_name_second_part', 'Blog', 1),
+(3, 'carousel_name', 'Main Posts', 1),
+(4, 'carousel_topic', '1', 1),
+(5, 'recent_posts_title', 'Recent Posts', 1),
+(6, 'search_bar_title', 'Search', 1),
+(7, 'topic_bar_title', 'Topics', 1),
+(8, 'footer_links_title', 'Quick Links', 1),
+(9, 'contact_form_title', 'Contact Us', 1),
+(16, 'footer_blog_name', NULL, 1),
+(18, 'c_sign', 'Created by Viktoriia Herchanivska | viktoriia.herchanivska@gmail.com', 1),
+(19, 'open_post', 'Read More', 1);
 
 -- --------------------------------------------------------
 
@@ -299,6 +316,12 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `created_at`
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `info`
@@ -364,6 +387,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `info`

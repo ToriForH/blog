@@ -1,6 +1,11 @@
 <?php include("path.php");
 include(ROOT_PATH. "app/database/db.php");
 include(ROOT_PATH. "app/controllers/requests.php");
+$temp_contacts = selectAll('contacts', ['visibility' => 1]);
+$contacts = array();
+foreach ($temp_contacts as $key => $value) {
+    $contacts[$value['label']] = $value;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,17 +62,17 @@ include(ROOT_PATH. "app/controllers/requests.php");
             <div class="contact-info">
                 <p>Our contacts: </p>
                 <div>
-                    <span><i class="fa-solid fa-phone"></i> &nbsp; +380989234737</span>
+                    <span><i class="fa-solid fa-phone"></i> &nbsp; <?php echo $contacts['phone_number']['contact']?></span>
                 </div>
                 <div>
-                    <span><i class="fa-solid fa-envelope"></i> &nbsp; viktoriia.herchanivska@gmail.com</span>
+                    <span><i class="fa-solid fa-envelope"></i> &nbsp; <?php echo $contacts['email_address']['contact']?></span>
                 </div>
                 <p>Our social media: </p>
                 <div>
-                    <a href="https://facebook.com/profile.php?id=100008948389333"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="<?php echo $contacts['facebook_link']['contact']?>"><i class="fab fa-facebook"></i></a>
+                    <a href="<?php echo $contacts['instagram_link']['contact']?>"><i class="fab fa-instagram"></i></a>
+                    <a href="<?php echo $contacts['twitter_link']['contact']?>"><i class="fab fa-twitter"></i></a>
+                    <a href="<?php echo $contacts['youtube_link']['contact']?>"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
 

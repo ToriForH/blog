@@ -66,6 +66,13 @@ header {
     padding: 20px 50px 50px;
     overflow-y: scroll;
 
+    .content .dashboard-info {
+      color: $text-color;
+      font-family: $logo-text;
+      font-size: 1.3em;
+      text-align: center;
+    }
+
     .content .msg {
       left: 40%;
       width: 50%;

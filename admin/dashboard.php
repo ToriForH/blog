@@ -3,6 +3,7 @@ include(ROOT_PATH . "../app/controllers/usersLog.php");
 include(ROOT_PATH. "../app/database/db.php");
 include(ROOT_PATH. "../app/helpers/middleware.php");
 usersOnly();
+$info = selectOne('info', ['visibility' => 1, 'label' => 'dashboard_info']);
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +43,7 @@ usersOnly();
         <div class="content">
             <h2 class="page-title">Dashboard</h2>
             <?php include(ROOT_PATH . "../app/includes/messages.php"); ?>
+            <p class="dashboard-info"><?php echo html_entity_decode($info['info_text']); ?></p>
         </div>
     </div>
     <!-- Admin Content -->

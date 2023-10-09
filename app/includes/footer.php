@@ -16,6 +16,18 @@ if(isset($_SESSION['id'])) {
         }
     }
 }
+$footer_site_name = selectOne('titles', ['visibility' => 1, 'label' => 'footer_blog_name']);
+$temp_titles = selectAll('titles', ['visibility' => 1]);
+$titles = array();
+foreach ($temp_titles as $key => $value) {
+    $titles[$value['label']] = $value;
+}
+$info = selectOne('info', ['visibility' => 1, 'label' => 'footer_info']);
+$temp_contacts = selectAll('contacts', ['visibility' => 1]);
+$contacts = array();
+foreach ($temp_contacts as $key => $value) {
+    $contacts[$value['label']] = $value;
+}
 ?>
 
 
@@ -23,24 +35,23 @@ if(isset($_SESSION['id'])) {
 <div class="footer">
     <div class="footer-content">
         <div class="footer-section about">
-                <h1 class="logo-text"><span>Somename</span>Blog</h1>
-                <p>
-                    This is some text about blog. I write here anything just to fill up some lines. And one another sentence. It is almost done. I need just a little more text.
-                    And some text here. Suggest this sentence could be the last, perhaps, I don't sure.
-                </p>
+            <?php if(isset($footer_site_name)): ?>
+                <h1 class="logo-text"><span><?php echo selectOne('titles', ['label' => 'site_name'])['title']; ?></span><?php echo selectOne('titles', ['label' => 'site_name_second_part'])['title']; ?></h1>
+            <?php endif; ?>
+                <?php echo $info['info_text']; ?>
             <div class="contact">
-                <div><i class="fa-solid fa-phone"></i> &nbsp; +380989234737</div>
-                <div><i class="fa-solid fa-envelope"></i> &nbsp; viktoriia.herchanivska@gmail.com</div>
+                <div><i class="fa-solid fa-phone"></i> &nbsp; <?php echo $contacts['phone_number']['contact']?></div>
+                <div><i class="fa-solid fa-envelope"></i> &nbsp; <?php echo $contacts['email_address']['contact']?></div>
             </div>
             <div class="socials">
-                <a href="https://facebook.com/profile.php?id=100008948389333"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/exo_xaocy/"><i class="fab fa-instagram"></i></a>
-                <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
+                <a href="<?php echo $contacts['facebook_link']['contact']?>"><i class="fab fa-facebook"></i></a>
+                <a href="<?php echo $contacts['instagram_link']['contact']?>"><i class="fab fa-instagram"></i></a>
+                <a href="<?php echo $contacts['twitter_link']['contact']?>"><i class="fab fa-twitter"></i></a>
+                <a href="<?php echo $contacts['youtube_link']['contact']?>"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
         <div class="footer-section links">
-            <h2>Quick Links</h2>
+            <h2><?php echo $titles['footer_links_title']['title']; ?></h2>
             <br>
             <ul>
                 <?php foreach ($links as $key => $link): ?>
@@ -49,7 +60,7 @@ if(isset($_SESSION['id'])) {
             </ul>
         </div>
         <div class="footer-section contact-form">
-            <h2>Contact Us</h2>
+            <h2><?php echo $titles['contact_form_title']['title']; ?></h2>
             <br>
             <form action="contact.php" method="post">
                 <input type="email" name="email" class="text-input contact-input" placeholder="Your email address...">
@@ -62,7 +73,7 @@ if(isset($_SESSION['id'])) {
         </div>
     </div>
     <div class="footer-bottom">
-        &copy; Created by Viktoriia Herchanivska | viktoriia.herchanivska@gmail.com
+        &copy; <?php echo html_entity_decode($titles['c_sign']['title']); ?>
     </div>
 </div>
 <!-- //footer -->

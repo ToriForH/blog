@@ -3,9 +3,10 @@ include("path.php");
 include(ROOT_PATH. "app/database/db.php");
 include(ROOT_PATH. "app/controllers/posts.php");
 
+$mainPage = true;
 $paginatedPosts = array();
-$postsTitle = 'Recent Posts';
-// $mainPage = true; no usages
+$postsTitle = selectOne('titles', ['visibility' => 1, 'label' => 'recent_posts_title'])['title'];
+$open_post = selectOne('titles', ['visibility' => 1, 'label' => 'open_post'])['title'];
 
 if (isset($_GET['search-term'])) {
     if ($_GET['search-term'] == '') {
@@ -109,7 +110,9 @@ if (isset($_GET['page']) && $_GET['page'] != 1) {
                                 } ?>
                             </span>
                         </div>
-                        <a href="single.php?post_id=<?php echo $post['id']; ?>" class="btn read-more">Read More</a>
+                        <?php if(isset($open_post)): ?>
+                        <a href="single.php?post_id=<?php echo $post['id']; ?>" class="btn read-more"><?php echo $open_post; ?></a>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>
