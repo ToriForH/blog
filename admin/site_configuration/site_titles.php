@@ -1,8 +1,9 @@
 <?php
 include("../../path.php");
 include(ROOT_PATH . "../../app/controllers/posts.php");
-$navigations = selectAll('navigation');
-$title = 'Links Settings';
+$titles = selectAll('titles');
+$topics = selectAll('topics', ['published' => 1]);
+$title = 'Site Titles';
 ?>
 
 <!DOCTYPE html>
@@ -50,52 +51,45 @@ $title = 'Links Settings';
 
         <div class="content">
 
-            <?php include (ROOT_PATH. "../../app/includes/messages.php"); ?>
-
             <h2 class="page-title"><?php echo $title; ?></h2>
 
-            <div class="button-group">
-                <a href="edit_link.php" class="btn btn-big">Create New Link</a>
-            </div>
+            <?php include (ROOT_PATH. "../../app/includes/messages.php"); ?>
 
-            <?php foreach ($navigations as $key => $link): ?>
-                <form action="edit_link.php" method="post" class="content request">
-                    <input type="hidden" name="id" value="<?php echo $link['id']; ?>">
+            <?php foreach ($titles as $key => $t): ?>
+                <form action="edit_title.php" method="post" class="content request">
+                    <input type="hidden" name="id" value="<?php echo $t['id']; ?>">
                     <div>
-                        <label>Name</label>
-                        <input type="text" name="name" value="<?php echo $link['name']; ?>" class="text-input main">
+                        <label>Label</label>
+                        <input type="text" name="label" value="<?php echo $t['label']; ?>" class="text-input main" readonly>
                     </div>
                     <div>
-                        <label>Link</label>
-                        <input type="text" name="link" value="<?php echo $link['link']; ?>" class="text-input main">
-                    </div>
-                    <div>
-                        <label>Visibility Header</label>
-                        <?php if($link['header'] == 1): ?>
-                            <input type="checkbox" name="header" value="<?php echo $link['header']; ?>" checked>
+                        <label>Title</label>
+                        <?php if($t['label'] == 'carousel_topic'): ?>
+                            <select name="title" style="font-size: 1.3em">
+                                <?php foreach ($topics as $k => $topic): ?>
+                                    <?php if($topic['id'] == $t['title']): ?>
+                                        <option value="<?php echo $topic['id']; ?>" selected><?php echo $topic['name']; ?></option>
+                                    <?php else: ?>
+                                        <option value="<?php echo $topic['id']; ?>"><?php echo $topic['name']; ?></option>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </select>
+                        <?php elseif ($t['label'] == 'footer_blog_name'): ?>
+                            <input type="text" name="title" value="<?php echo getValue('titles', selectOne('titles', ['label' => 'site_name'])['id'], 'title') . getValue('titles', selectOne('titles', ['label' => 'site_name_second_part'])['id'], 'title'); ?>" class="text-input main" readonly>
                         <?php else: ?>
-                            <input type="checkbox" name="header" value="<?php echo $link['header']; ?>">
+                            <input type="text" name="title" value="<?php echo $t['title']; ?>" class="text-input main">
                         <?php endif; ?>
                     </div>
                     <div>
-                        <label>Visibility User Menu</label>
-                        <?php if($link['user_menu'] == 1): ?>
-                            <input type="checkbox" name="user_menu" value="<?php echo $link['user_menu']; ?>" checked>
+                        <label>Visibility</label>
+                        <?php if($t['visibility'] == 1): ?>
+                            <input type="checkbox" name="visibility" value="<?php echo $t['visibility']; ?>" checked>
                         <?php else: ?>
-                            <input type="checkbox" name="user_menu" value="<?php echo $link['user_menu']; ?>">
-                        <?php endif; ?>
-                    </div>
-                    <div>
-                        <label>Visibility Footer</label>
-                        <?php if($link['footer'] == 1): ?>
-                            <input type="checkbox" name="footer" value="<?php echo $link['footer']; ?>" checked>
-                        <?php else: ?>
-                            <input type="checkbox" name="footer" value="<?php echo $link['footer']; ?>">
+                            <input type="checkbox" name="visibility" value="<?php echo $t['visibility']; ?>">
                         <?php endif; ?>
                     </div>
                     <div class="button-group">
-                        <button type="submit" name="save-link" class="btn btn-big">Save Changes</button>
-                        <button type="submit" name="delete-link" class="btn btn-big">Delete Link</button>
+                        <button type="submit" name="save-title" class="btn btn-big">Save Changes</button>
                     </div>
                 </form>
             <?php endforeach; ?>

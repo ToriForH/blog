@@ -259,7 +259,7 @@ INSERT INTO `titles` (`id`, `label`, `title`, `visibility`) VALUES
 (8, 'footer_links_title', 'Quick Links', 1),
 (9, 'contact_form_title', 'Contact Us', 1),
 (16, 'footer_blog_name', NULL, 1),
-(18, 'c_sign', 'Created by Viktoriia Herchanivska | viktoriia.herchanivska@gmail.com', 1),
+(18, 'bottom_c_sign', 'Created by Viktoriia Herchanivska | viktoriia.herchanivska@gmail.com', 1),
 (19, 'open_post', 'Read More', 1);
 
 -- --------------------------------------------------------

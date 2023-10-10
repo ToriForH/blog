@@ -1,3 +1,9 @@
+<?php
+include("../../path.php");
+include(ROOT_PATH . "../../app/controllers/posts.php");
+$title = 'Edit Link';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,37 +41,53 @@
     <!-- Admin Content -->
     <div class="admin-content">
         <div class="button-group">
-            <a href="create.php" class="btn btn-big">Add Topic</a>
-            <a href="index.php" class="btn btn-big">Published Topics</a>
-            <?php if($_SESSION['role'] > 1): ?>
-                <a href="index_all.php" class="btn btn-big">Manage All Topics</a>
-                <a href="index_suggested.php" class="btn btn-big">Manage Suggested Topics</a>
-            <?php endif; ?>
-            <a href="index_my.php" class="btn btn-big">Manage My Topics</a>
+            <a href="site_titles.php" class="btn btn-big">Manage Titles</a>
+            <a href="links_settings.php" class="btn btn-big">Manage Links</a>
+            <a href="contacts_settings.php" class="btn btn-big">Manage Contacts</a>
+            <a href="site_info.php" class="btn btn-big">Manage Site Info</a>
         </div>
 
         <div class="content">
 
             <h2 class="page-title"><?php echo $title; ?></h2>
-            <?php include(ROOT_PATH . "../../app/helpers/formErrors.php"); ?>
 
-            <form action="<?php echo $action; ?>" method="post">
-                <?php if($title == "Edit Topic"): ?>
-                    <input type="hidden" name="id" value="<?php echo $id; ?>">
-                <?php endif; ?>
+            <?php include (ROOT_PATH. "../../app/includes/messages.php"); ?>
+
+            <form action="edit_link.php" method="post" class="content request">
                 <div>
                     <label>Name</label>
                     <input type="text" name="name" value="<?php echo $name; ?>" class="text-input main">
                 </div>
                 <div>
-                    <label>Description</label>
-                    <textarea name="description" id="body"><?php echo $description; ?></textarea>
+                    <label>Link</label>
+                    <input type="text" name="link" value="<?php echo $link; ?>" class="text-input main">
+                </div>
+                <div>
+                    <label>Visibility Header</label>
+                    <?php if($header == 1): ?>
+                        <input type="checkbox" name="header" value="<?php echo $header; ?>" checked>
+                    <?php else: ?>
+                        <input type="checkbox" name="header" value="<?php echo $header; ?>">
+                    <?php endif; ?>
+                </div>
+                <div>
+                    <label>Visibility User Menu</label>
+                    <?php if($user_menu == 1): ?>
+                        <input type="checkbox" name="user_menu" value="<?php echo $user_menu; ?>" checked>
+                    <?php else: ?>
+                        <input type="checkbox" name="user_menu" value="<?php echo $user_menu; ?>">
+                    <?php endif; ?>
+                </div>
+                <div>
+                    <label>Visibility Footer</label>
+                    <?php if($footer == 1): ?>
+                        <input type="checkbox" name="footer" value="<?php echo $footer; ?>" checked>
+                    <?php else: ?>
+                        <input type="checkbox" name="footer" value="<?php echo $footer; ?>">
+                    <?php endif; ?>
                 </div>
                 <div class="button-group">
-                    <button type="submit" name="<?php echo $submitName; ?>" class="btn btn-big"><?php echo $submitTitle; ?></button>
-                    <?php if($_SESSION['role'] > 1): ?>
-                        <button type="submit" name="<?php echo $publishName; ?>" class="btn btn-big"><?php echo $publishTitle; ?></button>
-                    <?php endif; ?>
+                    <button type="submit" name="add-link" class="btn btn-big">Save Link</button>
                 </div>
             </form>
         </div>

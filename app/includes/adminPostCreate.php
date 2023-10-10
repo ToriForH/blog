@@ -68,11 +68,11 @@ $topics = selectAll('topics', ['published' => 1]);
                 </div>
                 <div>
                     <label>Image</label>
-                    <?php /*if(isset($_GET['id'])): ?>
+                    <?php if(isset($_GET['id'])): ?>
                         <p>Old image:</p>
                         <img class="edit-image" src="<?php echo BASE_URL . '/assets/images/' . $image ?>" alt="">
                         <p>Select new image if you want to replace old one:</p>
-                    <?php endif; */?>
+                    <?php endif; ?>
                     <input type="file" name="image" class="text-input image">
                 </div>
                 <div>

@@ -73,7 +73,7 @@ foreach ($temp_contacts as $key => $value) {
         </div>
     </div>
     <div class="footer-bottom">
-        &copy; <?php echo html_entity_decode($titles['c_sign']['title']); ?>
+        &copy; <?php echo html_entity_decode($titles['bottom_c_sign']['title']); ?>
     </div>
 </div>
 <!-- //footer -->

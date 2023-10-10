@@ -1,3 +1,10 @@
+<?php
+include("../../path.php");
+include(ROOT_PATH . "../../app/controllers/posts.php");
+$infos = selectAll('info');
+$title = 'Site Info';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,13 +42,10 @@
     <!-- Admin Content -->
     <div class="admin-content">
         <div class="button-group">
-            <a href="create.php" class="btn btn-big">Add Topic</a>
-            <a href="index.php" class="btn btn-big">Published Topics</a>
-            <?php if($_SESSION['role'] > 1): ?>
-                <a href="index_all.php" class="btn btn-big">Manage All Topics</a>
-                <a href="index_suggested.php" class="btn btn-big">Manage Suggested Topics</a>
-            <?php endif; ?>
-            <a href="index_my.php" class="btn btn-big">Manage My Topics</a>
+            <a href="site_titles.php" class="btn btn-big">Manage Titles</a>
+            <a href="links_settings.php" class="btn btn-big">Manage Links</a>
+            <a href="contacts_settings.php" class="btn btn-big">Manage Contacts</a>
+            <a href="site_info.php" class="btn btn-big">Manage Site Info</a>
         </div>
 
         <div class="content">
@@ -50,37 +54,30 @@
 
             <?php include (ROOT_PATH. "../../app/includes/messages.php"); ?>
 
-            <table>
-                <thead>
-                <th>№</th>
-                <th>Name</th>
-                <th>Author</th>
-                <th colspan="3"></th>
-                </thead>
-                <tbody>
-                <?php foreach (topics($condition) as $key => $topic): ?>
-                    <tr>
-                        <td><?php echo $key + 1; ?></td>
-                        <td><?php echo $topic['name']; ?></td>
-                        <td><?php echo getValue('users', $topic['user_id'], 'username'); ?></td>
-                        <?php if (($_SESSION['role'] > 1) || $_SESSION['id'] == $topic['user_id']): ?>
-                            <td><a href="edit.php?id=<?php echo $topic['id']; ?>" class="edit">edit</a></td>
-                            <td><a href="index.php?del_id=<?php echo $topic['id']; ?>" class="delete">delete</a></td>
+            <?php foreach ($infos as $key => $info): ?>
+                <form action="edit_info.php" method="post" class="content request">
+                    <input type="hidden" name="id" value="<?php echo $info['id']; ?>">
+                    <div>
+                        <label>Label</label>
+                        <input type="text" name="label" value="<?php echo $info['label']; ?>" class="text-input main" readonly>
+                    </div>
+                    <div>
+                        <label>Info-text</label>
+                        <textarea rows="4" name="info_text" class="text-input"><?php echo $info['info_text']; ?></textarea>
+                    </div>
+                    <div>
+                        <label>Visibility</label>
+                        <?php if($info['visibility'] == 1): ?>
+                            <input type="checkbox" name="visibility" value="<?php echo $info['visibility']; ?>" checked>
                         <?php else: ?>
-                            <td></td>
-                            <td></td>
+                            <input type="checkbox" name="visibility" value="<?php echo $info['visibility']; ?>">
                         <?php endif; ?>
-                        <?php if ($topic['published']): ?>
-                            <td>is published</td>
-                        <?php elseif($_SESSION['role'] > 1): ?>
-                            <td><a href="edit.php?published=1&p_id=<?php echo $topic['id']; ?>" class="publish">publish</a></td>
-                        <?php else: ?>
-                            <td>suggested</td>
-                        <?php endif; ?>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" name="save-info" class="btn btn-big">Save Changes</button>
+                    </div>
+                </form>
+            <?php endforeach; ?>
         </div>
     </div>
     <!-- Admin Content -->
